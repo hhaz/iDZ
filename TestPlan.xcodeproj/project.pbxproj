@@ -22,6 +22,17 @@
 		63402F0118DA001900FAF06F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63402EE018DA001900FAF06F /* UIKit.framework */; };
 		63402F0918DA001900FAF06F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 63402F0718DA001900FAF06F /* InfoPlist.strings */; };
 		63402F0B18DA001900FAF06F /* TestPlanTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 63402F0A18DA001900FAF06F /* TestPlanTests.m */; };
+		63402F1518DA007000FAF06F /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63402F1418DA007000FAF06F /* MapKit.framework */; };
+		63402F1718DA02F500FAF06F /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63402F1618DA02F500FAF06F /* MobileCoreServices.framework */; };
+		63402F1A18DAF30600FAF06F /* TestPlan.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 63402F1818DAF30600FAF06F /* TestPlan.xcdatamodeld */; };
+		63402F1D18DAFB9E00FAF06F /* Tracking.m in Sources */ = {isa = PBXBuildFile; fileRef = 63402F1C18DAFB9E00FAF06F /* Tracking.m */; };
+		635CA63918DC3D920046C839 /* TestPlanUIStoryBoardSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 635CA63818DC3D920046C839 /* TestPlanUIStoryBoardSegue.m */; };
+		635CA63C18DC4A5D0046C839 /* TestPlanHistoryTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 635CA63B18DC4A5D0046C839 /* TestPlanHistoryTableView.m */; };
+		635CA63F18DC51300046C839 /* TestPlanHistoryItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 635CA63E18DC51300046C839 /* TestPlanHistoryItemCell.m */; };
+		635CA64218DC840B0046C839 /* TestPlanlocationDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 635CA64118DC840B0046C839 /* TestPlanlocationDetailsViewController.m */; };
+		635CA64518DC8CB70046C839 /* TestPlanAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 635CA64418DC8CB70046C839 /* TestPlanAnnotation.m */; };
+		635CA64818DCA1530046C839 /* TestPlanAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 635CA64718DCA1530046C839 /* TestPlanAnnotationView.m */; };
+		63899CBD18DF3D6A00C02B39 /* TestPlanTripMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 63899CBC18DF3D6A00C02B39 /* TestPlanTripMap.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +66,25 @@
 		63402F0618DA001900FAF06F /* TestPlanTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TestPlanTests-Info.plist"; sourceTree = "<group>"; };
 		63402F0818DA001900FAF06F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		63402F0A18DA001900FAF06F /* TestPlanTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestPlanTests.m; sourceTree = "<group>"; };
+		63402F1418DA007000FAF06F /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		63402F1618DA02F500FAF06F /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		63402F1918DAF30600FAF06F /* TestPlan.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TestPlan.xcdatamodel; sourceTree = "<group>"; };
+		63402F1B18DAFB9E00FAF06F /* Tracking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tracking.h; sourceTree = "<group>"; };
+		63402F1C18DAFB9E00FAF06F /* Tracking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tracking.m; sourceTree = "<group>"; };
+		635CA63718DC3D920046C839 /* TestPlanUIStoryBoardSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestPlanUIStoryBoardSegue.h; sourceTree = "<group>"; };
+		635CA63818DC3D920046C839 /* TestPlanUIStoryBoardSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestPlanUIStoryBoardSegue.m; sourceTree = "<group>"; };
+		635CA63A18DC4A5D0046C839 /* TestPlanHistoryTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestPlanHistoryTableView.h; sourceTree = "<group>"; };
+		635CA63B18DC4A5D0046C839 /* TestPlanHistoryTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestPlanHistoryTableView.m; sourceTree = "<group>"; };
+		635CA63D18DC51300046C839 /* TestPlanHistoryItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestPlanHistoryItemCell.h; sourceTree = "<group>"; };
+		635CA63E18DC51300046C839 /* TestPlanHistoryItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestPlanHistoryItemCell.m; sourceTree = "<group>"; };
+		635CA64018DC840B0046C839 /* TestPlanlocationDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestPlanlocationDetailsViewController.h; sourceTree = "<group>"; };
+		635CA64118DC840B0046C839 /* TestPlanlocationDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestPlanlocationDetailsViewController.m; sourceTree = "<group>"; };
+		635CA64318DC8CB70046C839 /* TestPlanAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestPlanAnnotation.h; sourceTree = "<group>"; };
+		635CA64418DC8CB70046C839 /* TestPlanAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestPlanAnnotation.m; sourceTree = "<group>"; };
+		635CA64618DCA1530046C839 /* TestPlanAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestPlanAnnotationView.h; sourceTree = "<group>"; };
+		635CA64718DCA1530046C839 /* TestPlanAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestPlanAnnotationView.m; sourceTree = "<group>"; };
+		63899CBB18DF3D6A00C02B39 /* TestPlanTripMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestPlanTripMap.h; sourceTree = "<group>"; };
+		63899CBC18DF3D6A00C02B39 /* TestPlanTripMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestPlanTripMap.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +92,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63402F1718DA02F500FAF06F /* MobileCoreServices.framework in Frameworks */,
+				63402F1518DA007000FAF06F /* MapKit.framework in Frameworks */,
 				63402EDF18DA001900FAF06F /* CoreGraphics.framework in Frameworks */,
 				63402EE118DA001900FAF06F /* UIKit.framework in Frameworks */,
 				63402EDD18DA001900FAF06F /* Foundation.framework in Frameworks */,
@@ -103,6 +135,8 @@
 		63402EDB18DA001900FAF06F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				63402F1618DA02F500FAF06F /* MobileCoreServices.framework */,
+				63402F1418DA007000FAF06F /* MapKit.framework */,
 				63402EDC18DA001900FAF06F /* Foundation.framework */,
 				63402EDE18DA001900FAF06F /* CoreGraphics.framework */,
 				63402EE018DA001900FAF06F /* UIKit.framework */,
@@ -115,9 +149,26 @@
 			isa = PBXGroup;
 			children = (
 				63402EEB18DA001900FAF06F /* TestPlanAppDelegate.h */,
+				635CA64318DC8CB70046C839 /* TestPlanAnnotation.h */,
+				635CA64418DC8CB70046C839 /* TestPlanAnnotation.m */,
+				635CA64618DCA1530046C839 /* TestPlanAnnotationView.h */,
+				635CA64718DCA1530046C839 /* TestPlanAnnotationView.m */,
 				63402EEC18DA001900FAF06F /* TestPlanAppDelegate.m */,
 				63402EEE18DA001900FAF06F /* Main_iPhone.storyboard */,
+				63899CBB18DF3D6A00C02B39 /* TestPlanTripMap.h */,
+				63899CBC18DF3D6A00C02B39 /* TestPlanTripMap.m */,
+				635CA64018DC840B0046C839 /* TestPlanlocationDetailsViewController.h */,
+				635CA64118DC840B0046C839 /* TestPlanlocationDetailsViewController.m */,
+				635CA63718DC3D920046C839 /* TestPlanUIStoryBoardSegue.h */,
+				635CA63A18DC4A5D0046C839 /* TestPlanHistoryTableView.h */,
+				635CA63B18DC4A5D0046C839 /* TestPlanHistoryTableView.m */,
+				635CA63D18DC51300046C839 /* TestPlanHistoryItemCell.h */,
+				635CA63E18DC51300046C839 /* TestPlanHistoryItemCell.m */,
+				635CA63818DC3D920046C839 /* TestPlanUIStoryBoardSegue.m */,
 				63402EF118DA001900FAF06F /* Main_iPad.storyboard */,
+				63402F1818DAF30600FAF06F /* TestPlan.xcdatamodeld */,
+				63402F1B18DAFB9E00FAF06F /* Tracking.h */,
+				63402F1C18DAFB9E00FAF06F /* Tracking.m */,
 				63402EF418DA001900FAF06F /* TestPlanViewController.h */,
 				63402EF518DA001900FAF06F /* TestPlanViewController.m */,
 				63402EF718DA001900FAF06F /* Images.xcassets */,
@@ -254,9 +305,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				635CA63F18DC51300046C839 /* TestPlanHistoryItemCell.m in Sources */,
+				63402F1D18DAFB9E00FAF06F /* Tracking.m in Sources */,
+				635CA63918DC3D920046C839 /* TestPlanUIStoryBoardSegue.m in Sources */,
+				635CA63C18DC4A5D0046C839 /* TestPlanHistoryTableView.m in Sources */,
 				63402EE918DA001900FAF06F /* main.m in Sources */,
+				635CA64218DC840B0046C839 /* TestPlanlocationDetailsViewController.m in Sources */,
 				63402EF618DA001900FAF06F /* TestPlanViewController.m in Sources */,
 				63402EED18DA001900FAF06F /* TestPlanAppDelegate.m in Sources */,
+				63899CBD18DF3D6A00C02B39 /* TestPlanTripMap.m in Sources */,
+				635CA64818DCA1530046C839 /* TestPlanAnnotationView.m in Sources */,
+				63402F1A18DAF30600FAF06F /* TestPlan.xcdatamodeld in Sources */,
+				635CA64518DC8CB70046C839 /* TestPlanAnnotation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -471,6 +531,7 @@
 				63402F1018DA001900FAF06F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		63402F1118DA001900FAF06F /* Build configuration list for PBXNativeTarget "TestPlanTests" */ = {
 			isa = XCConfigurationList;
@@ -479,8 +540,22 @@
 				63402F1318DA001900FAF06F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		63402F1818DAF30600FAF06F /* TestPlan.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				63402F1918DAF30600FAF06F /* TestPlan.xcdatamodel */,
+			);
+			currentVersion = 63402F1918DAF30600FAF06F /* TestPlan.xcdatamodel */;
+			path = TestPlan.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 63402ED118DA001800FAF06F /* Project object */;
 }

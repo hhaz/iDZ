@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5063" systemVersion="13C64" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Tracking" representedClassName="Tracking" syncable="YES">
+        <attribute name="dateandtime" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="latitude" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="longitude" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="tripid" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Trip" syncable="YES">
+        <attribute name="dateandtime" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="label" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="tripid" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <fetchRequest name="GetAll" entity="Tracking"/>
+    <elements>
+        <element name="Trip" positionX="-36" positionY="-18" width="128" height="88"/>
+        <element name="Tracking" positionX="-252" positionY="144" width="128" height="103"/>
+    </elements>
+</model>

@@ -7,7 +7,24 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MapKit/MapKit.h>
+#import <CoreData/CoreData.h>
 
-@interface TestPlanViewController : UIViewController
+#define kOverlayLimit 1000
+
+@interface TestPlanViewController : UIViewController <CLLocationManagerDelegate,NSFetchedResultsControllerDelegate,MKMapViewDelegate>
+
+@property (weak, nonatomic) IBOutlet MKMapView *mapView;
+@property (nonatomic , strong) CLLocationManager *locationManager;
+
+@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
+@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+@property (strong, nonatomic) NSString *tripId;
+
+@property (nonatomic, retain) MKPolyline *routeLine;
+
+@property (nonatomic) NSDate *lastUpdateTimeInterval;
+- (IBAction) startUpdatingLocation;
+- (IBAction) stopUpdatingLocation;
 
 @end
