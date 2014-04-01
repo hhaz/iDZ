@@ -15,6 +15,10 @@
 @interface TestPlanViewController : UIViewController <CLLocationManagerDelegate,NSFetchedResultsControllerDelegate,MKMapViewDelegate>
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
+@property (weak, nonatomic) IBOutlet UILabel *labelDistance;
+@property (weak, nonatomic) IBOutlet UILabel *labelSpeed;
+@property (weak, nonatomic) IBOutlet UIButton *buttonStart;
+@property (weak, nonatomic) IBOutlet UIButton *buttonStop;
 @property (nonatomic , strong) CLLocationManager *locationManager;
 
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;

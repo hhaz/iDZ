@@ -10,6 +10,10 @@
 #import "TestPlanViewController.h"
 #import "Tracking.h"
 #import "TestPlanHistoryTableView.h"
+#import "Trip.h"
+
+static CLLocationCoordinate2D coordinateArray[2];
+static CLLocationDistance distance = 0;
 
 @interface TestPlanViewController ()
 
@@ -34,8 +38,8 @@
     _mapView.userLocation.title = @"Me";
     
     _mapView.delegate = self;
-    CLLocationCoordinate2D coordinateArray[2];
-    _routeLine = [MKPolyline polylineWithCoordinates:coordinateArray count:2];
+    CLLocationCoordinate2D coordinateArrayLocal[2];
+    _routeLine = [MKPolyline polylineWithCoordinates:coordinateArrayLocal count:2];
     
     TestPlanAppDelegate *appDelegate = (TestPlanAppDelegate *)[[UIApplication sharedApplication] delegate];
     
@@ -62,11 +66,9 @@
 -(void)startUpdatingLocation
 {
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    // Edit the entity name as appropriate.
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Trip" inManagedObjectContext:self.managedObjectContext];
     [fetchRequest setEntity:entity];
     
-    // Set the batch size to a suitable number.
     [fetchRequest setFetchBatchSize:20];
     
     // Edit the sort key as appropriate.
@@ -74,13 +76,14 @@
     NSArray *sortDescriptors = @[sortDescriptor];
     
     [fetchRequest setSortDescriptors:sortDescriptors];
-    
-    // nil for section name key path means "no sections".
+
     NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
     
-    Tracking *newTracking = [[Tracking alloc]initWithEntity:entity insertIntoManagedObjectContext:[aFetchedResultsController managedObjectContext]];
+    Trip *newTrip = [[Trip alloc]initWithEntity:entity insertIntoManagedObjectContext:[aFetchedResultsController managedObjectContext]];
     
-    newTracking.dateandtime = [NSDate date];
+    newTrip.dateandtime = [NSDate date];
+    newTrip.tripid = [self uuid];
+    newTrip.mileage = [NSNumber numberWithDouble:distance];
     
     // Save the context.
     NSError *error = nil;
@@ -89,9 +92,12 @@
         abort();
     }
     else {
-        _tripId = [self uuid];
+        _tripId = newTrip.tripid;
     }
     _mapView.showsUserLocation = YES;
+    distance = 0;
+    _buttonStop.enabled = YES;
+    _buttonStart.enabled = NO;
     [_locationManager startUpdatingLocation];
 }
 
@@ -99,6 +105,30 @@
 {
     _mapView.showsUserLocation = NO;
     [_locationManager stopUpdatingLocation];
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Trip" inManagedObjectContext:_managedObjectContext];
+    [fetchRequest setEntity:entity];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"tripid == %@",_tripId]];
+    
+    [fetchRequest setFetchBatchSize:20];
+    
+    NSError *error = nil;
+    NSArray *resultArray = [_managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    if (resultArray.count > 0) {
+        Trip *localTrip = (Trip *)resultArray[0];
+        localTrip.mileage = [NSNumber numberWithDouble:distance];
+        
+        NSError *errorUpdate = nil;
+        if (![_managedObjectContext save:&errorUpdate]) {
+            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+            abort();
+        }
+    }
+    
+    _buttonStop.enabled = NO;
+    _buttonStart.enabled = YES;
 }
 
 - (NSString *)uuid
@@ -116,10 +146,11 @@
     
     Tracking *newTracking = [[Tracking alloc]initWithEntity:entity insertIntoManagedObjectContext:context];
     
-    newTracking.dateandtime = [NSDate date];
-    newTracking.longitude = [NSNumber numberWithFloat:location.coordinate.longitude];
-    newTracking.latitude = [NSNumber numberWithFloat:location.coordinate.latitude];
-    newTracking.tripid = _tripId;
+    newTracking.dateandtime     = [NSDate date];
+    newTracking.longitude       = [NSNumber numberWithFloat:location.coordinate.longitude];
+    newTracking.latitude        = [NSNumber numberWithFloat:location.coordinate.latitude];
+    newTracking.tripid          = _tripId;
+    newTracking.altitude        = [NSNumber numberWithFloat:location.altitude];
    
     // Save the context.
     NSError *error = nil;
@@ -160,9 +191,6 @@
 	    abort();
 	}
     
-    NSLog(@"%lu records found", (unsigned long)self.fetchedResultsController.fetchedObjects.count);
-    
-    
     return _fetchedResultsController;
 }
 
@@ -175,8 +203,6 @@
     CLLocationCoordinate2D zoomLocation;
     CLLocation *location = [locations lastObject];
     
-    static CLLocationCoordinate2D coordinateArray[2];
-    
     zoomLocation.latitude = location.coordinate.latitude;
     zoomLocation.longitude = location.coordinate.longitude;
     
@@ -186,7 +212,7 @@
     [_mapView setRegion:viewRegion animated:YES];
     _mapView.userLocation.subtitle = [NSString stringWithFormat:@"Long : %f - Lat : %f", _mapView.userLocation.location.coordinate.longitude,_mapView.userLocation.coordinate.latitude];
     
-    NSTimeInterval distanceBetweenDates = [[NSDate date] timeIntervalSinceDate:self.lastUpdateTimeInterval];
+    NSTimeInterval distanceBetweenDates = [[NSDate date] timeIntervalSinceDate:_lastUpdateTimeInterval];
     
     if( distanceBetweenDates > 10)
     {
@@ -197,6 +223,45 @@
     if (coordinateArray[0].longitude != 0 || coordinateArray[0].latitude != 0) {
         _routeLine = [MKPolyline polylineWithCoordinates:coordinateArray count:2];
         [_mapView addOverlay:self.routeLine];
+        
+        // Compute mileage
+        CLLocation *previousLocation = [[CLLocation alloc]initWithLatitude:coordinateArray[0].latitude longitude:coordinateArray[0].longitude];
+        CLLocation *currentLocation = [[CLLocation alloc]initWithLatitude:coordinateArray[1].latitude longitude:coordinateArray[1].longitude];
+        
+        distance += ([currentLocation distanceFromLocation:previousLocation]);
+        
+        NSString *unit = @"m";
+        NSString *unitSpeed = @"m/s";
+        NSString *distanceString;
+        NSString *speedString;
+        
+        if (distance > 1000) {
+            unit = @"km";
+            distanceString = [NSString localizedStringWithFormat:@"%.3F", distance/1000];
+        }
+        else {
+            unit = @"m";
+            distanceString = [NSString localizedStringWithFormat:@"%.3F", distance];
+        }
+        
+        if (currentLocation.speed > 1000) {
+            unitSpeed = @"km/s";
+            speedString = [NSString localizedStringWithFormat:@"%.3F", currentLocation.speed/1000];
+        }
+        else {
+            unitSpeed = @"m/s";
+            speedString = [NSString localizedStringWithFormat:@"%.3F", currentLocation.speed];
+        }
+
+        _labelDistance.text = [NSString stringWithFormat:@"%@ %@",distanceString,unit];
+        if(currentLocation.speed > 0)
+        {
+            _labelSpeed.text    = [NSString stringWithFormat:@"%@ %@",speedString,unitSpeed];
+        }
+        else {
+            _labelSpeed.text    = @"";
+        }
+
     }
     
     if (_mapView.overlays.count > kOverlayLimit) {
@@ -204,8 +269,6 @@
         [_mapView removeOverlay:(id)overlay];
     }
     coordinateArray[0] = zoomLocation;
-    NSLog(@"Overlay count : %d", _mapView.overlays.count);
-
     
 }
 
@@ -214,8 +277,13 @@
     NSLog(@"Error while getting core location : %@",[error localizedFailureReason]);
     if ([error code] == kCLErrorDenied) {
         //you had denied
+        [self stopUpdatingLocation];
+        _buttonStop.enabled = NO;
+        _buttonStart.enabled = YES;
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Access to location service must be enabled" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
     }
-    [manager stopUpdatingLocation];
 }
 
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

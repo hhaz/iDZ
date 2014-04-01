@@ -33,6 +33,7 @@
 		635CA64518DC8CB70046C839 /* TestPlanAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 635CA64418DC8CB70046C839 /* TestPlanAnnotation.m */; };
 		635CA64818DCA1530046C839 /* TestPlanAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 635CA64718DCA1530046C839 /* TestPlanAnnotationView.m */; };
 		63899CBD18DF3D6A00C02B39 /* TestPlanTripMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 63899CBC18DF3D6A00C02B39 /* TestPlanTripMap.m */; };
+		63E5470618E9870A00D603D9 /* Trip.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E5470518E9870A00D603D9 /* Trip.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +86,8 @@
 		635CA64718DCA1530046C839 /* TestPlanAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestPlanAnnotationView.m; sourceTree = "<group>"; };
 		63899CBB18DF3D6A00C02B39 /* TestPlanTripMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestPlanTripMap.h; sourceTree = "<group>"; };
 		63899CBC18DF3D6A00C02B39 /* TestPlanTripMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestPlanTripMap.m; sourceTree = "<group>"; };
+		63E5470418E9870A00D603D9 /* Trip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Trip.h; sourceTree = "<group>"; };
+		63E5470518E9870A00D603D9 /* Trip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Trip.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,6 +170,8 @@
 				635CA63818DC3D920046C839 /* TestPlanUIStoryBoardSegue.m */,
 				63402EF118DA001900FAF06F /* Main_iPad.storyboard */,
 				63402F1818DAF30600FAF06F /* TestPlan.xcdatamodeld */,
+				63E5470418E9870A00D603D9 /* Trip.h */,
+				63E5470518E9870A00D603D9 /* Trip.m */,
 				63402F1B18DAFB9E00FAF06F /* Tracking.h */,
 				63402F1C18DAFB9E00FAF06F /* Tracking.m */,
 				63402EF418DA001900FAF06F /* TestPlanViewController.h */,
@@ -305,6 +310,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63E5470618E9870A00D603D9 /* Trip.m in Sources */,
 				635CA63F18DC51300046C839 /* TestPlanHistoryItemCell.m in Sources */,
 				63402F1D18DAFB9E00FAF06F /* Tracking.m in Sources */,
 				635CA63918DC3D920046C839 /* TestPlanUIStoryBoardSegue.m in Sources */,

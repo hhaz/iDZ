@@ -15,5 +15,6 @@
 @dynamic longitude;
 @dynamic latitude;
 @dynamic tripid;
+@dynamic altitude;
 
 @end

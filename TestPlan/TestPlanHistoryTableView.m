@@ -11,6 +11,7 @@
 #import "Tracking.h"
 #import "TestPlanlocationDetailsViewController.h"
 #import "TestPlanTripMap.h"
+#import "Trip.h"
 
 #define kHeaderHeight 25
 
@@ -51,31 +52,34 @@
     
     NSString *tripIdTemp = @"";
     
-    for(Tracking *object in _fetchedResultsController.fetchedObjects)
+    if(_fetchedResultsController.fetchedObjects.count > 0)
     {
-        if (![object.tripid isEqualToString:tripIdTemp] && (dateArray.count > 0)) {
-            [_content setObject:[[NSArray alloc]initWithArray:dateArray] forKey:tripIdTemp];
-            [dateArray removeAllObjects];
+        for(Tracking *object in _fetchedResultsController.fetchedObjects)
+        {
+            if (![object.tripid isEqualToString:tripIdTemp] && (dateArray.count > 0)) {
+                [_content setObject:[[NSArray alloc]initWithArray:dateArray] forKey:tripIdTemp];
+                [dateArray removeAllObjects];
+            }
+            tripIdTemp = object.tripid;
+            [dateArray addObject:object];
         }
-        tripIdTemp = object.tripid;
-        [dateArray addObject:object];
+            [_content setObject:dateArray forKey:tripIdTemp];
+    
+            NSArray *keys = [_content allKeys];
+    
+            _sortedKeys = [keys sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+            Tracking *track1 = (Tracking *)[[_content objectForKey:obj1] firstObject];
+            Tracking *track2 = (Tracking *)[[_content objectForKey:obj2] firstObject];
+        
+            NSTimeInterval distanceBetweenDates = [track1.dateandtime timeIntervalSinceDate:track2.dateandtime];
+        
+            if (distanceBetweenDates > 0) {
+                return NSOrderedAscending;
+            }
+            else
+                return NSOrderedDescending;
+        }];
     }
-    [_content setObject:dateArray forKey:tripIdTemp];
-    
-    NSArray *keys = [_content allKeys];
-    
-    _sortedKeys = [keys sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-        Tracking *track1 = (Tracking *)[[_content objectForKey:obj1] firstObject];
-        Tracking *track2 = (Tracking *)[[_content objectForKey:obj2] firstObject];
-        
-        NSTimeInterval distanceBetweenDates = [track1.dateandtime timeIntervalSinceDate:track2.dateandtime];
-        
-        if (distanceBetweenDates > 0) {
-            return NSOrderedAscending;
-        }
-        else
-            return NSOrderedDescending;
-    }];
 }
 
 - (void)viewDidLoad
@@ -156,22 +160,6 @@
     return cell;
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-{
-    NSArray *keys = [_content allKeys];
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"dd/MM/yyyy HH:mm:ss"];
-    
-    [formatter setTimeZone:[NSTimeZone timeZoneWithName:@"..."]];
-    
-    NSString *tripId = [keys objectAtIndex:section];
-    
-    Tracking *newTrack = [[_content objectForKey:tripId] firstObject ];
-    
-    NSString *dateHeader = [formatter stringFromDate:newTrack.dateandtime];
-
-    return dateHeader;
-}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     return kHeaderHeight;
@@ -180,7 +168,7 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     UIView *aView =[[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, kHeaderHeight)];
     [aView setBackgroundColor:[UIColor lightGrayColor]];
-    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(10, 0, self.view.frame.size.width / 2, kHeaderHeight)];
+    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(10, 0, self.view.frame.size.width -50, kHeaderHeight)];
     label.font = [UIFont fontWithName:@"Arial" size:12];
     aView.tag = 0;
     [aView addSubview:label];
@@ -209,11 +197,40 @@
     
     NSString *tripId = [_sortedKeys objectAtIndex:section];
     
-    Tracking *newTrack = [[_content objectForKey:tripId] firstObject ];
+    // get mileage
+    NSNumber *mileAge;
     
-    NSString *dateHeader = [formatter stringFromDate:newTrack.dateandtime];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Trip" inManagedObjectContext:_managedObjectContext];
+    [fetchRequest setEntity:entity];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"tripid == %@",tripId]];
     
-    label.text = dateHeader;
+    NSError *error = nil;
+    NSArray *resultArray = [_managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    Trip *localTrip;
+    
+    if (resultArray.count > 0) {
+       localTrip = (Trip *)resultArray[0];
+        mileAge = localTrip.mileage;
+    }
+
+    NSString *unit = @"m";
+    NSString *distanceString;
+    
+    if ([mileAge doubleValue]  > 1000) {
+        unit = @"km";
+        distanceString = [NSString localizedStringWithFormat:@"%.3F", [mileAge doubleValue]/1000];
+    }
+    else {
+        unit = @"m";
+        distanceString = [NSString localizedStringWithFormat:@"%.3F", [mileAge doubleValue]];
+    }
+    
+    NSString *dateHeader = [formatter stringFromDate:localTrip.dateandtime];
+    NSString *tripHeader = [NSString stringWithFormat:@"%@ - %@ %@",dateHeader,distanceString,unit];
+    
+    label.text = tripHeader;
     [map addTarget:self action:@selector(sectionTapped:) forControlEvents:UIControlEventTouchDown];
     [toggleView addTarget:self action:@selector(toggleView:) forControlEvents:UIControlEventTouchDown];
     return aView;
