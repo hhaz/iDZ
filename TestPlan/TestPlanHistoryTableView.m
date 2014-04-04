@@ -264,6 +264,7 @@
         
         detailView.longitude    = newTracking.longitude;
         detailView.latitude     = newTracking.latitude;
+        detailView.altitude     = newTracking.altitude;
     }
     
     if ([[segue identifier] isEqualToString:@"segueMap"])

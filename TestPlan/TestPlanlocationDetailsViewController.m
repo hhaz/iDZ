@@ -43,7 +43,7 @@
     
     TestPlanAnnotation *annotation = [[TestPlanAnnotation alloc]initWithTitle:[NSString stringWithFormat:@"Long : %f  Lat : %f",coordinate.longitude,coordinate.latitude]AndCoordinate:coordinate];
     
-    annotation.place = [NSString stringWithFormat:@"Long. : %f \nLat. : %f",coordinate.longitude,coordinate.latitude];
+    annotation.place = [NSString stringWithFormat:@"Long. : %f \nLat. : %f \nAlt. : %@",coordinate.longitude,coordinate.latitude,_altitude];
     
     [_mapView addAnnotation:annotation];
     

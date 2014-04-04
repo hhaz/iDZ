@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) NSNumber *longitude;
 @property (weak, nonatomic) NSNumber *latitude;
+@property (weak, nonatomic) NSNumber *altitude;
 
 
 @end

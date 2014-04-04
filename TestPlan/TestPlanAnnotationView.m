@@ -43,7 +43,7 @@ static CGFloat kRoundBoxLeft = 10.0;
         TestPlanAnnotation *mapItem = (TestPlanAnnotation *)self.annotation;
         self.annotationLabel.font = [UIFont systemFontOfSize:9.0];
         self.annotationLabel.textColor = [UIColor whiteColor];
-        self.annotationLabel.numberOfLines = 2;
+        self.annotationLabel.numberOfLines = 3;
         self.annotationLabel.text = mapItem.place;
         [self.annotationLabel sizeToFit];   // get the right vertical size
         
