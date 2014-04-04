@@ -21,7 +21,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </mapView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Speed" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uik-XX-CiT">
-                                <rect key="frame" x="11" y="75" width="81" height="23"/>
+                                <rect key="frame" x="3" y="75" width="89" height="23"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -54,6 +54,23 @@
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z3i-fL-sJ1" customClass="CPTGraphHostingView">
+                                <rect key="frame" x="65" y="75" width="179" height="119"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pyY-Ub-h65">
+                                <rect key="frame" x="234" y="90" width="87" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <state key="normal" title="Altitude">
+                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="showGraph" destination="vXZ-lx-hvc" eventType="touchUpInside" id="d9d-fj-Ul8"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -65,8 +82,10 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="buttonAltitude" destination="pyY-Ub-h65" id="oVV-31-O8Z"/>
                         <outlet property="buttonStart" destination="TOZ-Nk-5OX" id="RCJ-d6-Ypo"/>
                         <outlet property="buttonStop" destination="vRL-eu-Y7a" id="c6v-F7-YB6"/>
+                        <outlet property="graphView" destination="z3i-fL-sJ1" id="TDK-ur-FDI"/>
                         <outlet property="labelDistance" destination="qU9-7D-exp" id="do8-ak-oLe"/>
                         <outlet property="labelSpeed" destination="uik-XX-CiT" id="dJw-Nr-Lon"/>
                         <outlet property="mapView" destination="eIP-ID-Mbu" id="5A4-hV-nLp"/>
@@ -128,9 +147,17 @@
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Altitude : " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TtS-KJ-l6j">
+                                            <rect key="frame" x="145" y="0.0" width="207" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="altitude" destination="TtS-KJ-l6j" id="f13-ZM-JBn"/>
                                     <outlet property="date" destination="q8H-En-Qpd" id="M2r-0m-0H9"/>
                                     <outlet property="latitude" destination="7N4-mi-htX" id="euh-la-KGC"/>
                                     <outlet property="longitude" destination="RAz-PS-GYC" id="jvg-Sn-XW1"/>

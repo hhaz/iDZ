@@ -47,6 +47,11 @@ static CLLocationDistance distance = 0;
     
     self.managedObjectContext = appDelegate.managedObjectContext;
     
+    _graph = [[RealTimePlot alloc]init];
+    _graph.altitude = _mapView.userLocation.location.altitude;
+
+    [_graph renderInLayer:_graphView withTheme:[CPTTheme themeNamed:kCPTSlateTheme] animated:YES];
+    
 }
 
 - (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id < MKOverlay >)overlay
@@ -115,6 +120,11 @@ static CLLocationDistance distance = 0;
     
     NSError *error = nil;
     NSArray *resultArray = [_managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    coordinateArray[0].latitude = 0;
+    coordinateArray[1].latitude = 0;
+    coordinateArray[0].longitude = 0;
+    coordinateArray[1].longitude = 0;
     
     if (resultArray.count > 0) {
         Trip *localTrip = (Trip *)resultArray[0];
@@ -214,7 +224,7 @@ static CLLocationDistance distance = 0;
     
     NSTimeInterval distanceBetweenDates = [[NSDate date] timeIntervalSinceDate:_lastUpdateTimeInterval];
     
-    if( distanceBetweenDates > 10)
+    if( distanceBetweenDates > 10 && location.horizontalAccuracy > 0)
     {
         [self insertNewObject:location];
         self.lastUpdateTimeInterval = [NSDate date];
@@ -226,9 +236,8 @@ static CLLocationDistance distance = 0;
         
         // Compute mileage
         CLLocation *previousLocation = [[CLLocation alloc]initWithLatitude:coordinateArray[0].latitude longitude:coordinateArray[0].longitude];
-        CLLocation *currentLocation = [[CLLocation alloc]initWithLatitude:coordinateArray[1].latitude longitude:coordinateArray[1].longitude];
         
-        distance += ([currentLocation distanceFromLocation:previousLocation]);
+        distance += ([location distanceFromLocation:previousLocation]);
         
         NSString *unit = @"m";
         NSString *unitSpeed = @"m/s";
@@ -244,30 +253,38 @@ static CLLocationDistance distance = 0;
             distanceString = [NSString localizedStringWithFormat:@"%.3F", distance];
         }
         
-        if (currentLocation.speed > 1000) {
-            unitSpeed = @"km/s";
-            speedString = [NSString localizedStringWithFormat:@"%.3F", currentLocation.speed/1000];
+        if (location.speed > 1) {
+            unitSpeed = @"km/h";
+            speedString = [NSString localizedStringWithFormat:@"%.3F", location.speed*3600/1000];
         }
         else {
             unitSpeed = @"m/s";
-            speedString = [NSString localizedStringWithFormat:@"%.3F", currentLocation.speed];
+            speedString = [NSString localizedStringWithFormat:@"%.3F", location.speed];
         }
 
         _labelDistance.text = [NSString stringWithFormat:@"%@ %@",distanceString,unit];
-        if(currentLocation.speed > 0)
+        if(location.speed > 0)
         {
             _labelSpeed.text    = [NSString stringWithFormat:@"%@ %@",speedString,unitSpeed];
         }
         else {
             _labelSpeed.text    = @"";
         }
-
     }
+    
+    if(location.verticalAccuracy > 0)
+    {
+        [_buttonAltitude setTitle:[NSString stringWithFormat:@"Alt. : %1.0f",location.altitude] forState:UIControlStateNormal];
+        _graph.altitude = location.altitude;
+    }
+    else
+       _graph.altitude = 0.0;
     
     if (_mapView.overlays.count > kOverlayLimit) {
         MKOverlayView *overlay = [[_mapView overlays] firstObject];
         [_mapView removeOverlay:(id)overlay];
     }
+    
     coordinateArray[0] = zoomLocation;
     
 }
@@ -307,6 +324,11 @@ static CLLocationDistance distance = 0;
         
     }
     
+}
+
+-(void) showGraph
+{
+    _graphView.hidden = ! _graphView.hidden;
 }
 
 - (void)viewWillAppear:(BOOL)animated {

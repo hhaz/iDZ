@@ -19,9 +19,6 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        /*date       = [[UILabel alloc]init];
-        longitude  = [[UILabel alloc]init];
-        latitude   = [[UILabel alloc]init];*/
     }
     return self;
 }

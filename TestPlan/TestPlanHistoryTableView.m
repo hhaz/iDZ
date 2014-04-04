@@ -155,7 +155,8 @@
     
     cell.date.text      = stringFromDate;
     cell.longitude.text = [NSString stringWithFormat:@"Longitude : %@",newTracking.longitude];
-    cell.latitude.text  = [NSString stringWithFormat:@"Latitude : %@",newTracking.latitude];;
+    cell.latitude.text  = [NSString stringWithFormat:@"Latitude : %@",newTracking.latitude];
+    cell.altitude.text  = [NSString stringWithFormat:@"Altitude : %@",newTracking.altitude];
     
     return cell;
 }
