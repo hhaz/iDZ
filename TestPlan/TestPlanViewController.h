@@ -10,8 +10,10 @@
 #import <MapKit/MapKit.h>
 #import <CoreData/CoreData.h>
 #import "RealTimePlot.h"
+#import "TestPlanLoadDZ.h"
 
 #define kOverlayLimit 1000
+#define kDZCheckFrequency 20
 
 @interface TestPlanViewController : UIViewController <CLLocationManagerDelegate,NSFetchedResultsControllerDelegate,MKMapViewDelegate>
 
@@ -26,6 +28,10 @@
 @property (nonatomic , strong) CLLocationManager *locationManager;
 @property (nonatomic, retain) RealTimePlot *graph;
 
+@property (nonatomic, retain) NSTimer *dzTimer;
+@property (nonatomic, retain) NSArray *dangerZones;
+@property (nonatomic, retain) TestPlanLoadDZ *loadDZ;
+@property (nonatomic, retain) TestPlanAppDelegate *appDelegate;
 
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;

@@ -11,6 +11,9 @@
 #import "Tracking.h"
 #import "TestPlanHistoryTableView.h"
 #import "Trip.h"
+#import "DangerZone.h"
+#import "TestPlanAnnotation.h"
+
 
 static CLLocationCoordinate2D coordinateArray[2];
 static CLLocationDistance distance = 0;
@@ -24,6 +27,10 @@ static CLLocationDistance distance = 0;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    _loadDZ = [[TestPlanLoadDZ alloc] init];
+    
+    [_loadDZ checkDZ];
     
     if ([CLLocationManager locationServicesEnabled]) {
         _locationManager = [[CLLocationManager alloc] init];
@@ -41,16 +48,23 @@ static CLLocationDistance distance = 0;
     CLLocationCoordinate2D coordinateArrayLocal[2];
     _routeLine = [MKPolyline polylineWithCoordinates:coordinateArrayLocal count:2];
     
-    TestPlanAppDelegate *appDelegate = (TestPlanAppDelegate *)[[UIApplication sharedApplication] delegate];
+    _appDelegate = (TestPlanAppDelegate *)[[UIApplication sharedApplication] delegate];
     
     _lastUpdateTimeInterval = [NSDate date];
     
-    self.managedObjectContext = appDelegate.managedObjectContext;
+    _managedObjectContext = _appDelegate.managedObjectContext;
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"DangerZone" inManagedObjectContext:_managedObjectContext];
+    [fetchRequest setEntity:entity];
+    
+    _dangerZones = [_managedObjectContext executeFetchRequest:fetchRequest error:nil];
     
     _graph = [[RealTimePlot alloc]init];
     _graph.altitude = _mapView.userLocation.location.altitude;
 
     [_graph renderInLayer:_graphView withTheme:[CPTTheme themeNamed:kCPTSlateTheme] animated:YES];
+    
     
 }
 
@@ -87,8 +101,8 @@ static CLLocationDistance distance = 0;
     Trip *newTrip = [[Trip alloc]initWithEntity:entity insertIntoManagedObjectContext:[aFetchedResultsController managedObjectContext]];
     
     newTrip.dateandtime = [NSDate date];
-    newTrip.tripid = [self uuid];
-    newTrip.mileage = [NSNumber numberWithDouble:distance];
+    newTrip.tripid      = [self newUUID];
+    newTrip.mileage     = [NSNumber numberWithDouble:distance];
     
     // Save the context.
     NSError *error = nil;
@@ -104,6 +118,14 @@ static CLLocationDistance distance = 0;
     _buttonStop.enabled = YES;
     _buttonStart.enabled = NO;
     [_locationManager startUpdatingLocation];
+    
+    _dzTimer = [NSTimer timerWithTimeInterval:kDZCheckFrequency
+                                        target:self
+                                      selector:@selector(checkDZ:)
+                                      userInfo:nil
+                                       repeats:YES];
+    [[NSRunLoop mainRunLoop] addTimer:_dzTimer forMode:NSRunLoopCommonModes];
+
 }
 
 -(void)stopUpdatingLocation
@@ -139,14 +161,18 @@ static CLLocationDistance distance = 0;
     
     _buttonStop.enabled = NO;
     _buttonStart.enabled = YES;
+    [_dzTimer invalidate];
+    _dzTimer = nil;
 }
 
-- (NSString *)uuid
+- (NSString *)newUUID
 {
     CFUUIDRef uuidRef = CFUUIDCreate(NULL);
     CFStringRef uuidStringRef = CFUUIDCreateString(NULL, uuidRef);
     CFRelease(uuidRef);
-    return (__bridge NSString *)uuidStringRef;
+    NSString *uuid = CFBridgingRelease(uuidStringRef);
+    return uuid;
+    //return (__bridge NSString *)uuidStringRef;
 }
 
 - (void)insertNewObject:(CLLocation *)location
@@ -209,6 +235,25 @@ static CLLocationDistance distance = 0;
     NSLog(@"Error : %@", error.localizedDescription);
 }
 
+-(void)checkDZ:(NSTimer *)theTimer
+{
+    
+    for (DangerZone *dz in _dangerZones) {
+        CLLocation *dzLoc = [[CLLocation alloc]initWithLatitude:[dz.latitude doubleValue] longitude:[dz.longitude doubleValue]];
+        if ([_mapView.userLocation.location distanceFromLocation:dzLoc] < 2000) {
+            CLLocationCoordinate2D locationDZ;
+            
+            locationDZ.longitude = [dz.longitude doubleValue];
+            locationDZ.latitude = [dz.latitude doubleValue];
+            
+            TestPlanAnnotation *annotationDZ = [[TestPlanAnnotation alloc]initWithTitle:dz.label AndCoordinate:locationDZ];
+            [_mapView addAnnotation:annotationDZ];
+            
+            [_appDelegate.theAudio play];
+        }
+    }
+}
+
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
     CLLocationCoordinate2D zoomLocation;
     CLLocation *location = [locations lastObject];
@@ -220,6 +265,7 @@ static CLLocationDistance distance = 0;
     
     MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(zoomLocation, 0.05*METERS_PER_MILE, 0.05*METERS_PER_MILE);
     [_mapView setRegion:viewRegion animated:YES];
+    
     _mapView.userLocation.subtitle = [NSString stringWithFormat:@"Long : %f - Lat : %f", _mapView.userLocation.location.coordinate.longitude,_mapView.userLocation.coordinate.latitude];
     
     NSTimeInterval distanceBetweenDates = [[NSDate date] timeIntervalSinceDate:_lastUpdateTimeInterval];
@@ -332,7 +378,7 @@ static CLLocationDistance distance = 0;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-  
+    
 }
 
 - (void)didReceiveMemoryWarning

@@ -7,12 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		631D74B818F1A23200F517D4 /* TestPlanAltitudeHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = 631D74B718F1A23200F517D4 /* TestPlanAltitudeHistory.m */; };
+		631D74BB18F1A8B000F517D4 /* GradientScatterPlot.m in Sources */ = {isa = PBXBuildFile; fileRef = 631D74BA18F1A8B000F517D4 /* GradientScatterPlot.m */; };
 		631E026718EDB79E0013689D /* libCorePlot-CocoaTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 631E026618EDB79E0013689D /* libCorePlot-CocoaTouch.a */; };
 		631E027718EDBB510013689D /* RealTimePlot.m in Sources */ = {isa = PBXBuildFile; fileRef = 631E027618EDBB510013689D /* RealTimePlot.m */; };
 		631E027A18EDBB950013689D /* PlotItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 631E027918EDBB950013689D /* PlotItem.m */; };
 		631E027D18EE9D980013689D /* PlotGallery.m in Sources */ = {isa = PBXBuildFile; fileRef = 631E027C18EE9D980013689D /* PlotGallery.m */; };
 		631E027F18EE9E1B0013689D /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 631E027E18EE9E1B0013689D /* Accelerate.framework */; };
 		631E028118EEAAA30013689D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 631E028018EEAAA30013689D /* QuartzCore.framework */; };
+		632D8D06190BBAC100F98060 /* FR Zone de danger Feu Rouge FR.csv in Resources */ = {isa = PBXBuildFile; fileRef = 632D8CF9190BBAC100F98060 /* FR Zone de danger Feu Rouge FR.csv */; };
+		632D8D07190BBAC100F98060 /* FR Zone de danger FR 110.csv in Resources */ = {isa = PBXBuildFile; fileRef = 632D8CFA190BBAC100F98060 /* FR Zone de danger FR 110.csv */; };
+		632D8D08190BBAC100F98060 /* FR Zone de danger FR 130.csv in Resources */ = {isa = PBXBuildFile; fileRef = 632D8CFB190BBAC100F98060 /* FR Zone de danger FR 130.csv */; };
+		632D8D09190BBAC100F98060 /* FR Zone de danger FR 30.csv in Resources */ = {isa = PBXBuildFile; fileRef = 632D8CFC190BBAC100F98060 /* FR Zone de danger FR 30.csv */; };
+		632D8D0A190BBAC100F98060 /* FR Zone de danger FR 50.csv in Resources */ = {isa = PBXBuildFile; fileRef = 632D8CFD190BBAC100F98060 /* FR Zone de danger FR 50.csv */; };
+		632D8D0B190BBAC100F98060 /* FR Zone de danger FR 60.csv in Resources */ = {isa = PBXBuildFile; fileRef = 632D8CFE190BBAC100F98060 /* FR Zone de danger FR 60.csv */; };
+		632D8D0C190BBAC100F98060 /* FR Zone de danger FR 70.csv in Resources */ = {isa = PBXBuildFile; fileRef = 632D8CFF190BBAC100F98060 /* FR Zone de danger FR 70.csv */; };
+		632D8D0D190BBAC100F98060 /* FR Zone de danger FR 80.csv in Resources */ = {isa = PBXBuildFile; fileRef = 632D8D00190BBAC100F98060 /* FR Zone de danger FR 80.csv */; };
+		632D8D0E190BBAC100F98060 /* FR Zone de danger FR 90.csv in Resources */ = {isa = PBXBuildFile; fileRef = 632D8D01190BBAC100F98060 /* FR Zone de danger FR 90.csv */; };
+		632D8D0F190BBAC100F98060 /* FR Zone de danger FR Passage Niveau.csv in Resources */ = {isa = PBXBuildFile; fileRef = 632D8D02190BBAC100F98060 /* FR Zone de danger FR Passage Niveau.csv */; };
+		632D8D10190BBAC100F98060 /* FR Zone de danger Temporaire FR.csv in Resources */ = {isa = PBXBuildFile; fileRef = 632D8D03190BBAC100F98060 /* FR Zone de danger Temporaire FR.csv */; };
+		632D8D11190BBAC100F98060 /* FR Zone de Danger Troncon debut FR.csv in Resources */ = {isa = PBXBuildFile; fileRef = 632D8D04190BBAC100F98060 /* FR Zone de Danger Troncon debut FR.csv */; };
+		632D8D12190BBAC100F98060 /* FR Zone de Danger Troncon fin FR.csv in Resources */ = {isa = PBXBuildFile; fileRef = 632D8D05190BBAC100F98060 /* FR Zone de Danger Troncon fin FR.csv */; };
+		632D8D15190BFB1900F98060 /* DangerZone.m in Sources */ = {isa = PBXBuildFile; fileRef = 632D8D14190BFB1900F98060 /* DangerZone.m */; };
+		632D8D17190C1A6A00F98060 /* Chimpanzee Calls.caf in Resources */ = {isa = PBXBuildFile; fileRef = 632D8D16190C189700F98060 /* Chimpanzee Calls.caf */; };
 		63402EDD18DA001900FAF06F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63402EDC18DA001900FAF06F /* Foundation.framework */; };
 		63402EDF18DA001900FAF06F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63402EDE18DA001900FAF06F /* CoreGraphics.framework */; };
 		63402EE118DA001900FAF06F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63402EE018DA001900FAF06F /* UIKit.framework */; };
@@ -39,6 +56,7 @@
 		635CA64518DC8CB70046C839 /* TestPlanAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 635CA64418DC8CB70046C839 /* TestPlanAnnotation.m */; };
 		635CA64818DCA1530046C839 /* TestPlanAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 635CA64718DCA1530046C839 /* TestPlanAnnotationView.m */; };
 		63899CBD18DF3D6A00C02B39 /* TestPlanTripMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 63899CBC18DF3D6A00C02B39 /* TestPlanTripMap.m */; };
+		63E0A633190D230700339D25 /* TestPlanLoadDZ.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E0A632190D230700339D25 /* TestPlanLoadDZ.m */; };
 		63E5470618E9870A00D603D9 /* Trip.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E5470518E9870A00D603D9 /* Trip.m */; };
 /* End PBXBuildFile section */
 
@@ -53,6 +71,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		631D74B618F1A23200F517D4 /* TestPlanAltitudeHistory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestPlanAltitudeHistory.h; sourceTree = "<group>"; };
+		631D74B718F1A23200F517D4 /* TestPlanAltitudeHistory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestPlanAltitudeHistory.m; sourceTree = "<group>"; };
+		631D74B918F1A8B000F517D4 /* GradientScatterPlot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientScatterPlot.h; sourceTree = "<group>"; };
+		631D74BA18F1A8B000F517D4 /* GradientScatterPlot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradientScatterPlot.m; sourceTree = "<group>"; };
 		631E021818EDB6E20013689D /* CorePlot-CocoaTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CorePlot-CocoaTouch.h"; sourceTree = "<group>"; };
 		631E021918EDB6E20013689D /* CPTAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTAnimation.h; sourceTree = "<group>"; };
 		631E021A18EDB6E20013689D /* CPTAnimationOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTAnimationOperation.h; sourceTree = "<group>"; };
@@ -140,6 +162,22 @@
 		631E027C18EE9D980013689D /* PlotGallery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlotGallery.m; sourceTree = "<group>"; };
 		631E027E18EE9E1B0013689D /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		631E028018EEAAA30013689D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		632D8CF9190BBAC100F98060 /* FR Zone de danger Feu Rouge FR.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "FR Zone de danger Feu Rouge FR.csv"; sourceTree = "<group>"; };
+		632D8CFA190BBAC100F98060 /* FR Zone de danger FR 110.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "FR Zone de danger FR 110.csv"; sourceTree = "<group>"; };
+		632D8CFB190BBAC100F98060 /* FR Zone de danger FR 130.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "FR Zone de danger FR 130.csv"; sourceTree = "<group>"; };
+		632D8CFC190BBAC100F98060 /* FR Zone de danger FR 30.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "FR Zone de danger FR 30.csv"; sourceTree = "<group>"; };
+		632D8CFD190BBAC100F98060 /* FR Zone de danger FR 50.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "FR Zone de danger FR 50.csv"; sourceTree = "<group>"; };
+		632D8CFE190BBAC100F98060 /* FR Zone de danger FR 60.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "FR Zone de danger FR 60.csv"; sourceTree = "<group>"; };
+		632D8CFF190BBAC100F98060 /* FR Zone de danger FR 70.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "FR Zone de danger FR 70.csv"; sourceTree = "<group>"; };
+		632D8D00190BBAC100F98060 /* FR Zone de danger FR 80.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "FR Zone de danger FR 80.csv"; sourceTree = "<group>"; };
+		632D8D01190BBAC100F98060 /* FR Zone de danger FR 90.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "FR Zone de danger FR 90.csv"; sourceTree = "<group>"; };
+		632D8D02190BBAC100F98060 /* FR Zone de danger FR Passage Niveau.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "FR Zone de danger FR Passage Niveau.csv"; sourceTree = "<group>"; };
+		632D8D03190BBAC100F98060 /* FR Zone de danger Temporaire FR.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "FR Zone de danger Temporaire FR.csv"; sourceTree = "<group>"; };
+		632D8D04190BBAC100F98060 /* FR Zone de Danger Troncon debut FR.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "FR Zone de Danger Troncon debut FR.csv"; sourceTree = "<group>"; };
+		632D8D05190BBAC100F98060 /* FR Zone de Danger Troncon fin FR.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "FR Zone de Danger Troncon fin FR.csv"; sourceTree = "<group>"; };
+		632D8D13190BFB1900F98060 /* DangerZone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DangerZone.h; sourceTree = "<group>"; };
+		632D8D14190BFB1900F98060 /* DangerZone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DangerZone.m; sourceTree = "<group>"; };
+		632D8D16190C189700F98060 /* Chimpanzee Calls.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Chimpanzee Calls.caf"; sourceTree = "<group>"; };
 		63402ED918DA001900FAF06F /* TestPlan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestPlan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63402EDC18DA001900FAF06F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		63402EDE18DA001900FAF06F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -179,6 +217,8 @@
 		635CA64718DCA1530046C839 /* TestPlanAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestPlanAnnotationView.m; sourceTree = "<group>"; };
 		63899CBB18DF3D6A00C02B39 /* TestPlanTripMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestPlanTripMap.h; sourceTree = "<group>"; };
 		63899CBC18DF3D6A00C02B39 /* TestPlanTripMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestPlanTripMap.m; sourceTree = "<group>"; };
+		63E0A631190D230700339D25 /* TestPlanLoadDZ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestPlanLoadDZ.h; sourceTree = "<group>"; };
+		63E0A632190D230700339D25 /* TestPlanLoadDZ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestPlanLoadDZ.m; sourceTree = "<group>"; };
 		63E5470418E9870A00D603D9 /* Trip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Trip.h; sourceTree = "<group>"; };
 		63E5470518E9870A00D603D9 /* Trip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Trip.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -337,18 +377,24 @@
 			children = (
 				631E021718EDB6E20013689D /* CorePlotHeaders */,
 				63402EEB18DA001900FAF06F /* TestPlanAppDelegate.h */,
+				63402EEC18DA001900FAF06F /* TestPlanAppDelegate.m */,
+				63E0A631190D230700339D25 /* TestPlanLoadDZ.h */,
+				63E0A632190D230700339D25 /* TestPlanLoadDZ.m */,
 				635CA64318DC8CB70046C839 /* TestPlanAnnotation.h */,
 				635CA64418DC8CB70046C839 /* TestPlanAnnotation.m */,
 				631E027B18EE9D980013689D /* PlotGallery.h */,
 				631E027C18EE9D980013689D /* PlotGallery.m */,
 				631E027818EDBB950013689D /* PlotItem.h */,
 				631E027918EDBB950013689D /* PlotItem.m */,
+				631D74B918F1A8B000F517D4 /* GradientScatterPlot.h */,
+				631D74BA18F1A8B000F517D4 /* GradientScatterPlot.m */,
 				631E027518EDBB510013689D /* RealTimePlot.h */,
 				631E027618EDBB510013689D /* RealTimePlot.m */,
 				635CA64618DCA1530046C839 /* TestPlanAnnotationView.h */,
 				635CA64718DCA1530046C839 /* TestPlanAnnotationView.m */,
-				63402EEC18DA001900FAF06F /* TestPlanAppDelegate.m */,
 				63402EEE18DA001900FAF06F /* Main_iPhone.storyboard */,
+				631D74B618F1A23200F517D4 /* TestPlanAltitudeHistory.h */,
+				631D74B718F1A23200F517D4 /* TestPlanAltitudeHistory.m */,
 				63899CBB18DF3D6A00C02B39 /* TestPlanTripMap.h */,
 				63899CBC18DF3D6A00C02B39 /* TestPlanTripMap.m */,
 				635CA64018DC840B0046C839 /* TestPlanlocationDetailsViewController.h */,
@@ -361,6 +407,8 @@
 				635CA63818DC3D920046C839 /* TestPlanUIStoryBoardSegue.m */,
 				63402EF118DA001900FAF06F /* Main_iPad.storyboard */,
 				63402F1818DAF30600FAF06F /* TestPlan.xcdatamodeld */,
+				632D8D13190BFB1900F98060 /* DangerZone.h */,
+				632D8D14190BFB1900F98060 /* DangerZone.m */,
 				63E5470418E9870A00D603D9 /* Trip.h */,
 				63E5470518E9870A00D603D9 /* Trip.m */,
 				63402F1B18DAFB9E00FAF06F /* Tracking.h */,
@@ -376,6 +424,20 @@
 		63402EE318DA001900FAF06F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				632D8D16190C189700F98060 /* Chimpanzee Calls.caf */,
+				632D8CF9190BBAC100F98060 /* FR Zone de danger Feu Rouge FR.csv */,
+				632D8CFA190BBAC100F98060 /* FR Zone de danger FR 110.csv */,
+				632D8CFB190BBAC100F98060 /* FR Zone de danger FR 130.csv */,
+				632D8CFC190BBAC100F98060 /* FR Zone de danger FR 30.csv */,
+				632D8CFD190BBAC100F98060 /* FR Zone de danger FR 50.csv */,
+				632D8CFE190BBAC100F98060 /* FR Zone de danger FR 60.csv */,
+				632D8CFF190BBAC100F98060 /* FR Zone de danger FR 70.csv */,
+				632D8D00190BBAC100F98060 /* FR Zone de danger FR 80.csv */,
+				632D8D01190BBAC100F98060 /* FR Zone de danger FR 90.csv */,
+				632D8D02190BBAC100F98060 /* FR Zone de danger FR Passage Niveau.csv */,
+				632D8D03190BBAC100F98060 /* FR Zone de danger Temporaire FR.csv */,
+				632D8D04190BBAC100F98060 /* FR Zone de Danger Troncon debut FR.csv */,
+				632D8D05190BBAC100F98060 /* FR Zone de Danger Troncon fin FR.csv */,
 				63402EE418DA001900FAF06F /* TestPlan-Info.plist */,
 				63402EE518DA001900FAF06F /* InfoPlist.strings */,
 				63402EE818DA001900FAF06F /* main.m */,
@@ -450,6 +512,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Hervé AZOULAY";
 				TargetAttributes = {
+					63402ED818DA001900FAF06F = {
+						DevelopmentTeam = 83NE4H42TL;
+					};
 					63402EFC18DA001900FAF06F = {
 						TestTargetID = 63402ED818DA001900FAF06F;
 					};
@@ -479,10 +544,24 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				632D8D17190C1A6A00F98060 /* Chimpanzee Calls.caf in Resources */,
+				632D8D10190BBAC100F98060 /* FR Zone de danger Temporaire FR.csv in Resources */,
+				632D8D06190BBAC100F98060 /* FR Zone de danger Feu Rouge FR.csv in Resources */,
+				632D8D0E190BBAC100F98060 /* FR Zone de danger FR 90.csv in Resources */,
 				63402EF318DA001900FAF06F /* Main_iPad.storyboard in Resources */,
+				632D8D07190BBAC100F98060 /* FR Zone de danger FR 110.csv in Resources */,
 				63402EF818DA001900FAF06F /* Images.xcassets in Resources */,
 				63402EF018DA001900FAF06F /* Main_iPhone.storyboard in Resources */,
+				632D8D08190BBAC100F98060 /* FR Zone de danger FR 130.csv in Resources */,
+				632D8D0F190BBAC100F98060 /* FR Zone de danger FR Passage Niveau.csv in Resources */,
+				632D8D09190BBAC100F98060 /* FR Zone de danger FR 30.csv in Resources */,
+				632D8D12190BBAC100F98060 /* FR Zone de Danger Troncon fin FR.csv in Resources */,
+				632D8D0D190BBAC100F98060 /* FR Zone de danger FR 80.csv in Resources */,
 				63402EE718DA001900FAF06F /* InfoPlist.strings in Resources */,
+				632D8D0A190BBAC100F98060 /* FR Zone de danger FR 50.csv in Resources */,
+				632D8D11190BBAC100F98060 /* FR Zone de Danger Troncon debut FR.csv in Resources */,
+				632D8D0B190BBAC100F98060 /* FR Zone de danger FR 60.csv in Resources */,
+				632D8D0C190BBAC100F98060 /* FR Zone de danger FR 70.csv in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -501,6 +580,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63E0A633190D230700339D25 /* TestPlanLoadDZ.m in Sources */,
 				63E5470618E9870A00D603D9 /* Trip.m in Sources */,
 				635CA63F18DC51300046C839 /* TestPlanHistoryItemCell.m in Sources */,
 				63402F1D18DAFB9E00FAF06F /* Tracking.m in Sources */,
@@ -512,9 +592,12 @@
 				63402EF618DA001900FAF06F /* TestPlanViewController.m in Sources */,
 				63402EED18DA001900FAF06F /* TestPlanAppDelegate.m in Sources */,
 				63899CBD18DF3D6A00C02B39 /* TestPlanTripMap.m in Sources */,
+				631D74BB18F1A8B000F517D4 /* GradientScatterPlot.m in Sources */,
 				635CA64818DCA1530046C839 /* TestPlanAnnotationView.m in Sources */,
+				631D74B818F1A23200F517D4 /* TestPlanAltitudeHistory.m in Sources */,
 				631E027718EDBB510013689D /* RealTimePlot.m in Sources */,
 				63402F1A18DAF30600FAF06F /* TestPlan.xcdatamodeld in Sources */,
+				632D8D15190BFB1900F98060 /* DangerZone.m in Sources */,
 				631E027A18EDBB950013689D /* PlotItem.m in Sources */,
 				635CA64518DC8CB70046C839 /* TestPlanAnnotation.m in Sources */,
 			);
@@ -651,6 +734,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TestPlan/TestPlan-Prefix.pch";
 				INFOPLIST_FILE = "TestPlan/TestPlan-Info.plist";
@@ -669,6 +753,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TestPlan/TestPlan-Prefix.pch";
 				INFOPLIST_FILE = "TestPlan/TestPlan-Info.plist";

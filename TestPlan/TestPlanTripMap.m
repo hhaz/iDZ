@@ -10,6 +10,7 @@
 #import "Tracking.h"
 #import "TestPlanAppDelegate.h"
 #import "TestPlanAnnotation.h"
+#import "TestPlanAltitudeHistory.h"
 
 @interface TestPlanTripMap ()
 
@@ -43,6 +44,7 @@
     if(_tracks.count > 1)
     {
         CLLocationCoordinate2D coordinateArray[_tracks.count];
+        
         for(i=0;i<_tracks.count;i++)
         {
             Tracking *track = (Tracking *)_tracks[i];
@@ -109,6 +111,21 @@
     
     return annotationView;
 }
+
+-(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+
+{
+    if ([[segue identifier] isEqualToString:@"segueAltitudeHisotry"])
+    {
+        
+        TestPlanAltitudeHistory *historyAltitudeView = [segue destinationViewController];
+        
+        historyAltitudeView.tracks = _tracks;
+        
+    }
+    
+}
+
 
 - (void)didReceiveMemoryWarning
 {

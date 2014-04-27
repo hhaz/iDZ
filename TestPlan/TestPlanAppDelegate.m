@@ -7,6 +7,7 @@
 //
 
 #import "TestPlanAppDelegate.h"
+#import "DangerZone.h"
 
 
 @implementation TestPlanAppDelegate
@@ -21,11 +22,15 @@
     // Override point for customization after application launch.
     
     //[[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:10];
-
+    
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"Chimpanzee Calls" ofType:@"caf"];
+    NSData *soundData = [NSData dataWithContentsOfFile:filePath];
+    NSError *errAudio;
+    
+    _theAudio = [[AVAudioPlayer alloc]initWithData:soundData error:&errAudio];
+        
     return YES;
 }
-
-
 
 // Returns the URL to the application's Documents directory.
 - (NSURL *)applicationDocumentsDirectory

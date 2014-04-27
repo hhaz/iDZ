@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="2fT-fW-Ets">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="2fT-fW-Ets">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -199,14 +199,49 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Trip Map" id="vJo-eh-v6d"/>
+                    <navigationItem key="navigationItem" title="Trip Map" id="vJo-eh-v6d">
+                        <barButtonItem key="rightBarButtonItem" title="Altitude" id="zw8-3X-JRm">
+                            <connections>
+                                <segue destination="Pcj-NX-ZD0" kind="push" identifier="segueAltitudeHisotry" id="chR-it-9eE"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="mapView" destination="bFc-f1-FGD" id="5dd-Wf-g1c"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p2R-eW-NLQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="699" y="393"/>
+            <point key="canvasLocation" x="695" y="323"/>
+        </scene>
+        <!--Test Plan Altitude History-->
+        <scene sceneID="uxx-MW-W29">
+            <objects>
+                <viewController id="Pcj-NX-ZD0" customClass="TestPlanAltitudeHistory" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Ull-Vl-Uh5"/>
+                        <viewControllerLayoutGuide type="bottom" id="Qkd-Ys-63f"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="A6h-rv-Ywb">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="25E-yk-wR8" customClass="CPTGraphHostingView">
+                                <rect key="frame" x="0.0" y="65" width="320" height="415"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="5pl-Tt-kY9"/>
+                    <connections>
+                        <outlet property="graphView" destination="25E-yk-wR8" id="IBc-Pa-RrM"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uuc-xR-D2p" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1139" y="408"/>
         </scene>
         <!--Test Planlocation Details View Controller - Location Details-->
         <scene sceneID="EBt-i6-43U">

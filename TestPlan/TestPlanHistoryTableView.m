@@ -256,11 +256,9 @@
         TestPlanlocationDetailsViewController *detailView = [segue destinationViewController];
         TestPlanHistoryItemCell *cell = (TestPlanHistoryItemCell *)sender;
         
-        NSArray *keys = [_content allKeys];
-        
         NSIndexPath *selectedIndexPath = [self.tableView indexPathForCell:cell];
         
-        Tracking *newTracking = [[_content objectForKey:[keys objectAtIndex: selectedIndexPath.section]] objectAtIndex:selectedIndexPath.row];
+        Tracking *newTracking = [[_content objectForKey:[_sortedKeys objectAtIndex: selectedIndexPath.section]] objectAtIndex:selectedIndexPath.row];
         
         detailView.longitude    = newTracking.longitude;
         detailView.latitude     = newTracking.latitude;

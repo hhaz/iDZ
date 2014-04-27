@@ -9,10 +9,11 @@
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import <CoreData/CoreData.h>
+#import <AVFoundation/AVFoundation.h>
 
 #define METERS_PER_MILE 1609.344
 
-@interface TestPlanAppDelegate : UIResponder <UIApplicationDelegate>
+@interface TestPlanAppDelegate : UIResponder <UIApplicationDelegate,UIAlertViewDelegate>
 {
     UINavigationController *navigationController;
 }
@@ -21,6 +22,10 @@
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+
+@property (nonatomic, strong) AVAudioPlayer *theAudio;
+
+@property (nonatomic, strong) UIAlertView *activityAlert;
 
 
 - (void)saveContext;
