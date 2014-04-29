@@ -12,11 +12,13 @@
 #import "TestPlanHistoryTableView.h"
 #import "Trip.h"
 #import "TestPlanAnnotation.h"
+#import "TestPlanDangerZoneWork.h"
 
 static CLLocationCoordinate2D coordinateArray[2];
 static CLLocationDistance distance = 0;
 static double previousDist;
 static bool playSound = YES;
+static NSMutableArray *dzNear;
 
 @interface TestPlanViewController ()
 
@@ -73,6 +75,8 @@ static bool playSound = YES;
     [_mapView addGestureRecognizer:twoFingerPinch];
     
     _proximity.progress = 0;
+    
+    dzNear = [[NSMutableArray alloc]init];
 
 }
 
@@ -265,8 +269,10 @@ static bool playSound = YES;
 
 -(void)checkDZ:(NSTimer *)theTimer
 {
+    //NSDate *startDate = [NSDate date];
     
-    NSUInteger dzIsNear = [_dangerZones indexOfObjectPassingTest:
+    //Interesting way of finding item in an array but retrieve only the first one ==> not applicable here if several dz
+    /*NSUInteger dzIsNear = [_dangerZones indexOfObjectPassingTest:
                         ^BOOL (DangerZone *dz, NSUInteger index, BOOL *stop)
                         {
                             CLLocation *dzLoc = [[CLLocation alloc]initWithLatitude:[dz.latitude doubleValue] longitude:[dz.longitude doubleValue]];
@@ -275,18 +281,56 @@ static bool playSound = YES;
                             }
                             else return NO;
                         }];
+     if (dzIsNear != NSNotFound) {
+         ...
+     }*/
+    DangerZone *firstDZ = nil;
+    double minDistance = 2000;
     
-    if (dzIsNear != NSNotFound) {
+    for (DangerZone *dz in _dangerZones) {
+        CLLocation *dzLoc = [[CLLocation alloc]initWithLatitude:[dz.latitude doubleValue] longitude:[dz.longitude doubleValue]];
+        double distance = [_mapView.userLocation.location distanceFromLocation:dzLoc];
+        
+        if (distance < 2000) {
+                        
+            TestPlanDangerZoneWork *dzFound = nil;
 
-        DangerZone *dzTemp = (DangerZone *)_dangerZones[dzIsNear];
-        CLLocation *dzLoc = [[CLLocation alloc]initWithLatitude:[dzTemp.latitude doubleValue] longitude:[dzTemp.longitude doubleValue]];
+            for (TestPlanDangerZoneWork *dzw in dzNear) {
+                TestPlanDangerZoneWork *temp = [dzw valueForKey:@"dz"];
+                if(dz == temp.dz) {
+                    dzFound = temp;
+                    break;
+                }
+            }
+
+            if (dzFound == nil)
+            {
+                TestPlanDangerZoneWork *dzWork = [[TestPlanDangerZoneWork alloc]init];
+                dzWork.dz = dz;
+                dzWork.distance = [NSNumber numberWithDouble:distance];
+                [dzNear addObject:@{ @"dz": dzWork, @"y": dzWork.distance }];
+            }
+            
+            if(distance < minDistance && distance <= [dzFound.distance doubleValue])
+            {
+                minDistance = distance;
+                firstDZ = dz;
+            }
+            if (distance > [dzFound.distance doubleValue]) {
+                [dzNear removeObject:dzFound];
+            }
+            dzFound.distance = [NSNumber numberWithDouble:distance];
+        }
+    }
+    
+    if (firstDZ != nil) {
+        CLLocation *dzLoc = [[CLLocation alloc]initWithLatitude:[firstDZ.latitude doubleValue] longitude:[firstDZ.longitude doubleValue]];
         double distance = [_mapView.userLocation.location distanceFromLocation:dzLoc];
         
         if(playSound) {
             [_appDelegate.theAudio play];
             playSound = NO;
         }
-        
         if (distance < previousDist) { //getting closer
             previousDist = distance;
             _proximity.progress = 1 - distance/2000;
@@ -295,6 +339,8 @@ static bool playSound = YES;
             }
         }
         else {
+            previousDist = 2000;
+            playSound = YES;
             _proximity.progress = 0;
         }
     }
@@ -303,13 +349,15 @@ static bool playSound = YES;
         playSound = YES;
         _proximity.progress = 0;
     }
+    //NSDate *endDate = [NSDate date];
+    //NSLog(@"Time to check dz : %f",[endDate timeIntervalSinceDate:startDate]);
     
     [self updateAnnotations];
 }
 
 -(void)updateAnnotations {
     
-    NSDate *startDate = [NSDate date];
+    //NSDate *startDate = [NSDate date];
     int countAnnot = 0;
     
     [_mapView removeAnnotations:_mapView.annotations];
@@ -341,8 +389,8 @@ static bool playSound = YES;
             [_mapView addAnnotation:annotationDZ];
         }
     }
-    NSDate *endDate = [NSDate date];
-    NSLog(@"Time to display %d annotations : %f", countAnnot,[endDate timeIntervalSinceDate:startDate]);
+    //NSDate *endDate = [NSDate date];
+    //NSLog(@"Time to display %d annotations : %f", countAnnot,[endDate timeIntervalSinceDate:startDate]);
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {

@@ -23,7 +23,7 @@
     
     //[[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:10];
     
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"Chimpanzee Calls" ofType:@"caf"];
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"Comedy Whistle" ofType:@"caf"];
     NSData *soundData = [NSData dataWithContentsOfFile:filePath];
     NSError *errAudio;
     

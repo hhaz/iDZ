@@ -14,7 +14,7 @@
 #import "DangerZone.h"
 
 #define kOverlayLimit 1000
-#define kDZCheckFrequency 10
+#define kDZCheckFrequency 5
 
 @interface TestPlanViewController : UIViewController <CLLocationManagerDelegate,NSFetchedResultsControllerDelegate,MKMapViewDelegate,UIGestureRecognizerDelegate>
 

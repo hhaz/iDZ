@@ -52,6 +52,8 @@
 		635CA64518DC8CB70046C839 /* TestPlanAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 635CA64418DC8CB70046C839 /* TestPlanAnnotation.m */; };
 		635CA64818DCA1530046C839 /* TestPlanAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 635CA64718DCA1530046C839 /* TestPlanAnnotationView.m */; };
 		63899CBD18DF3D6A00C02B39 /* TestPlanTripMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 63899CBC18DF3D6A00C02B39 /* TestPlanTripMap.m */; };
+		63AC1B71191004C400B7E759 /* TestPlanDangerZoneWork.m in Sources */ = {isa = PBXBuildFile; fileRef = 63AC1B70191004C400B7E759 /* TestPlanDangerZoneWork.m */; };
+		63AC1B7619104C8A00B7E759 /* Comedy Whistle.caf in Resources */ = {isa = PBXBuildFile; fileRef = 63AC1B731910122D00B7E759 /* Comedy Whistle.caf */; };
 		63E0A633190D230700339D25 /* TestPlanLoadDZ.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E0A632190D230700339D25 /* TestPlanLoadDZ.m */; };
 		63E5470618E9870A00D603D9 /* Trip.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E5470518E9870A00D603D9 /* Trip.m */; };
 /* End PBXBuildFile section */
@@ -209,6 +211,12 @@
 		635CA64718DCA1530046C839 /* TestPlanAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestPlanAnnotationView.m; sourceTree = "<group>"; };
 		63899CBB18DF3D6A00C02B39 /* TestPlanTripMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestPlanTripMap.h; sourceTree = "<group>"; };
 		63899CBC18DF3D6A00C02B39 /* TestPlanTripMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestPlanTripMap.m; sourceTree = "<group>"; };
+		63AC1B6F191004C400B7E759 /* TestPlanDangerZoneWork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestPlanDangerZoneWork.h; sourceTree = "<group>"; };
+		63AC1B70191004C400B7E759 /* TestPlanDangerZoneWork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestPlanDangerZoneWork.m; sourceTree = "<group>"; };
+		63AC1B721910122100B7E759 /* Comedy Low Honk.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comedy Low Honk.caf"; sourceTree = "<group>"; };
+		63AC1B731910122D00B7E759 /* Comedy Whistle.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comedy Whistle.caf"; sourceTree = "<group>"; };
+		63AC1B741910123C00B7E759 /* Children Aaaah.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Children Aaaah.caf"; sourceTree = "<group>"; };
+		63AC1B751910128500B7E759 /* Ethereal Accents.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ethereal Accents.caf"; sourceTree = "<group>"; };
 		63E0A631190D230700339D25 /* TestPlanLoadDZ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestPlanLoadDZ.h; sourceTree = "<group>"; };
 		63E0A632190D230700339D25 /* TestPlanLoadDZ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestPlanLoadDZ.m; sourceTree = "<group>"; };
 		63E5470418E9870A00D603D9 /* Trip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Trip.h; sourceTree = "<group>"; };
@@ -405,6 +413,8 @@
 				63E5470518E9870A00D603D9 /* Trip.m */,
 				63402F1B18DAFB9E00FAF06F /* Tracking.h */,
 				63402F1C18DAFB9E00FAF06F /* Tracking.m */,
+				63AC1B6F191004C400B7E759 /* TestPlanDangerZoneWork.h */,
+				63AC1B70191004C400B7E759 /* TestPlanDangerZoneWork.m */,
 				63402EF418DA001900FAF06F /* TestPlanViewController.h */,
 				63402EF518DA001900FAF06F /* TestPlanViewController.m */,
 				63402EF718DA001900FAF06F /* Images.xcassets */,
@@ -417,6 +427,10 @@
 			isa = PBXGroup;
 			children = (
 				632D8D16190C189700F98060 /* Chimpanzee Calls.caf */,
+				63AC1B751910128500B7E759 /* Ethereal Accents.caf */,
+				63AC1B721910122100B7E759 /* Comedy Low Honk.caf */,
+				63AC1B741910123C00B7E759 /* Children Aaaah.caf */,
+				63AC1B731910122D00B7E759 /* Comedy Whistle.caf */,
 				632D8CF9190BBAC100F98060 /* FR Zone de danger Feu Rouge FR.csv */,
 				632D8CFA190BBAC100F98060 /* FR Zone de danger FR 110.csv */,
 				632D8CFB190BBAC100F98060 /* FR Zone de danger FR 130.csv */,
@@ -532,6 +546,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63AC1B7619104C8A00B7E759 /* Comedy Whistle.caf in Resources */,
 				632D8D17190C1A6A00F98060 /* Chimpanzee Calls.caf in Resources */,
 				632D8D06190BBAC100F98060 /* FR Zone de danger Feu Rouge FR.csv in Resources */,
 				632D8D0E190BBAC100F98060 /* FR Zone de danger FR 90.csv in Resources */,
@@ -573,6 +588,7 @@
 				63402EE918DA001900FAF06F /* main.m in Sources */,
 				635CA64218DC840B0046C839 /* TestPlanlocationDetailsViewController.m in Sources */,
 				631E027D18EE9D980013689D /* PlotGallery.m in Sources */,
+				63AC1B71191004C400B7E759 /* TestPlanDangerZoneWork.m in Sources */,
 				63402EF618DA001900FAF06F /* TestPlanViewController.m in Sources */,
 				63402EED18DA001900FAF06F /* TestPlanAppDelegate.m in Sources */,
 				63899CBD18DF3D6A00C02B39 /* TestPlanTripMap.m in Sources */,
