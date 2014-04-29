@@ -66,7 +66,7 @@
         CLLocationCoordinate2D coord;
         Tracking *track = (Tracking *)_tracks[0];
         coord = CLLocationCoordinate2DMake([track.latitude doubleValue], [track.longitude doubleValue]);
-        MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(coord, 0.05*METERS_PER_MILE, 0.05*METERS_PER_MILE);
+        MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(coord, 100, 100);
         TestPlanAnnotation *annotationStart = [[TestPlanAnnotation alloc]initWithTitle:@"Start" AndCoordinate:coord];
         [_mapView addAnnotation:annotationStart];
         [_mapView setRegion:viewRegion animated:YES];

@@ -11,11 +11,12 @@
 #import <CoreData/CoreData.h>
 #import "RealTimePlot.h"
 #import "TestPlanLoadDZ.h"
+#import "DangerZone.h"
 
 #define kOverlayLimit 1000
-#define kDZCheckFrequency 20
+#define kDZCheckFrequency 10
 
-@interface TestPlanViewController : UIViewController <CLLocationManagerDelegate,NSFetchedResultsControllerDelegate,MKMapViewDelegate>
+@interface TestPlanViewController : UIViewController <CLLocationManagerDelegate,NSFetchedResultsControllerDelegate,MKMapViewDelegate,UIGestureRecognizerDelegate>
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UILabel *labelDistance;
@@ -24,6 +25,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *buttonStart;
 @property (weak, nonatomic) IBOutlet UIButton *buttonStop;
 @property (weak, nonatomic) IBOutlet CPTGraphHostingView *graphView;
+@property (weak, nonatomic) IBOutlet UIStepper *stepper;
+@property (weak, nonatomic) IBOutlet UIProgressView *proximity;
 
 @property (nonatomic , strong) CLLocationManager *locationManager;
 @property (nonatomic, retain) RealTimePlot *graph;

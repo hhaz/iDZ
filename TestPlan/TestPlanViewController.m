@@ -11,12 +11,12 @@
 #import "Tracking.h"
 #import "TestPlanHistoryTableView.h"
 #import "Trip.h"
-#import "DangerZone.h"
 #import "TestPlanAnnotation.h"
-
 
 static CLLocationCoordinate2D coordinateArray[2];
 static CLLocationDistance distance = 0;
+static double previousDist;
+static bool playSound = YES;
 
 @interface TestPlanViewController ()
 
@@ -27,6 +27,7 @@ static CLLocationDistance distance = 0;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    _stepper.hidden = YES;
     
     _loadDZ = [[TestPlanLoadDZ alloc] init];
     
@@ -65,8 +66,29 @@ static CLLocationDistance distance = 0;
 
     [_graph renderInLayer:_graphView withTheme:[CPTTheme themeNamed:kCPTSlateTheme] animated:YES];
     
+    UIPinchGestureRecognizer *twoFingerPinch =
+    [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(handlePinchGesture:)];
     
+    twoFingerPinch.delegate = self;
+    [_mapView addGestureRecognizer:twoFingerPinch];
+    
+    _proximity.progress = 0;
+
 }
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    return YES;
+}
+
+- (void)handlePinchGesture:(UIPinchGestureRecognizer *)pinchRecognizer {
+    
+    _stepper.value += 100 * - pinchRecognizer.velocity;
+
+    if (pinchRecognizer.state == UIGestureRecognizerStateEnded) {
+        [self updateAnnotations];
+    }
+}
+
 
 - (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id < MKOverlay >)overlay
 {
@@ -119,6 +141,11 @@ static CLLocationDistance distance = 0;
     _buttonStart.enabled = NO;
     [_locationManager startUpdatingLocation];
     
+    _stepper.hidden = NO;
+    
+    previousDist = 2000;
+    _proximity.progress = 0;
+    
     _dzTimer = [NSTimer timerWithTimeInterval:kDZCheckFrequency
                                         target:self
                                       selector:@selector(checkDZ:)
@@ -131,6 +158,7 @@ static CLLocationDistance distance = 0;
 -(void)stopUpdatingLocation
 {
     _mapView.showsUserLocation = NO;
+    _stepper.hidden = YES;
     [_locationManager stopUpdatingLocation];
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
@@ -238,20 +266,83 @@ static CLLocationDistance distance = 0;
 -(void)checkDZ:(NSTimer *)theTimer
 {
     
+    NSUInteger dzIsNear = [_dangerZones indexOfObjectPassingTest:
+                        ^BOOL (DangerZone *dz, NSUInteger index, BOOL *stop)
+                        {
+                            CLLocation *dzLoc = [[CLLocation alloc]initWithLatitude:[dz.latitude doubleValue] longitude:[dz.longitude doubleValue]];
+                            if ([_mapView.userLocation.location distanceFromLocation:dzLoc] < 2000) {
+                                return YES;
+                            }
+                            else return NO;
+                        }];
+    
+    if (dzIsNear != NSNotFound) {
+
+        DangerZone *dzTemp = (DangerZone *)_dangerZones[dzIsNear];
+        CLLocation *dzLoc = [[CLLocation alloc]initWithLatitude:[dzTemp.latitude doubleValue] longitude:[dzTemp.longitude doubleValue]];
+        double distance = [_mapView.userLocation.location distanceFromLocation:dzLoc];
+        
+        if(playSound) {
+            [_appDelegate.theAudio play];
+            playSound = NO;
+        }
+        
+        if (distance < previousDist) { //getting closer
+            previousDist = distance;
+            _proximity.progress = 1 - distance/2000;
+            if(distance < 500 ){
+                [_appDelegate.theAudio play];
+            }
+        }
+        else {
+            _proximity.progress = 0;
+        }
+    }
+    else {
+        previousDist = 2000;
+        playSound = YES;
+        _proximity.progress = 0;
+    }
+    
+    [self updateAnnotations];
+}
+
+-(void)updateAnnotations {
+    
+    NSDate *startDate = [NSDate date];
+    int countAnnot = 0;
+    
+    [_mapView removeAnnotations:_mapView.annotations];
+    
     for (DangerZone *dz in _dangerZones) {
-        CLLocation *dzLoc = [[CLLocation alloc]initWithLatitude:[dz.latitude doubleValue] longitude:[dz.longitude doubleValue]];
-        if ([_mapView.userLocation.location distanceFromLocation:dzLoc] < 2000) {
-            CLLocationCoordinate2D locationDZ;
+        CLLocationCoordinate2D locationDZ;
+        
+        locationDZ.longitude    = [dz.longitude doubleValue];
+        locationDZ.latitude     = [dz.latitude doubleValue];
+        
+        if (MKMapRectContainsPoint(_mapView.visibleMapRect, MKMapPointForCoordinate(locationDZ))){
+            countAnnot++;
+           // ideally should check if annotation already exists but impacting performance
+           /* NSUInteger annotationExist = [_mapView.annotations indexOfObjectPassingTest:
+                                          ^BOOL (TestPlanAnnotation *annot, NSUInteger index, BOOL *stop)
+                                          {
+                                              if (annot.coordinate.latitude == locationDZ.latitude && annot.coordinate.longitude == locationDZ.longitude) {
+                                                  return YES;
+                                              }
+                                              else return NO;
+                                          }];
             
-            locationDZ.longitude = [dz.longitude doubleValue];
-            locationDZ.latitude = [dz.latitude doubleValue];
+            if (annotationExist == NSNotFound) {
+                TestPlanAnnotation *annotationDZ = [[TestPlanAnnotation alloc]initWithTitle:dz.label AndCoordinate:locationDZ];
+                [_mapView addAnnotation:annotationDZ];
+            }*/
             
             TestPlanAnnotation *annotationDZ = [[TestPlanAnnotation alloc]initWithTitle:dz.label AndCoordinate:locationDZ];
             [_mapView addAnnotation:annotationDZ];
-            
-            [_appDelegate.theAudio play];
         }
     }
+    NSDate *endDate = [NSDate date];
+    NSLog(@"Time to display %d annotations : %f", countAnnot,[endDate timeIntervalSinceDate:startDate]);
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
@@ -263,7 +354,7 @@ static CLLocationDistance distance = 0;
     
     coordinateArray[1] = zoomLocation;
     
-    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(zoomLocation, 0.05*METERS_PER_MILE, 0.05*METERS_PER_MILE);
+    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(zoomLocation, _stepper.value, _stepper.value);
     [_mapView setRegion:viewRegion animated:YES];
     
     _mapView.userLocation.subtitle = [NSString stringWithFormat:@"Long : %f - Lat : %f", _mapView.userLocation.location.coordinate.longitude,_mapView.userLocation.coordinate.latitude];

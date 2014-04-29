@@ -24,10 +24,6 @@
 		632D8D0C190BBAC100F98060 /* FR Zone de danger FR 70.csv in Resources */ = {isa = PBXBuildFile; fileRef = 632D8CFF190BBAC100F98060 /* FR Zone de danger FR 70.csv */; };
 		632D8D0D190BBAC100F98060 /* FR Zone de danger FR 80.csv in Resources */ = {isa = PBXBuildFile; fileRef = 632D8D00190BBAC100F98060 /* FR Zone de danger FR 80.csv */; };
 		632D8D0E190BBAC100F98060 /* FR Zone de danger FR 90.csv in Resources */ = {isa = PBXBuildFile; fileRef = 632D8D01190BBAC100F98060 /* FR Zone de danger FR 90.csv */; };
-		632D8D0F190BBAC100F98060 /* FR Zone de danger FR Passage Niveau.csv in Resources */ = {isa = PBXBuildFile; fileRef = 632D8D02190BBAC100F98060 /* FR Zone de danger FR Passage Niveau.csv */; };
-		632D8D10190BBAC100F98060 /* FR Zone de danger Temporaire FR.csv in Resources */ = {isa = PBXBuildFile; fileRef = 632D8D03190BBAC100F98060 /* FR Zone de danger Temporaire FR.csv */; };
-		632D8D11190BBAC100F98060 /* FR Zone de Danger Troncon debut FR.csv in Resources */ = {isa = PBXBuildFile; fileRef = 632D8D04190BBAC100F98060 /* FR Zone de Danger Troncon debut FR.csv */; };
-		632D8D12190BBAC100F98060 /* FR Zone de Danger Troncon fin FR.csv in Resources */ = {isa = PBXBuildFile; fileRef = 632D8D05190BBAC100F98060 /* FR Zone de Danger Troncon fin FR.csv */; };
 		632D8D15190BFB1900F98060 /* DangerZone.m in Sources */ = {isa = PBXBuildFile; fileRef = 632D8D14190BFB1900F98060 /* DangerZone.m */; };
 		632D8D17190C1A6A00F98060 /* Chimpanzee Calls.caf in Resources */ = {isa = PBXBuildFile; fileRef = 632D8D16190C189700F98060 /* Chimpanzee Calls.caf */; };
 		63402EDD18DA001900FAF06F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63402EDC18DA001900FAF06F /* Foundation.framework */; };
@@ -171,10 +167,6 @@
 		632D8CFF190BBAC100F98060 /* FR Zone de danger FR 70.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "FR Zone de danger FR 70.csv"; sourceTree = "<group>"; };
 		632D8D00190BBAC100F98060 /* FR Zone de danger FR 80.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "FR Zone de danger FR 80.csv"; sourceTree = "<group>"; };
 		632D8D01190BBAC100F98060 /* FR Zone de danger FR 90.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "FR Zone de danger FR 90.csv"; sourceTree = "<group>"; };
-		632D8D02190BBAC100F98060 /* FR Zone de danger FR Passage Niveau.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "FR Zone de danger FR Passage Niveau.csv"; sourceTree = "<group>"; };
-		632D8D03190BBAC100F98060 /* FR Zone de danger Temporaire FR.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "FR Zone de danger Temporaire FR.csv"; sourceTree = "<group>"; };
-		632D8D04190BBAC100F98060 /* FR Zone de Danger Troncon debut FR.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "FR Zone de Danger Troncon debut FR.csv"; sourceTree = "<group>"; };
-		632D8D05190BBAC100F98060 /* FR Zone de Danger Troncon fin FR.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "FR Zone de Danger Troncon fin FR.csv"; sourceTree = "<group>"; };
 		632D8D13190BFB1900F98060 /* DangerZone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DangerZone.h; sourceTree = "<group>"; };
 		632D8D14190BFB1900F98060 /* DangerZone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DangerZone.m; sourceTree = "<group>"; };
 		632D8D16190C189700F98060 /* Chimpanzee Calls.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Chimpanzee Calls.caf"; sourceTree = "<group>"; };
@@ -434,10 +426,6 @@
 				632D8CFF190BBAC100F98060 /* FR Zone de danger FR 70.csv */,
 				632D8D00190BBAC100F98060 /* FR Zone de danger FR 80.csv */,
 				632D8D01190BBAC100F98060 /* FR Zone de danger FR 90.csv */,
-				632D8D02190BBAC100F98060 /* FR Zone de danger FR Passage Niveau.csv */,
-				632D8D03190BBAC100F98060 /* FR Zone de danger Temporaire FR.csv */,
-				632D8D04190BBAC100F98060 /* FR Zone de Danger Troncon debut FR.csv */,
-				632D8D05190BBAC100F98060 /* FR Zone de Danger Troncon fin FR.csv */,
 				63402EE418DA001900FAF06F /* TestPlan-Info.plist */,
 				63402EE518DA001900FAF06F /* InfoPlist.strings */,
 				63402EE818DA001900FAF06F /* main.m */,
@@ -545,7 +533,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				632D8D17190C1A6A00F98060 /* Chimpanzee Calls.caf in Resources */,
-				632D8D10190BBAC100F98060 /* FR Zone de danger Temporaire FR.csv in Resources */,
 				632D8D06190BBAC100F98060 /* FR Zone de danger Feu Rouge FR.csv in Resources */,
 				632D8D0E190BBAC100F98060 /* FR Zone de danger FR 90.csv in Resources */,
 				63402EF318DA001900FAF06F /* Main_iPad.storyboard in Resources */,
@@ -553,13 +540,10 @@
 				63402EF818DA001900FAF06F /* Images.xcassets in Resources */,
 				63402EF018DA001900FAF06F /* Main_iPhone.storyboard in Resources */,
 				632D8D08190BBAC100F98060 /* FR Zone de danger FR 130.csv in Resources */,
-				632D8D0F190BBAC100F98060 /* FR Zone de danger FR Passage Niveau.csv in Resources */,
 				632D8D09190BBAC100F98060 /* FR Zone de danger FR 30.csv in Resources */,
-				632D8D12190BBAC100F98060 /* FR Zone de Danger Troncon fin FR.csv in Resources */,
 				632D8D0D190BBAC100F98060 /* FR Zone de danger FR 80.csv in Resources */,
 				63402EE718DA001900FAF06F /* InfoPlist.strings in Resources */,
 				632D8D0A190BBAC100F98060 /* FR Zone de danger FR 50.csv in Resources */,
-				632D8D11190BBAC100F98060 /* FR Zone de Danger Troncon debut FR.csv in Resources */,
 				632D8D0B190BBAC100F98060 /* FR Zone de danger FR 60.csv in Resources */,
 				632D8D0C190BBAC100F98060 /* FR Zone de danger FR 70.csv in Resources */,
 			);

@@ -11,8 +11,6 @@
 #import <CoreData/CoreData.h>
 #import <AVFoundation/AVFoundation.h>
 
-#define METERS_PER_MILE 1609.344
-
 @interface TestPlanAppDelegate : UIResponder <UIApplicationDelegate,UIAlertViewDelegate>
 {
     UINavigationController *navigationController;

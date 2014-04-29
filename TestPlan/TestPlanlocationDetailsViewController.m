@@ -38,7 +38,7 @@
 
     [_mapView setCenterCoordinate:coordinate animated:YES];
     
-    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(coordinate, 0.05*METERS_PER_MILE, 0.05*METERS_PER_MILE);
+    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(coordinate, 100, 100);
     [_mapView setRegion:viewRegion animated:YES];
     
     TestPlanAnnotation *annotation = [[TestPlanAnnotation alloc]initWithTitle:[NSString stringWithFormat:@"Long : %f  Lat : %f",coordinate.longitude,coordinate.latitude]AndCoordinate:coordinate];
