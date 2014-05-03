@@ -35,6 +35,13 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XcY-Ad-1Dy">
+                                <rect key="frame" x="251" y="81" width="60" height="23"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="8"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TOZ-Nk-5OX">
                                 <rect key="frame" x="20" y="456" width="46" height="24"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -89,7 +96,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pyY-Ub-h65">
-                                <rect key="frame" x="237" y="65" width="83" height="30"/>
+                                <rect key="frame" x="212" y="65" width="83" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -101,16 +108,23 @@
                                     <action selector="showGraph" destination="vXZ-lx-hvc" eventType="touchUpInside" id="d9d-fj-Ul8"/>
                                 </connections>
                             </button>
-                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Ybe-CZ-KH6">
-                                <rect key="frame" x="228" y="102" width="84" height="2"/>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progressViewStyle="bar" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Ybe-CZ-KH6">
+                                <rect key="frame" x="228" y="102" width="84" height="3"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </progressView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SRv-XP-Wkn">
+                                <rect key="frame" x="96" y="457" width="129" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Map View" id="X1b-QF-HZs">
                         <barButtonItem key="leftBarButtonItem" id="rd7-GU-h2J">
-                            <stepper key="customView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="100" maximumValue="100000" stepValue="1000" id="b8F-C5-fr0">
+                            <stepper key="customView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100000" stepValue="1000" id="b8F-C5-fr0">
                                 <rect key="frame" x="16" y="7" width="94" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <rect key="contentStretch" x="0.0" y="0.0" width="0.49999999999999961" height="0.49999999999999961"/>
@@ -127,16 +141,18 @@
                         <outlet property="buttonStart" destination="TOZ-Nk-5OX" id="RCJ-d6-Ypo"/>
                         <outlet property="buttonStop" destination="vRL-eu-Y7a" id="c6v-F7-YB6"/>
                         <outlet property="graphView" destination="z3i-fL-sJ1" id="TDK-ur-FDI"/>
+                        <outlet property="isConnected" destination="SRv-XP-Wkn" id="C4n-pa-GEw"/>
                         <outlet property="labelDistance" destination="qU9-7D-exp" id="do8-ak-oLe"/>
                         <outlet property="labelSpeed" destination="uik-XX-CiT" id="dJw-Nr-Lon"/>
                         <outlet property="mapView" destination="eIP-ID-Mbu" id="5A4-hV-nLp"/>
                         <outlet property="proximity" destination="Ybe-CZ-KH6" id="mXp-ch-7Ep"/>
+                        <outlet property="proximityValue" destination="XcY-Ad-1Dy" id="fc9-YF-Dnl"/>
                         <outlet property="stepper" destination="b8F-C5-fr0" id="Vin-oO-Kz4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-290" y="-35"/>
+            <point key="canvasLocation" x="-312" y="-34"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="s7I-57-40P">

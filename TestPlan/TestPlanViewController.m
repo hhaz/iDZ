@@ -12,12 +12,13 @@
 #import "TestPlanHistoryTableView.h"
 #import "Trip.h"
 #import "TestPlanAnnotation.h"
-#import "TestPlanDangerZoneWork.h"
+#import "TestPlandzInfos.h"
 
 static CLLocationCoordinate2D coordinateArray[2];
 static CLLocationDistance distance = 0;
 static double previousDist;
 static bool playSound = YES;
+static bool dzServerConnected = NO;
 static NSMutableArray *dzNear;
 
 @interface TestPlanViewController ()
@@ -31,9 +32,7 @@ static NSMutableArray *dzNear;
     [super viewDidLoad];
     _stepper.hidden = YES;
     
-    _loadDZ = [[TestPlanLoadDZ alloc] init];
-    
-    [_loadDZ checkDZ];
+    [self isDZLoaded];
     
     if ([CLLocationManager locationServicesEnabled]) {
         _locationManager = [[CLLocationManager alloc] init];
@@ -65,7 +64,7 @@ static NSMutableArray *dzNear;
     
     _graph = [[RealTimePlot alloc]init];
     _graph.altitude = _mapView.userLocation.location.altitude;
-
+    
     [_graph renderInLayer:_graphView withTheme:[CPTTheme themeNamed:kCPTSlateTheme] animated:YES];
     
     UIPinchGestureRecognizer *twoFingerPinch =
@@ -77,7 +76,11 @@ static NSMutableArray *dzNear;
     _proximity.progress = 0;
     
     dzNear = [[NSMutableArray alloc]init];
-
+    
+    _isConnected.text = @"Not connected";
+    
+    _graphView.hidden = YES;
+    
 }
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
@@ -87,7 +90,7 @@ static NSMutableArray *dzNear;
 - (void)handlePinchGesture:(UIPinchGestureRecognizer *)pinchRecognizer {
     
     _stepper.value += 100 * - pinchRecognizer.velocity;
-
+    
     if (pinchRecognizer.state == UIGestureRecognizerStateEnded) {
         [self updateAnnotations];
     }
@@ -105,7 +108,7 @@ static NSMutableArray *dzNear;
     routeLineView.lineWidth = 5;
     
     return routeLineView;
-
+    
 }
 
 -(void)startUpdatingLocation
@@ -121,7 +124,7 @@ static NSMutableArray *dzNear;
     NSArray *sortDescriptors = @[sortDescriptor];
     
     [fetchRequest setSortDescriptors:sortDescriptors];
-
+    
     NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
     
     Trip *newTrip = [[Trip alloc]initWithEntity:entity insertIntoManagedObjectContext:[aFetchedResultsController managedObjectContext]];
@@ -151,12 +154,12 @@ static NSMutableArray *dzNear;
     _proximity.progress = 0;
     
     _dzTimer = [NSTimer timerWithTimeInterval:kDZCheckFrequency
-                                        target:self
-                                      selector:@selector(checkDZ:)
-                                      userInfo:nil
-                                       repeats:YES];
+                                       target:self
+                                     selector:@selector(checkDZ:)
+                                     userInfo:nil
+                                      repeats:YES];
     [[NSRunLoop mainRunLoop] addTimer:_dzTimer forMode:NSRunLoopCommonModes];
-
+    
 }
 
 -(void)stopUpdatingLocation
@@ -219,7 +222,7 @@ static NSMutableArray *dzNear;
     newTracking.latitude        = [NSNumber numberWithFloat:location.coordinate.latitude];
     newTracking.tripid          = _tripId;
     newTracking.altitude        = [NSNumber numberWithFloat:location.altitude];
-   
+    
     // Save the context.
     NSError *error = nil;
     if (![context save:&error]) {
@@ -247,7 +250,7 @@ static NSMutableArray *dzNear;
     NSArray *sortDescriptors = @[sortDescriptor];
     
     [fetchRequest setSortDescriptors:sortDescriptors];
-
+    
     // nil for section name key path means "no sections".
     NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
     aFetchedResultsController.delegate = self;
@@ -267,62 +270,58 @@ static NSMutableArray *dzNear;
     NSLog(@"Error : %@", error.localizedDescription);
 }
 
--(void)checkDZ:(NSTimer *)theTimer
+- (void)connection:(NSURLConnection*)connection didFailWithError:(NSError*)error {
+    NSLog(@"URL Connection Failed!");
+    currentConnection = nil;
+    dzServerConnected = NO;
+    _isConnected.text = @"Not connected";
+}
+
+- (void)connection:(NSURLConnection*)connection didReceiveResponse:(NSURLResponse *)response {
+    [self.apiReturnXMLData setLength:0];
+    dzServerConnected = YES;
+    _isConnected.text = @"Connected";
+}
+
+- (void)connection:(NSURLConnection*)connection didReceiveData:(NSData*)data {
+    [self.apiReturnXMLData appendData:data];
+}
+
+- (void)checkIfDzNear:(NSArray *)dzArray
 {
-    //NSDate *startDate = [NSDate date];
-    
-    //Interesting way of finding item in an array but retrieve only the first one ==> not applicable here if several dz
-    /*NSUInteger dzIsNear = [_dangerZones indexOfObjectPassingTest:
-                        ^BOOL (DangerZone *dz, NSUInteger index, BOOL *stop)
-                        {
-                            CLLocation *dzLoc = [[CLLocation alloc]initWithLatitude:[dz.latitude doubleValue] longitude:[dz.longitude doubleValue]];
-                            if ([_mapView.userLocation.location distanceFromLocation:dzLoc] < 2000) {
-                                return YES;
-                            }
-                            else return NO;
-                        }];
-     if (dzIsNear != NSNotFound) {
-         ...
-     }*/
-    DangerZone *firstDZ = nil;
+    TestPlandzInfos *firstDZ = nil;
     double minDistance = 2000;
     
-    for (DangerZone *dz in _dangerZones) {
-        CLLocation *dzLoc = [[CLLocation alloc]initWithLatitude:[dz.latitude doubleValue] longitude:[dz.longitude doubleValue]];
+    for (TestPlandzInfos *dzCurrent in dzArray) {
+        TestPlandzInfos *dzFound = nil;
+        CLLocation *dzLoc = [[CLLocation alloc]initWithLatitude:[dzCurrent.latitude doubleValue] longitude:[dzCurrent.longitude doubleValue]];
         double distance = [_mapView.userLocation.location distanceFromLocation:dzLoc];
         
-        if (distance < 2000) {
-                        
-            TestPlanDangerZoneWork *dzFound = nil;
-
-            for (TestPlanDangerZoneWork *dzw in dzNear) {
-                TestPlanDangerZoneWork *temp = [dzw valueForKey:@"dz"];
-                if(dz == temp.dz) {
-                    dzFound = temp;
-                    break;
-                }
+        for (TestPlandzInfos *dzn in dzNear) {
+            if ([dzn.latitude doubleValue] == [dzCurrent.latitude doubleValue] && [dzCurrent.longitude doubleValue] == [dzCurrent.longitude doubleValue] ) {
+                dzFound = dzn;
             }
-
-            if (dzFound == nil)
-            {
-                TestPlanDangerZoneWork *dzWork = [[TestPlanDangerZoneWork alloc]init];
-                dzWork.dz = dz;
-                dzWork.distance = [NSNumber numberWithDouble:distance];
-                [dzNear addObject:@{ @"dz": dzWork, @"y": dzWork.distance }];
-            }
-            
-            if(distance < minDistance && distance <= [dzFound.distance doubleValue])
-            {
-                minDistance = distance;
-                firstDZ = dz;
-            }
-            if (distance > [dzFound.distance doubleValue]) {
-                [dzNear removeObject:dzFound];
-            }
-            dzFound.distance = [NSNumber numberWithDouble:distance];
         }
+        
+        if (dzFound == nil) {
+            dzCurrent.distance = [NSNumber numberWithDouble:-1]; // adding dz for the first time
+            [dzNear addObject:dzCurrent];
+            dzFound = [dzNear lastObject];
+        }
+        
+        if(distance < minDistance && distance <= [dzFound.distance doubleValue])
+        {
+            minDistance = distance;
+            firstDZ = dzCurrent;
+        }
+        if (distance > [dzFound.distance doubleValue] && [dzFound.distance doubleValue] != -1) {
+            [dzNear removeObject:dzFound];
+        }
+        dzFound.distance = [NSNumber numberWithDouble:distance];
+        
+        TestPlanAnnotation *annotationDZ = [[TestPlanAnnotation alloc]initWithTitle:dzCurrent.description AndCoordinate:dzLoc.coordinate];
+        [_mapView addAnnotation:annotationDZ];
     }
-    
     if (firstDZ != nil) {
         CLLocation *dzLoc = [[CLLocation alloc]initWithLatitude:[firstDZ.latitude doubleValue] longitude:[firstDZ.longitude doubleValue]];
         double distance = [_mapView.userLocation.location distanceFromLocation:dzLoc];
@@ -330,27 +329,98 @@ static NSMutableArray *dzNear;
         if(playSound) {
             [_appDelegate.theAudio play];
             playSound = NO;
+            _appDelegate.theAudio.rate = 1;
         }
         if (distance < previousDist) { //getting closer
             previousDist = distance;
             _proximity.progress = 1 - distance/2000;
+            _proximityValue.text = [NSString stringWithFormat:@"%1.0f m",distance];
             if(distance < 500 ){
-                [_appDelegate.theAudio play];
+                playSound = YES;
+                _appDelegate.theAudio.rate = 2;
             }
         }
         else {
             previousDist = 2000;
             playSound = YES;
             _proximity.progress = 0;
+            _proximityValue.text = @"";
         }
     }
     else {
         previousDist = 2000;
         playSound = YES;
         _proximity.progress = 0;
+        _proximityValue.text = @"";
     }
-    //NSDate *endDate = [NSDate date];
-    //NSLog(@"Time to check dz : %f",[endDate timeIntervalSinceDate:startDate]);
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+    currentConnection = nil;
+    NSError *nserr;
+    NSMutableArray *dzArray = [[NSMutableArray alloc]init];
+    
+    NSLog(@"server data");
+    
+    NSArray *jsonArray=[NSJSONSerialization JSONObjectWithData:_apiReturnXMLData options:NSJSONReadingMutableContainers error:&nserr];
+    
+    if(jsonArray !=nil && jsonArray.count > 0 && nserr == nil && !([[jsonArray objectAtIndex:0] isEqual:[NSNull null]]))
+    {
+        for (int i=0; i<jsonArray.count; i++) {
+            if (![[jsonArray objectAtIndex:i] isEqual:[NSNull null]]) {
+                double latitude = [(NSNumber *)[[jsonArray objectAtIndex:i] objectForKey:@"latitude"] doubleValue];
+                double longitude = [(NSNumber *)[[jsonArray objectAtIndex:i] objectForKey:@"longitude"] doubleValue];
+                NSString *dzLabel = (NSString *)[[jsonArray objectAtIndex:i] objectForKey:@"description"];
+                
+                TestPlandzInfos *dzCurrent = [[TestPlandzInfos alloc]init];
+                
+                dzCurrent.latitude = [NSNumber numberWithDouble:latitude];
+                dzCurrent.longitude = [NSNumber numberWithDouble:longitude];
+                dzCurrent.description = dzLabel;
+                
+                [dzArray addObject:dzCurrent];
+            }
+        }
+    }
+    
+    [self checkIfDzNear:dzArray];
+    
+}
+
+
+-(void)checkDZ:(NSTimer *)theTimer
+{
+    NSString *restCallString = [NSString stringWithFormat:@"http://velhaz.hd.free.fr:3000/api/findClosestDZ?latitude=%f&longitude=%f", _mapView.userLocation.location.coordinate.latitude, _mapView.userLocation.coordinate.longitude];
+    
+    NSURL *restURL = [NSURL URLWithString:restCallString];
+    NSURLRequest *restRequest = [NSURLRequest requestWithURL:restURL cachePolicy:NSURLCacheStorageNotAllowed timeoutInterval:3];
+    
+    if( currentConnection)
+    {
+        [currentConnection cancel];
+        currentConnection = nil;
+        self.apiReturnXMLData = nil;
+    }
+    
+    currentConnection = [[NSURLConnection alloc] initWithRequest:restRequest delegate:self];
+    
+    _apiReturnXMLData = [NSMutableData data];
+    
+    if(!dzServerConnected) {
+        NSLog(@"local data");
+        NSMutableArray *dzArray = [[NSMutableArray alloc]init];
+        for (DangerZone *dz in _dangerZones) {
+            TestPlandzInfos *dzCurrent = [[TestPlandzInfos alloc]init];
+            
+            dzCurrent.latitude = dz.latitude;
+            dzCurrent.longitude = dz.longitude;
+            dzCurrent.description = dz.description ;
+            
+            [dzArray addObject:dzCurrent];
+        }
+        
+        [self checkIfDzNear:dzArray];
+    }
     
     [self updateAnnotations];
 }
@@ -370,21 +440,6 @@ static NSMutableArray *dzNear;
         
         if (MKMapRectContainsPoint(_mapView.visibleMapRect, MKMapPointForCoordinate(locationDZ))){
             countAnnot++;
-           // ideally should check if annotation already exists but impacting performance
-           /* NSUInteger annotationExist = [_mapView.annotations indexOfObjectPassingTest:
-                                          ^BOOL (TestPlanAnnotation *annot, NSUInteger index, BOOL *stop)
-                                          {
-                                              if (annot.coordinate.latitude == locationDZ.latitude && annot.coordinate.longitude == locationDZ.longitude) {
-                                                  return YES;
-                                              }
-                                              else return NO;
-                                          }];
-            
-            if (annotationExist == NSNotFound) {
-                TestPlanAnnotation *annotationDZ = [[TestPlanAnnotation alloc]initWithTitle:dz.label AndCoordinate:locationDZ];
-                [_mapView addAnnotation:annotationDZ];
-            }*/
-            
             TestPlanAnnotation *annotationDZ = [[TestPlanAnnotation alloc]initWithTitle:dz.label AndCoordinate:locationDZ];
             [_mapView addAnnotation:annotationDZ];
         }
@@ -446,7 +501,7 @@ static NSMutableArray *dzNear;
             unitSpeed = @"m/s";
             speedString = [NSString localizedStringWithFormat:@"%.3F", location.speed];
         }
-
+        
         _labelDistance.text = [NSString stringWithFormat:@"%@ %@",distanceString,unit];
         if(location.speed > 0)
         {
@@ -463,7 +518,7 @@ static NSMutableArray *dzNear;
         _graph.altitude = location.altitude;
     }
     else
-       _graph.altitude = 0.0;
+        _graph.altitude = 0.0;
     
     if (_mapView.overlays.count > kOverlayLimit) {
         MKOverlayView *overlay = [[_mapView overlays] firstObject];
@@ -510,6 +565,101 @@ static NSMutableArray *dzNear;
     }
     
 }
+
+- (void)isDZLoaded
+{
+    _appDelegate = (TestPlanAppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    _managedObjectContext = _appDelegate.managedObjectContext;
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"DangerZone" inManagedObjectContext:_managedObjectContext];
+    [fetchRequest setEntity:entity];
+    
+    //code to delete records in DangerZone
+    /*NSArray *myObjectsToDelete = [_managedObjectContext executeFetchRequest:fetchRequest error:nil];
+     
+     for (DangerZone *objectToDelete in myObjectsToDelete) {
+     [_managedObjectContext deleteObject:objectToDelete];
+     }*/
+    
+    NSError *err;
+    NSUInteger count = [_managedObjectContext countForFetchRequest:fetchRequest error:&err];
+    
+    if (count == 0) {
+        
+        _activityAlert = [[UIAlertView alloc]
+                          initWithTitle:@"Danger Zone Locations Needs to be Updated"
+                          message:@"Click OK and please wait"
+                          delegate:self cancelButtonTitle:@"OK"
+                          otherButtonTitles:nil];
+        [_activityAlert show];
+        
+        
+        // saving in core data in background seems ... tricky ... https://developer.apple.com/library/ios/documentation/cocoa/conceptual/coredata/Articles/cdConcurrency.html
+        //[self performSelectorInBackground:@selector(loadDZ) withObject: nil];
+        
+    }
+}
+
+- (void)loadDZ
+{
+    
+    NSError *err;
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"DangerZone" inManagedObjectContext:_managedObjectContext];
+    [fetchRequest setEntity:entity];
+    
+    NSArray *csvArray = [[NSBundle mainBundle] pathsForResourcesOfType:@"csv" inDirectory:nil];
+    for(NSString *filePath in csvArray)
+    {
+        NSError *error;
+        NSUInteger countRows = 0;
+        
+        NSString *csvData = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:&error];
+        NSArray *rawData = [csvData componentsSeparatedByString:@"\n"];
+        
+        for(NSString *line in rawData)
+        {
+            NSArray *arrayValues = [line componentsSeparatedByString:@","];
+            if (arrayValues.count > 2) {
+                
+                countRows++;
+                
+                DangerZone *newDZ = [[DangerZone alloc]initWithEntity:entity insertIntoManagedObjectContext:_managedObjectContext];
+                
+                newDZ.label           = arrayValues[2];
+                newDZ.longitude       = [NSNumber numberWithFloat:[arrayValues[0] floatValue]];
+                newDZ.latitude        = [NSNumber numberWithFloat:[arrayValues[1] floatValue]];
+                // Save the context.
+                NSError *error = nil;
+                if (![_managedObjectContext save:&error]) {
+                    NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+                    abort();
+                }
+            }
+        }
+        NSLog(@"Loaded %lu records for %@", (unsigned long)countRows, filePath);
+    }
+    
+    NSUInteger count = [_managedObjectContext countForFetchRequest:fetchRequest error:&err];
+    NSLog(@"Loaded %lu danger zones records", (unsigned long)count);
+    
+    _dangerZones = [_managedObjectContext executeFetchRequest:fetchRequest error:nil];
+    
+}
+
+- (void)willPresentAlertView:(UIAlertView *)alertView
+{
+    
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    [self loadDZ];
+    [alertView dismissWithClickedButtonIndex:0 animated:YES];
+}
+
 
 -(void) showGraph
 {

@@ -23,11 +23,21 @@
     
     //[[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:10];
     
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"Comedy Whistle" ofType:@"caf"];
-    NSData *soundData = [NSData dataWithContentsOfFile:filePath];
+    NSArray *cafArray = [[NSBundle mainBundle] pathsForResourcesOfType:@"caf" inDirectory:nil];
+    
+    _soundDataArray = [[NSMutableArray alloc]initWithCapacity:cafArray.count];
+    
+    for(NSString *filePath in cafArray)
+    {
+        NSData *soundData = [NSData dataWithContentsOfFile:filePath];
+        [_soundDataArray addObject:soundData];
+    }
+
     NSError *errAudio;
     
-    _theAudio = [[AVAudioPlayer alloc]initWithData:soundData error:&errAudio];
+    _theAudio = [[AVAudioPlayer alloc]initWithData:_soundDataArray[1] error:&errAudio];
+    
+    _theAudio.enableRate = YES;
         
     return YES;
 }

@@ -10,14 +10,17 @@
 #import <MapKit/MapKit.h>
 #import <CoreData/CoreData.h>
 #import "RealTimePlot.h"
-#import "TestPlanLoadDZ.h"
 #import "DangerZone.h"
 
 #define kOverlayLimit 1000
 #define kDZCheckFrequency 5
 
-@interface TestPlanViewController : UIViewController <CLLocationManagerDelegate,NSFetchedResultsControllerDelegate,MKMapViewDelegate,UIGestureRecognizerDelegate>
+@interface TestPlanViewController : UIViewController <CLLocationManagerDelegate,NSFetchedResultsControllerDelegate,MKMapViewDelegate,UIGestureRecognizerDelegate,UIAlertViewDelegate,NSURLConnectionDelegate>
+{
+    NSURLConnection *currentConnection;
+}
 
+@property (retain, nonatomic) NSMutableData *apiReturnXMLData;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UILabel *labelDistance;
 @property (weak, nonatomic) IBOutlet UILabel *labelSpeed;
@@ -27,13 +30,15 @@
 @property (weak, nonatomic) IBOutlet CPTGraphHostingView *graphView;
 @property (weak, nonatomic) IBOutlet UIStepper *stepper;
 @property (weak, nonatomic) IBOutlet UIProgressView *proximity;
+@property (weak, nonatomic) IBOutlet UILabel *proximityValue;
+@property (weak, nonatomic) IBOutlet UILabel *isConnected;
 
 @property (nonatomic , strong) CLLocationManager *locationManager;
 @property (nonatomic, retain) RealTimePlot *graph;
+@property (nonatomic, retain) UIAlertView *activityAlert;
 
 @property (nonatomic, retain) NSTimer *dzTimer;
 @property (nonatomic, retain) NSArray *dangerZones;
-@property (nonatomic, retain) TestPlanLoadDZ *loadDZ;
 @property (nonatomic, retain) TestPlanAppDelegate *appDelegate;
 
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;

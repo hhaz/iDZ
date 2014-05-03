@@ -22,6 +22,7 @@
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
 @property (nonatomic, strong) AVAudioPlayer *theAudio;
+@property (nonatomic, strong) NSMutableArray *soundDataArray;
 
 @property (nonatomic, strong) UIAlertView *activityAlert;
 
