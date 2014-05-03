@@ -52,9 +52,18 @@
 		635CA64518DC8CB70046C839 /* TestPlanAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 635CA64418DC8CB70046C839 /* TestPlanAnnotation.m */; };
 		635CA64818DCA1530046C839 /* TestPlanAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 635CA64718DCA1530046C839 /* TestPlanAnnotationView.m */; };
 		63899CBD18DF3D6A00C02B39 /* TestPlanTripMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 63899CBC18DF3D6A00C02B39 /* TestPlanTripMap.m */; };
+		63A63B2219151F95008AA00A /* preferences.png in Resources */ = {isa = PBXBuildFile; fileRef = 63A63B2119151F95008AA00A /* preferences.png */; };
+		63A63B2419151FA1008AA00A /* world.png in Resources */ = {isa = PBXBuildFile; fileRef = 63A63B2319151FA1008AA00A /* world.png */; };
+		63A63B27191523F8008AA00A /* url2.png in Resources */ = {isa = PBXBuildFile; fileRef = 63A63B26191523F8008AA00A /* url2.png */; };
+		63A63B2919152663008AA00A /* database.png in Resources */ = {isa = PBXBuildFile; fileRef = 63A63B2819152663008AA00A /* database.png */; };
+		63A63B2B19152697008AA00A /* clock.png in Resources */ = {isa = PBXBuildFile; fileRef = 63A63B2A19152697008AA00A /* clock.png */; };
+		63A63B321915476F008AA00A /* TestPlanUpdateAnnotationsFromServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A63B311915476F008AA00A /* TestPlanUpdateAnnotationsFromServer.m */; };
 		63AADA7619114B42005E5AC4 /* Ethereal Accents.caf in Resources */ = {isa = PBXBuildFile; fileRef = 63AC1B751910128500B7E759 /* Ethereal Accents.caf */; };
 		63AC1B7619104C8A00B7E759 /* Comedy Whistle.caf in Resources */ = {isa = PBXBuildFile; fileRef = 63AC1B731910122D00B7E759 /* Comedy Whistle.caf */; };
+		63CEA0D019159A3400559706 /* downloadDZ.m in Sources */ = {isa = PBXBuildFile; fileRef = 63CEA0CF19159A3400559706 /* downloadDZ.m */; };
+		63CEA0D21915A16500559706 /* B14_90.png in Resources */ = {isa = PBXBuildFile; fileRef = 63CEA0D11915A16500559706 /* B14_90.png */; };
 		63E5470618E9870A00D603D9 /* Trip.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E5470518E9870A00D603D9 /* Trip.m */; };
+		63EC074619158BFA001F2042 /* TestPlanTableViewControllerSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 63EC074519158BFA001F2042 /* TestPlanTableViewControllerSettings.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -211,10 +220,22 @@
 		635CA64718DCA1530046C839 /* TestPlanAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestPlanAnnotationView.m; sourceTree = "<group>"; };
 		63899CBB18DF3D6A00C02B39 /* TestPlanTripMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestPlanTripMap.h; sourceTree = "<group>"; };
 		63899CBC18DF3D6A00C02B39 /* TestPlanTripMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestPlanTripMap.m; sourceTree = "<group>"; };
+		63A63B2119151F95008AA00A /* preferences.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = preferences.png; sourceTree = "<group>"; };
+		63A63B2319151FA1008AA00A /* world.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = world.png; sourceTree = "<group>"; };
+		63A63B26191523F8008AA00A /* url2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = url2.png; sourceTree = "<group>"; };
+		63A63B2819152663008AA00A /* database.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = database.png; sourceTree = "<group>"; };
+		63A63B2A19152697008AA00A /* clock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clock.png; sourceTree = "<group>"; };
+		63A63B301915476F008AA00A /* TestPlanUpdateAnnotationsFromServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestPlanUpdateAnnotationsFromServer.h; sourceTree = "<group>"; };
+		63A63B311915476F008AA00A /* TestPlanUpdateAnnotationsFromServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestPlanUpdateAnnotationsFromServer.m; sourceTree = "<group>"; };
 		63AC1B731910122D00B7E759 /* Comedy Whistle.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comedy Whistle.caf"; sourceTree = "<group>"; };
 		63AC1B751910128500B7E759 /* Ethereal Accents.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ethereal Accents.caf"; sourceTree = "<group>"; };
+		63CEA0CE19159A3400559706 /* downloadDZ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = downloadDZ.h; path = ../downloadDZ.h; sourceTree = "<group>"; };
+		63CEA0CF19159A3400559706 /* downloadDZ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = downloadDZ.m; path = ../downloadDZ.m; sourceTree = "<group>"; };
+		63CEA0D11915A16500559706 /* B14_90.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = B14_90.png; sourceTree = "<group>"; };
 		63E5470418E9870A00D603D9 /* Trip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Trip.h; sourceTree = "<group>"; };
 		63E5470518E9870A00D603D9 /* Trip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Trip.m; sourceTree = "<group>"; };
+		63EC074419158BFA001F2042 /* TestPlanTableViewControllerSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestPlanTableViewControllerSettings.h; sourceTree = "<group>"; };
+		63EC074519158BFA001F2042 /* TestPlanTableViewControllerSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestPlanTableViewControllerSettings.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -369,6 +390,7 @@
 		63402EE218DA001900FAF06F /* TestPlan */ = {
 			isa = PBXGroup;
 			children = (
+				63A63B2519151FA6008AA00A /* png */,
 				631E021718EDB6E20013689D /* CorePlotHeaders */,
 				63402EEB18DA001900FAF06F /* TestPlanAppDelegate.h */,
 				63402EEC18DA001900FAF06F /* TestPlanAppDelegate.m */,
@@ -407,6 +429,12 @@
 				63402F1C18DAFB9E00FAF06F /* Tracking.m */,
 				63402EF418DA001900FAF06F /* TestPlanViewController.h */,
 				63402EF518DA001900FAF06F /* TestPlanViewController.m */,
+				63CEA0CE19159A3400559706 /* downloadDZ.h */,
+				63CEA0CF19159A3400559706 /* downloadDZ.m */,
+				63EC074419158BFA001F2042 /* TestPlanTableViewControllerSettings.h */,
+				63EC074519158BFA001F2042 /* TestPlanTableViewControllerSettings.m */,
+				63A63B301915476F008AA00A /* TestPlanUpdateAnnotationsFromServer.h */,
+				63A63B311915476F008AA00A /* TestPlanUpdateAnnotationsFromServer.m */,
 				634BBA48191444DE007B38C0 /* TestPlandzInfos.h */,
 				634BBA49191444DE007B38C0 /* TestPlandzInfos.m */,
 				63402EF718DA001900FAF06F /* Images.xcassets */,
@@ -453,6 +481,19 @@
 				63402F0718DA001900FAF06F /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		63A63B2519151FA6008AA00A /* png */ = {
+			isa = PBXGroup;
+			children = (
+				63A63B2119151F95008AA00A /* preferences.png */,
+				63A63B26191523F8008AA00A /* url2.png */,
+				63CEA0D11915A16500559706 /* B14_90.png */,
+				63A63B2A19152697008AA00A /* clock.png */,
+				63A63B2819152663008AA00A /* database.png */,
+				63A63B2319151FA1008AA00A /* world.png */,
+			);
+			name = png;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -537,16 +578,22 @@
 			files = (
 				63AADA7619114B42005E5AC4 /* Ethereal Accents.caf in Resources */,
 				63AC1B7619104C8A00B7E759 /* Comedy Whistle.caf in Resources */,
+				63A63B27191523F8008AA00A /* url2.png in Resources */,
 				632D8D06190BBAC100F98060 /* FR Zone de danger Feu Rouge FR.csv in Resources */,
 				632D8D0E190BBAC100F98060 /* FR Zone de danger FR 90.csv in Resources */,
+				63A63B2219151F95008AA00A /* preferences.png in Resources */,
 				63402EF318DA001900FAF06F /* Main_iPad.storyboard in Resources */,
 				632D8D07190BBAC100F98060 /* FR Zone de danger FR 110.csv in Resources */,
+				63A63B2919152663008AA00A /* database.png in Resources */,
 				63402EF818DA001900FAF06F /* Images.xcassets in Resources */,
 				63402EF018DA001900FAF06F /* Main_iPhone.storyboard in Resources */,
 				632D8D08190BBAC100F98060 /* FR Zone de danger FR 130.csv in Resources */,
+				63CEA0D21915A16500559706 /* B14_90.png in Resources */,
 				632D8D09190BBAC100F98060 /* FR Zone de danger FR 30.csv in Resources */,
 				632D8D0D190BBAC100F98060 /* FR Zone de danger FR 80.csv in Resources */,
+				63A63B2419151FA1008AA00A /* world.png in Resources */,
 				63402EE718DA001900FAF06F /* InfoPlist.strings in Resources */,
+				63A63B2B19152697008AA00A /* clock.png in Resources */,
 				632D8D0A190BBAC100F98060 /* FR Zone de danger FR 50.csv in Resources */,
 				632D8D0B190BBAC100F98060 /* FR Zone de danger FR 60.csv in Resources */,
 				632D8D0C190BBAC100F98060 /* FR Zone de danger FR 70.csv in Resources */,
@@ -575,6 +622,7 @@
 				635CA63C18DC4A5D0046C839 /* TestPlanHistoryTableView.m in Sources */,
 				63402EE918DA001900FAF06F /* main.m in Sources */,
 				635CA64218DC840B0046C839 /* TestPlanlocationDetailsViewController.m in Sources */,
+				63EC074619158BFA001F2042 /* TestPlanTableViewControllerSettings.m in Sources */,
 				631E027D18EE9D980013689D /* PlotGallery.m in Sources */,
 				63402EF618DA001900FAF06F /* TestPlanViewController.m in Sources */,
 				63402EED18DA001900FAF06F /* TestPlanAppDelegate.m in Sources */,
@@ -586,8 +634,10 @@
 				631E027718EDBB510013689D /* RealTimePlot.m in Sources */,
 				63402F1A18DAF30600FAF06F /* TestPlan.xcdatamodeld in Sources */,
 				632D8D15190BFB1900F98060 /* DangerZone.m in Sources */,
+				63A63B321915476F008AA00A /* TestPlanUpdateAnnotationsFromServer.m in Sources */,
 				631E027A18EDBB950013689D /* PlotItem.m in Sources */,
 				635CA64518DC8CB70046C839 /* TestPlanAnnotation.m in Sources */,
+				63CEA0D019159A3400559706 /* downloadDZ.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -13,6 +13,7 @@
 #import "Trip.h"
 #import "TestPlanAnnotation.h"
 #import "TestPlandzInfos.h"
+#import "TestPlanUpdateAnnotationsFromServer.h"
 
 static CLLocationCoordinate2D coordinateArray[2];
 static CLLocationDistance distance = 0;
@@ -113,40 +114,42 @@ static NSMutableArray *dzNear;
 
 -(void)startUpdatingLocation
 {
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Trip" inManagedObjectContext:self.managedObjectContext];
-    [fetchRequest setEntity:entity];
-    
-    [fetchRequest setFetchBatchSize:20];
-    
-    // Edit the sort key as appropriate.
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"dateandtime" ascending:NO];
-    NSArray *sortDescriptors = @[sortDescriptor];
-    
-    [fetchRequest setSortDescriptors:sortDescriptors];
-    
-    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
-    
-    Trip *newTrip = [[Trip alloc]initWithEntity:entity insertIntoManagedObjectContext:[aFetchedResultsController managedObjectContext]];
-    
-    newTrip.dateandtime = [NSDate date];
-    newTrip.tripid      = [self newUUID];
-    newTrip.mileage     = [NSNumber numberWithDouble:distance];
-    
-    // Save the context.
-    NSError *error = nil;
-    if (![[aFetchedResultsController managedObjectContext] save:&error]) {
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        abort();
+    if(_appDelegate.saveTrip) {
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+        NSEntityDescription *entity = [NSEntityDescription entityForName:@"Trip" inManagedObjectContext:self.managedObjectContext];
+        [fetchRequest setEntity:entity];
+        
+        [fetchRequest setFetchBatchSize:20];
+        
+        // Edit the sort key as appropriate.
+        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"dateandtime" ascending:NO];
+        NSArray *sortDescriptors = @[sortDescriptor];
+        
+        [fetchRequest setSortDescriptors:sortDescriptors];
+        
+        NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
+        
+        Trip *newTrip = [[Trip alloc]initWithEntity:entity insertIntoManagedObjectContext:[aFetchedResultsController managedObjectContext]];
+        
+        newTrip.dateandtime = [NSDate date];
+        newTrip.tripid      = [self newUUID];
+        newTrip.mileage     = [NSNumber numberWithDouble:distance];
+        
+        // Save the context.
+        NSError *error = nil;
+        if (![[aFetchedResultsController managedObjectContext] save:&error]) {
+            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+            abort();
+        }
+        else {
+            _tripId = newTrip.tripid;
+        }
     }
-    else {
-        _tripId = newTrip.tripid;
-    }
+    [_locationManager startUpdatingLocation];
     _mapView.showsUserLocation = YES;
     distance = 0;
     _buttonStop.enabled = YES;
     _buttonStart.enabled = NO;
-    [_locationManager startUpdatingLocation];
     
     _stepper.hidden = NO;
     
@@ -168,29 +171,31 @@ static NSMutableArray *dzNear;
     _stepper.hidden = YES;
     [_locationManager stopUpdatingLocation];
     
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Trip" inManagedObjectContext:_managedObjectContext];
-    [fetchRequest setEntity:entity];
-    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"tripid == %@",_tripId]];
-    
-    [fetchRequest setFetchBatchSize:20];
-    
-    NSError *error = nil;
-    NSArray *resultArray = [_managedObjectContext executeFetchRequest:fetchRequest error:&error];
-    
-    coordinateArray[0].latitude = 0;
-    coordinateArray[1].latitude = 0;
-    coordinateArray[0].longitude = 0;
-    coordinateArray[1].longitude = 0;
-    
-    if (resultArray.count > 0) {
-        Trip *localTrip = (Trip *)resultArray[0];
-        localTrip.mileage = [NSNumber numberWithDouble:distance];
+    if(_appDelegate.saveTrip) {
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+        NSEntityDescription *entity = [NSEntityDescription entityForName:@"Trip" inManagedObjectContext:_managedObjectContext];
+        [fetchRequest setEntity:entity];
+        [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"tripid == %@",_tripId]];
         
-        NSError *errorUpdate = nil;
-        if (![_managedObjectContext save:&errorUpdate]) {
-            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-            abort();
+        [fetchRequest setFetchBatchSize:20];
+        
+        NSError *error = nil;
+        NSArray *resultArray = [_managedObjectContext executeFetchRequest:fetchRequest error:&error];
+        
+        coordinateArray[0].latitude = 0;
+        coordinateArray[1].latitude = 0;
+        coordinateArray[0].longitude = 0;
+        coordinateArray[1].longitude = 0;
+        
+        if (resultArray.count > 0) {
+            Trip *localTrip = (Trip *)resultArray[0];
+            localTrip.mileage = [NSNumber numberWithDouble:distance];
+            
+            NSError *errorUpdate = nil;
+            if (![_managedObjectContext save:&errorUpdate]) {
+                NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+                abort();
+            }
         }
     }
     
@@ -360,8 +365,6 @@ static NSMutableArray *dzNear;
     NSError *nserr;
     NSMutableArray *dzArray = [[NSMutableArray alloc]init];
     
-    NSLog(@"server data");
-    
     NSArray *jsonArray=[NSJSONSerialization JSONObjectWithData:_apiReturnXMLData options:NSJSONReadingMutableContainers error:&nserr];
     
     if(jsonArray !=nil && jsonArray.count > 0 && nserr == nil && !([[jsonArray objectAtIndex:0] isEqual:[NSNull null]]))
@@ -382,18 +385,16 @@ static NSMutableArray *dzNear;
             }
         }
     }
-    
     [self checkIfDzNear:dzArray];
-    
 }
 
 
 -(void)checkDZ:(NSTimer *)theTimer
 {
-    NSString *restCallString = [NSString stringWithFormat:@"http://velhaz.hd.free.fr:3000/api/findClosestDZ?latitude=%f&longitude=%f", _mapView.userLocation.location.coordinate.latitude, _mapView.userLocation.coordinate.longitude];
+    NSString *restCallString = [NSString stringWithFormat:@"%@/api/findClosestDZ?latitude=%f&longitude=%f&distance=%d", _appDelegate.dzServerURL,_mapView.userLocation.location.coordinate.latitude, _mapView.userLocation.coordinate.longitude, 2000];
     
     NSURL *restURL = [NSURL URLWithString:restCallString];
-    NSURLRequest *restRequest = [NSURLRequest requestWithURL:restURL cachePolicy:NSURLCacheStorageNotAllowed timeoutInterval:3];
+    NSURLRequest *restRequest = [NSURLRequest requestWithURL:restURL cachePolicy:0 timeoutInterval:3];
     
     if( currentConnection)
     {
@@ -407,7 +408,6 @@ static NSMutableArray *dzNear;
     _apiReturnXMLData = [NSMutableData data];
     
     if(!dzServerConnected) {
-        NSLog(@"local data");
         NSMutableArray *dzArray = [[NSMutableArray alloc]init];
         for (DangerZone *dz in _dangerZones) {
             TestPlandzInfos *dzCurrent = [[TestPlandzInfos alloc]init];
@@ -427,25 +427,46 @@ static NSMutableArray *dzNear;
 
 -(void)updateAnnotations {
     
-    //NSDate *startDate = [NSDate date];
-    int countAnnot = 0;
-    
     [_mapView removeAnnotations:_mapView.annotations];
     
-    for (DangerZone *dz in _dangerZones) {
-        CLLocationCoordinate2D locationDZ;
+    if(dzServerConnected || _buttonStart.enabled == YES)
+    {
+        MKMapRect mRect = _mapView.visibleMapRect;
+        TestPlanUpdateAnnotationsFromServer *updateAnnot = [[TestPlanUpdateAnnotationsFromServer alloc]init];
         
-        locationDZ.longitude    = [dz.longitude doubleValue];
-        locationDZ.latitude     = [dz.latitude doubleValue];
+        // get points of the visibleMapRect
+        MKMapPoint eastMapPoint = MKMapPointMake(MKMapRectGetMinX(mRect), MKMapRectGetMidY(mRect));
+        MKMapPoint westMapPoint = MKMapPointMake(MKMapRectGetMaxX(mRect), MKMapRectGetMidY(mRect));
         
-        if (MKMapRectContainsPoint(_mapView.visibleMapRect, MKMapPointForCoordinate(locationDZ))){
-            countAnnot++;
-            TestPlanAnnotation *annotationDZ = [[TestPlanAnnotation alloc]initWithTitle:dz.label AndCoordinate:locationDZ];
-            [_mapView addAnnotation:annotationDZ];
+        MKMapPoint northMapPoint = MKMapPointMake(MKMapRectGetMidX(mRect), MKMapRectGetMinY(mRect));
+        MKMapPoint southMapPoint = MKMapPointMake(MKMapRectGetMidX(mRect), MKMapRectGetMaxY(mRect));
+        
+        CLLocationDistance widthDist = MKMetersBetweenMapPoints(eastMapPoint, westMapPoint);
+        CLLocationDistance heightDist = MKMetersBetweenMapPoints(northMapPoint, southMapPoint);
+        
+        double maxDistance = 0;
+        
+        if (widthDist >= heightDist) {
+            maxDistance = widthDist;
+        } else {
+            maxDistance = heightDist;
+        }
+        
+        [updateAnnot updateAnnotations:maxDistance mapView:_mapView];
+    }
+    else {
+        for (DangerZone *dz in _dangerZones) {
+            CLLocationCoordinate2D locationDZ;
+            
+            locationDZ.longitude    = [dz.longitude doubleValue];
+            locationDZ.latitude     = [dz.latitude doubleValue];
+            
+            if (MKMapRectContainsPoint(_mapView.visibleMapRect, MKMapPointForCoordinate(locationDZ))){
+                TestPlanAnnotation *annotationDZ = [[TestPlanAnnotation alloc]initWithTitle:dz.label AndCoordinate:locationDZ];
+                [_mapView addAnnotation:annotationDZ];
+            }
         }
     }
-    //NSDate *endDate = [NSDate date];
-    //NSLog(@"Time to display %d annotations : %f", countAnnot,[endDate timeIntervalSinceDate:startDate]);
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
@@ -464,7 +485,7 @@ static NSMutableArray *dzNear;
     
     NSTimeInterval distanceBetweenDates = [[NSDate date] timeIntervalSinceDate:_lastUpdateTimeInterval];
     
-    if( distanceBetweenDates > 10 && location.horizontalAccuracy > 0)
+    if( distanceBetweenDates > _appDelegate.frequency && location.horizontalAccuracy > 0 && _appDelegate.saveTrip)
     {
         [self insertNewObject:location];
         self.lastUpdateTimeInterval = [NSDate date];

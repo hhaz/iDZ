@@ -38,6 +38,10 @@
     _theAudio = [[AVAudioPlayer alloc]initWithData:_soundDataArray[1] error:&errAudio];
     
     _theAudio.enableRate = YES;
+    
+    _saveTrip = NO;
+    _dzServerURL = @"http://velhaz.hd.free.fr:3000";
+    _frequency = 10;
         
     return YES;
 }

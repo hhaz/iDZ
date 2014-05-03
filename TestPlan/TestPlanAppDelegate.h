@@ -23,6 +23,9 @@
 
 @property (nonatomic, strong) AVAudioPlayer *theAudio;
 @property (nonatomic, strong) NSMutableArray *soundDataArray;
+@property (nonatomic) Boolean saveTrip;
+@property (nonatomic) double frequency;
+@property (nonatomic, strong) NSString *dzServerURL;
 
 @property (nonatomic, strong) UIAlertView *activityAlert;
 
