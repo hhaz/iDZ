@@ -79,7 +79,7 @@
         countRow = 0;
         for (int i=0; i<jsonArray.count; i++) {
             if (![[jsonArray objectAtIndex:i] isEqual:[NSNull null]]) {
-                DangerZone *newDZ = [[DangerZone alloc]initWithEntity:entity insertIntoManagedObjectContext:_managedObjectContext];
+                DangerZone *newDZ = [[DangerZone alloc]initWithEntity:entity insertIntoManagedObjectContext:localMOC];
                 
                 newDZ.label = (NSString *)[[jsonArray objectAtIndex:i] objectForKey:@"description"];;
                 newDZ.latitude = (NSNumber *)[[jsonArray objectAtIndex:i] objectForKey:@"latitude"];

@@ -45,6 +45,8 @@
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (strong, nonatomic) NSString *tripId;
 
+@property (strong, nonatomic) UIAlertView *alert;
+
 @property (nonatomic, retain) MKPolyline *routeLine;
 
 @property (nonatomic) NSDate *lastUpdateTimeInterval;

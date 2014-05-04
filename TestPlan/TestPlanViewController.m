@@ -31,6 +31,13 @@ static NSMutableArray *dzNear;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    _appDelegate = (TestPlanAppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    _lastUpdateTimeInterval = [NSDate date];
+    
+    _managedObjectContext = _appDelegate.managedObjectContext;
+    
     _stepper.hidden = YES;
     
     [self isDZLoaded];
@@ -50,12 +57,6 @@ static NSMutableArray *dzNear;
     _mapView.delegate = self;
     CLLocationCoordinate2D coordinateArrayLocal[2];
     _routeLine = [MKPolyline polylineWithCoordinates:coordinateArrayLocal count:2];
-    
-    _appDelegate = (TestPlanAppDelegate *)[[UIApplication sharedApplication] delegate];
-    
-    _lastUpdateTimeInterval = [NSDate date];
-    
-    _managedObjectContext = _appDelegate.managedObjectContext;
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"DangerZone" inManagedObjectContext:_managedObjectContext];
@@ -589,20 +590,9 @@ static NSMutableArray *dzNear;
 
 - (void)isDZLoaded
 {
-    _appDelegate = (TestPlanAppDelegate *)[[UIApplication sharedApplication] delegate];
-    
-    _managedObjectContext = _appDelegate.managedObjectContext;
-    
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"DangerZone" inManagedObjectContext:_managedObjectContext];
     [fetchRequest setEntity:entity];
-    
-    //code to delete records in DangerZone
-    /*NSArray *myObjectsToDelete = [_managedObjectContext executeFetchRequest:fetchRequest error:nil];
-     
-     for (DangerZone *objectToDelete in myObjectsToDelete) {
-     [_managedObjectContext deleteObject:objectToDelete];
-     }*/
     
     NSError *err;
     NSUInteger count = [_managedObjectContext countForFetchRequest:fetchRequest error:&err];
@@ -610,23 +600,81 @@ static NSMutableArray *dzNear;
     if (count == 0) {
         
         _activityAlert = [[UIAlertView alloc]
-                          initWithTitle:@"Danger Zone Locations Needs to be Updated"
-                          message:@"Click OK and please wait"
-                          delegate:self cancelButtonTitle:@"OK"
-                          otherButtonTitles:nil];
+                          initWithTitle:@" No Danger Zone Information"
+                          message:@"Download from settings or click Import to load local data"
+                          delegate:self cancelButtonTitle:@"Close"
+                          otherButtonTitles:@"Import",nil];
         [_activityAlert show];
-        
-        
-        // saving in core data in background seems ... tricky ... https://developer.apple.com/library/ios/documentation/cocoa/conceptual/coredata/Articles/cdConcurrency.html
-        //[self performSelectorInBackground:@selector(loadDZ) withObject: nil];
-        
     }
+}
+
+-(void)waitPanel {
+    _alert = [[UIAlertView alloc]initWithTitle:@"ImportDZ" message:[NSString stringWithFormat:@"Importing data. Please Wait ..."] delegate:nil cancelButtonTitle:nil otherButtonTitles:nil];
+    [_alert show];
+}
+
+-(void)importDZ {
+    NSError *err;
+    
+    NSManagedObjectContext *localMOC = [[NSManagedObjectContext alloc]init];
+    
+    [localMOC setPersistentStoreCoordinator:_appDelegate.persistentStoreCoordinator];
+
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"DangerZone" inManagedObjectContext:localMOC];
+    [fetchRequest setEntity:entity];
+    
+    NSArray *csvArray = [[NSBundle mainBundle] pathsForResourcesOfType:@"csv" inDirectory:nil];
+    for(NSString *filePath in csvArray)
+    {
+        NSError *error;
+        NSUInteger countRows = 0;
+        
+        NSString *csvData = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:&error];
+        NSArray *rawData = [csvData componentsSeparatedByString:@"\n"];
+        
+        for(NSString *line in rawData)
+        {
+            NSArray *arrayValues = [line componentsSeparatedByString:@","];
+            if (arrayValues.count > 2) {
+                
+                countRows++;
+                
+                DangerZone *newDZ = [[DangerZone alloc]initWithEntity:entity insertIntoManagedObjectContext:localMOC];
+                
+                newDZ.label           = arrayValues[2];
+                newDZ.longitude       = [NSNumber numberWithFloat:[arrayValues[0] floatValue]];
+                newDZ.latitude        = [NSNumber numberWithFloat:[arrayValues[1] floatValue]];
+                // Save the context.
+                NSError *error = nil;
+                if (![localMOC save:&error]) {
+                    NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+                    abort();
+                }
+            }
+        }
+        NSLog(@"Loaded %lu records for %@", (unsigned long)countRows, filePath);
+    }
+    
+    NSUInteger count = [localMOC countForFetchRequest:fetchRequest error:&err];
+    NSLog(@"Loaded %lu danger zones records", (unsigned long)count);
+    
+    _dangerZones = [localMOC executeFetchRequest:fetchRequest error:nil];
+    
+     [_alert dismissWithClickedButtonIndex:0 animated:YES];
+    
 }
 
 - (void)loadDZ
 {
     
-    NSError *err;
+    [self performSelectorOnMainThread:@selector(waitPanel) withObject:nil waitUntilDone:YES];
+    
+    [self performSelectorInBackground:@selector(importDZ) withObject:nil];
+
+    
+   /* NSError *err;
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"DangerZone" inManagedObjectContext:_managedObjectContext];
@@ -667,7 +715,7 @@ static NSMutableArray *dzNear;
     NSUInteger count = [_managedObjectContext countForFetchRequest:fetchRequest error:&err];
     NSLog(@"Loaded %lu danger zones records", (unsigned long)count);
     
-    _dangerZones = [_managedObjectContext executeFetchRequest:fetchRequest error:nil];
+    _dangerZones = [_managedObjectContext executeFetchRequest:fetchRequest error:nil];*/
     
 }
 
@@ -677,8 +725,16 @@ static NSMutableArray *dzNear;
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    [self loadDZ];
-    [alertView dismissWithClickedButtonIndex:0 animated:YES];
+    switch (buttonIndex) {
+        case 1:
+            [self loadDZ];
+            [alertView dismissWithClickedButtonIndex:1 animated:YES];
+            break;
+            
+        default:
+            [alertView dismissWithClickedButtonIndex:0 animated:YES];
+            break;
+    }
 }
 
 

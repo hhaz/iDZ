@@ -176,6 +176,17 @@
 - (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken
 {
 	NSLog(@"My token is: %@", deviceToken);
+    
+    NSString* newToken = [[[NSString stringWithFormat:@"%@",deviceToken]
+                           stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]] stringByReplacingOccurrencesOfString:@" " withString:@""];
+    
+    NSString *restCallString = [NSString stringWithFormat:@"%@/api/addDevice?deviceid=%@",_dzServerURL,newToken];
+    
+    NSURL *restURL = [NSURL URLWithString:restCallString];
+    NSURLRequest *restRequest = [NSURLRequest requestWithURL:restURL cachePolicy:0 timeoutInterval:3];
+    
+    NSURLConnection *currentConnection = [[NSURLConnection alloc] initWithRequest:restRequest delegate:self];
+    
 }
 
 - (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
