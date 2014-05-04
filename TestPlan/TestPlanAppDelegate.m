@@ -187,6 +187,8 @@
     
     NSURLConnection *currentConnection = [[NSURLConnection alloc] initWithRequest:restRequest delegate:self];
     
+    NSLog(@"To avoid warning %@", currentConnection.currentRequest);
+    
 }
 
 - (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
