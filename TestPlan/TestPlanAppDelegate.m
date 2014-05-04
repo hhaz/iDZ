@@ -19,9 +19,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
-    
-    //[[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:10];
+    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:
+     (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
     
     NSArray *cafArray = [[NSBundle mainBundle] pathsForResourcesOfType:@"caf" inDirectory:nil];
     
@@ -42,7 +41,16 @@
     _saveTrip = NO;
     _dzServerURL = @"http://velhaz.hd.free.fr:3000";
     _frequency = 10;
-        
+    _newDZFileAvailable = NO;
+    
+    _tabBarController = (UITabBarController*)self.window.rootViewController;
+    
+    NSDictionary *remoteNotif = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+    if (remoteNotif != nil)
+    {
+        [self handleRemoteNotification:application userInfo:remoteNotif];
+    }
+    
     return YES;
 }
 
@@ -163,6 +171,37 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken
+{
+	NSLog(@"My token is: %@", deviceToken);
+}
+
+- (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
+{
+	NSLog(@"Failed to get token, error: %@", error);
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+{
+    application.applicationIconBadgeNumber = 0;
+    
+    //_args = [[NSArray alloc] initWithArray:[[[userInfo objectForKey:@"aps"] objectForKey:@"alert"] objectForKey:@"loc-args"]];
+    
+    UITabBarItem *itemSetting = _tabBarController.tabBar.items[1];
+    
+    itemSetting.badgeValue = @"1";
+    
+}
+
+-(void) handleRemoteNotification:(UIApplication *)application userInfo:(NSDictionary *)userInfo {
+    
+    application.applicationIconBadgeNumber = 0;
+    
+    UITabBarItem *itemSetting = _tabBarController.tabBar.items[1];
+    
+    itemSetting.badgeValue = @"1";    NSLog(@"User info : %d", [userInfo count]);
 }
 
 @end

@@ -60,6 +60,11 @@
     downloadDZ *download = [[downloadDZ alloc]init];
     
     [download downloadDZ];
+    
+    UITabBarItem *itemSettings = _appDelegate.tabBarController.tabBar.items[1];
+    
+    itemSettings.badgeValue = nil;
+    
 }
 
 @end

@@ -24,11 +24,15 @@
 @property (nonatomic, strong) AVAudioPlayer *theAudio;
 @property (nonatomic, strong) NSMutableArray *soundDataArray;
 @property (nonatomic) Boolean saveTrip;
+@property (nonatomic) Boolean newDZFileAvailable;
 @property (nonatomic) double frequency;
 @property (nonatomic, strong) NSString *dzServerURL;
 
+@property (nonatomic, strong) UITabBarController *tabBarController;
+
 @property (nonatomic, strong) UIAlertView *activityAlert;
 
+@property (nonatomic, retain) NSArray *args;
 
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
