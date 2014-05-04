@@ -20,6 +20,8 @@
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
+@property (strong, nonatomic) UIAlertView *alert;
+
 - (void)downloadDZ;
 
 @end

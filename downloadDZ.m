@@ -32,7 +32,8 @@
 }
 
 - (void)connection:(NSURLConnection*)connection didFailWithError:(NSError*)error {
-    NSLog(@"URL Connection Failed!");
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"DownloadDZ" message:[NSString stringWithFormat:@"Connection Failed"] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alert show];
     currentConnection = nil;
 }
 
@@ -43,28 +44,35 @@
 - (void)connection:(NSURLConnection*)connection didReceiveData:(NSData*)data {
     [self.apiReturnXMLData appendData:data];
 }
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-    currentConnection = nil;
+
+-(void)waitPanel {
+    _alert = [[UIAlertView alloc]initWithTitle:@"DownloadDZ" message:[NSString stringWithFormat:@"Downloading data. Please Wait ..."] delegate:nil cancelButtonTitle:nil otherButtonTitles:nil];
+    [_alert show];
+}
+
+-(void)updateData:(NSMutableData *)data {
+    
     NSError *nserr;
     int countRow = 0;
+    NSArray *jsonArray=[NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&nserr];
     
-    NSArray *jsonArray=[NSJSONSerialization JSONObjectWithData:_apiReturnXMLData options:NSJSONReadingMutableContainers error:&nserr];
+    NSManagedObjectContext *localMOC = [[NSManagedObjectContext alloc]init];
+    
+    [localMOC setPersistentStoreCoordinator:_appDelegate.persistentStoreCoordinator];
     
     if(jsonArray !=nil && jsonArray.count > 0 && nserr == nil && !([[jsonArray objectAtIndex:0] isEqual:[NSNull null]]))
     {
-        _managedObjectContext = _appDelegate.managedObjectContext;
-        
         NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-        NSEntityDescription *entity = [NSEntityDescription entityForName:@"DangerZone" inManagedObjectContext:_managedObjectContext];
+        NSEntityDescription *entity = [NSEntityDescription entityForName:@"DangerZone" inManagedObjectContext:localMOC];
         [fetchRequest setEntity:entity];
         
         //Empty table
-        NSArray *myObjectsToDelete = [_managedObjectContext executeFetchRequest:fetchRequest error:nil];
-         
-         for (DangerZone *objectToDelete in myObjectsToDelete) {
-             countRow++;
-             [_managedObjectContext deleteObject:objectToDelete];
-         }
+        NSArray *myObjectsToDelete = [localMOC executeFetchRequest:fetchRequest error:nil];
+        
+        for (DangerZone *objectToDelete in myObjectsToDelete) {
+            countRow++;
+            [_managedObjectContext deleteObject:objectToDelete];
+        }
         
         NSLog(@"%d records deleted", countRow);
         
@@ -78,16 +86,25 @@
                 newDZ.longitude = (NSNumber *)[[jsonArray objectAtIndex:i] objectForKey:@"longitude"];
                 
                 NSError *error = nil;
-                if (![_managedObjectContext save:&error]) {
+                if (![localMOC save:&error]) {
                     NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
                     abort();
                 }
                 else countRow++;
             }
         }
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"DownloadDZ" message:[NSString stringWithFormat:@"%d records imported", countRow] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [alert show];
+         NSLog(@"%d records added", countRow);
+        [_alert dismissWithClickedButtonIndex:0 animated:YES];
     }
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+    currentConnection = nil;
+
+    [self performSelectorOnMainThread:@selector(waitPanel) withObject:nil waitUntilDone:YES];
+    
+    [self performSelectorInBackground:@selector(updateData:) withObject:_apiReturnXMLData];
+    
 }
 
 @end
