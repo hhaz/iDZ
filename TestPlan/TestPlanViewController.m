@@ -430,7 +430,7 @@ static NSMutableArray *dzNear;
     
     [_mapView removeAnnotations:_mapView.annotations];
     
-    if(dzServerConnected || _buttonStart.enabled == YES)
+    if(dzServerConnected)
     {
         MKMapRect mRect = _mapView.visibleMapRect;
         TestPlanUpdateAnnotationsFromServer *updateAnnot = [[TestPlanUpdateAnnotationsFromServer alloc]init];
