@@ -81,9 +81,12 @@
             if (![[jsonArray objectAtIndex:i] isEqual:[NSNull null]]) {
                 DangerZone *newDZ = [[DangerZone alloc]initWithEntity:entity insertIntoManagedObjectContext:localMOC];
                 
+                NSString *stringLat = [[jsonArray objectAtIndex:i] objectForKey:@"latitude"];
+                NSString *stringLong = [[jsonArray objectAtIndex:i] objectForKey:@"longitude"];
+                
                 newDZ.label = (NSString *)[[jsonArray objectAtIndex:i] objectForKey:@"description"];;
-                newDZ.latitude = (NSNumber *)[[jsonArray objectAtIndex:i] objectForKey:@"latitude"];
-                newDZ.longitude = (NSNumber *)[[jsonArray objectAtIndex:i] objectForKey:@"longitude"];
+                newDZ.latitude = [NSNumber numberWithDouble:[stringLat doubleValue]];
+                newDZ.longitude = [NSNumber numberWithDouble:[stringLong doubleValue]];
                 
                 NSError *error = nil;
                 if (![localMOC save:&error]) {
