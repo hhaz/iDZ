@@ -396,9 +396,39 @@
                                                     <rect key="frame" x="241" y="7" width="74" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numberPad"/>
+                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numbersAndPunctuation" enablesReturnKeyAutomatically="YES"/>
                                                     <connections>
                                                         <action selector="removeKeyBoard:" destination="ZWX-no-etg" eventType="editingDidEndOnExit" id="2ro-ET-tds"/>
+                                                    </connections>
+                                                </textField>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="zt4-mZ-PCU">
+                                        <rect key="frame" x="0.0" y="318" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zt4-mZ-PCU" id="KFp-Np-kCP">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="pin.png" translatesAutoresizingMaskIntoConstraints="NO" id="dFS-eX-8ib">
+                                                    <rect key="frame" x="20" y="9" width="25" height="25"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                </imageView>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Max Annotations" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RPe-V7-Ndl">
+                                                    <rect key="frame" x="53" y="11" width="180" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="v0P-MK-Q4y">
+                                                    <rect key="frame" x="241" y="7" width="74" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numbersAndPunctuation"/>
+                                                    <connections>
+                                                        <action selector="removeKeyBoard:" destination="ZWX-no-etg" eventType="editingDidEndOnExit" id="kBX-Bi-2I0"/>
                                                     </connections>
                                                 </textField>
                                             </subviews>
@@ -419,6 +449,7 @@
                         <outlet property="dzServerURL" destination="N0q-CE-ncz" id="FdM-5k-6ju"/>
                         <outlet property="frequency" destination="y8O-aj-G3h" id="NVX-9d-Ogo"/>
                         <outlet property="go" destination="4Tj-uS-xwj" id="eQU-Eo-mya"/>
+                        <outlet property="maxAnnotations" destination="v0P-MK-Q4y" id="v7I-tH-Z0J"/>
                         <outlet property="tripSwitch" destination="pfH-Th-1fu" id="QWX-3w-Dnc"/>
                     </connections>
                 </tableViewController>
@@ -522,6 +553,7 @@
         <image name="B14_90.png" width="1943" height="1990"/>
         <image name="clock.png" width="52" height="52"/>
         <image name="database.png" width="52" height="52"/>
+        <image name="pin.png" width="256" height="256"/>
         <image name="preferences.png" width="52" height="52"/>
         <image name="url2.png" width="64" height="64"/>
         <image name="world.png" width="52" height="52"/>

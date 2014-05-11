@@ -11,6 +11,7 @@
 #import <CoreData/CoreData.h>
 #import "RealTimePlot.h"
 #import "DangerZone.h"
+#import "TestPlanUpdateAnnotationsFromServer.h"
 
 #define kOverlayLimit 1000
 #define kDZCheckFrequency 5
@@ -36,9 +37,11 @@
 @property (nonatomic , strong) CLLocationManager *locationManager;
 @property (nonatomic, retain) RealTimePlot *graph;
 @property (nonatomic, retain) UIAlertView *activityAlert;
+@property (nonatomic, retain) TestPlanUpdateAnnotationsFromServer *updateAnnot;
 
 @property (nonatomic, retain) NSTimer *dzTimer;
 @property (nonatomic, retain) NSArray *dangerZones;
+@property (nonatomic, retain) NSMutableArray *dangerZonesLocalInfos;
 @property (nonatomic, retain) TestPlanAppDelegate *appDelegate;
 
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;

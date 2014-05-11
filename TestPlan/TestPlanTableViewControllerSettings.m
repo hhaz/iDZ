@@ -32,8 +32,9 @@
     
     _dzServerURL.text = _appDelegate.dzServerURL;
     _frequency.text = [NSString stringWithFormat:@"%1.0f",_appDelegate.frequency];
+    _maxAnnotations.text = [NSString stringWithFormat:@"%1.0f",_appDelegate.maxAnnotations];
     _tripSwitch.on = _appDelegate.saveTrip;
-    
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -52,6 +53,9 @@
     }
     if (sender == _dzServerURL) {
         _appDelegate.dzServerURL = _dzServerURL.text;
+    }
+    if (sender == _maxAnnotations) {
+        _appDelegate.maxAnnotations = [_maxAnnotations.text doubleValue];
     }
     [sender resignFirstResponder];
 }

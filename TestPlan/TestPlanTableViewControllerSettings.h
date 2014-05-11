@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *frequency;
 @property (weak, nonatomic) IBOutlet UISwitch *tripSwitch;
 @property (weak, nonatomic) IBOutlet UIButton *go;
+@property (weak, nonatomic) IBOutlet UITextField *maxAnnotations;
 
 - (void)setSaveTrip;
 

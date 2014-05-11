@@ -13,7 +13,6 @@
 #import "Trip.h"
 #import "TestPlanAnnotation.h"
 #import "TestPlandzInfos.h"
-#import "TestPlanUpdateAnnotationsFromServer.h"
 
 static CLLocationCoordinate2D coordinateArray[2];
 static CLLocationDistance distance = 0;
@@ -64,6 +63,18 @@ static NSMutableArray *dzNear;
     
     _dangerZones = [_managedObjectContext executeFetchRequest:fetchRequest error:nil];
     
+    _dangerZonesLocalInfos = [[NSMutableArray alloc]init];
+    for (DangerZone *dz in _dangerZones) {
+        TestPlandzInfos *dzCurrent = [[TestPlandzInfos alloc]init];
+        
+        dzCurrent.latitude = dz.latitude;
+        dzCurrent.longitude = dz.longitude;
+        dzCurrent.description = dz.description ;
+        
+        [_dangerZonesLocalInfos addObject:dzCurrent];
+    }
+
+    
     _graph = [[RealTimePlot alloc]init];
     _graph.altitude = _mapView.userLocation.location.altitude;
     
@@ -82,6 +93,8 @@ static NSMutableArray *dzNear;
     _isConnected.text = @"Not connected";
     
     _graphView.hidden = YES;
+    
+    _updateAnnot = [[TestPlanUpdateAnnotationsFromServer alloc]init];
     
 }
 
@@ -295,6 +308,7 @@ static NSMutableArray *dzNear;
 
 - (void)checkIfDzNear:(NSArray *)dzArray
 {
+    NSDate *startDate = [NSDate date];
     TestPlandzInfos *firstDZ = nil;
     double minDistance = 2000;
     
@@ -309,7 +323,7 @@ static NSMutableArray *dzNear;
             }
         }
         
-        if (dzFound == nil) {
+        if (distance < minDistance && dzFound == nil) {
             dzCurrent.distance = [NSNumber numberWithDouble:-1]; // adding dz for the first time
             [dzNear addObject:dzCurrent];
             dzFound = [dzNear lastObject];
@@ -359,6 +373,7 @@ static NSMutableArray *dzNear;
         _proximity.progress = 0;
         _proximityValue.text = @"";
     }
+    NSLog(@"Computing near DZ Time : %f", [[NSDate date] timeIntervalSinceDate:startDate]);
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
@@ -392,6 +407,8 @@ static NSMutableArray *dzNear;
 
 -(void)checkDZ:(NSTimer *)theTimer
 {
+    NSDate *startDate = [NSDate date];
+    
     NSString *restCallString = [NSString stringWithFormat:@"%@/api/findClosestDZ?latitude=%f&longitude=%f&distance=%d", _appDelegate.dzServerURL,_mapView.userLocation.location.coordinate.latitude, _mapView.userLocation.coordinate.longitude, 2000];
     
     NSURL *restURL = [NSURL URLWithString:restCallString];
@@ -409,31 +426,25 @@ static NSMutableArray *dzNear;
     _apiReturnXMLData = [NSMutableData data];
     
     if(!dzServerConnected) {
-        NSMutableArray *dzArray = [[NSMutableArray alloc]init];
-        for (DangerZone *dz in _dangerZones) {
-            TestPlandzInfos *dzCurrent = [[TestPlandzInfos alloc]init];
-            
-            dzCurrent.latitude = dz.latitude;
-            dzCurrent.longitude = dz.longitude;
-            dzCurrent.description = dz.description ;
-            
-            [dzArray addObject:dzCurrent];
-        }
         
-        [self checkIfDzNear:dzArray];
+        [self checkIfDzNear:_dangerZonesLocalInfos];
     }
     
     [self updateAnnotations];
+    
+    NSLog(@"Check DZ Time : %f", [[NSDate date] timeIntervalSinceDate:startDate]);
 }
 
 -(void)updateAnnotations {
+    
+    NSDate *startDate = [NSDate date];
+    double annotCount = 0;
     
     [_mapView removeAnnotations:_mapView.annotations];
     
     if(dzServerConnected)
     {
         MKMapRect mRect = _mapView.visibleMapRect;
-        TestPlanUpdateAnnotationsFromServer *updateAnnot = [[TestPlanUpdateAnnotationsFromServer alloc]init];
         
         // get points of the visibleMapRect
         MKMapPoint eastMapPoint = MKMapPointMake(MKMapRectGetMinX(mRect), MKMapRectGetMidY(mRect));
@@ -452,8 +463,7 @@ static NSMutableArray *dzNear;
         } else {
             maxDistance = heightDist;
         }
-        
-        [updateAnnot updateAnnotations:maxDistance mapView:_mapView];
+        [_updateAnnot updateAnnotations:maxDistance mapView:_mapView];
     }
     else {
         for (DangerZone *dz in _dangerZones) {
@@ -462,12 +472,19 @@ static NSMutableArray *dzNear;
             locationDZ.longitude    = [dz.longitude doubleValue];
             locationDZ.latitude     = [dz.latitude doubleValue];
             
-            if (MKMapRectContainsPoint(_mapView.visibleMapRect, MKMapPointForCoordinate(locationDZ))){
-                TestPlanAnnotation *annotationDZ = [[TestPlanAnnotation alloc]initWithTitle:dz.label AndCoordinate:locationDZ];
-                [_mapView addAnnotation:annotationDZ];
+            if (annotCount < _appDelegate.maxAnnotations) {
+                if (MKMapRectContainsPoint(_mapView.visibleMapRect, MKMapPointForCoordinate(locationDZ))){
+                    TestPlanAnnotation *annotationDZ = [[TestPlanAnnotation alloc]initWithTitle:dz.label AndCoordinate:locationDZ];
+                    [_mapView addAnnotation:annotationDZ];
+                    annotCount++;
+                }
+            }
+            else {
+                break;
             }
         }
     }
+    NSLog(@"Updating Annot Time : %f", [[NSDate date] timeIntervalSinceDate:startDate]);
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
@@ -536,12 +553,13 @@ static NSMutableArray *dzNear;
     
     if(location.verticalAccuracy > 0)
     {
-        [_buttonAltitude setTitle:[NSString stringWithFormat:@"Alt. : %1.0f",location.altitude] forState:UIControlStateNormal];
+        [_buttonAltitude setTitle:[NSString stringWithFormat:@"%1.0f",location.altitude] forState:UIControlStateNormal];
         _graph.altitude = location.altitude;
     }
     else
         _graph.altitude = 0.0;
     
+    // Limit number of overlays when drawing the trip
     if (_mapView.overlays.count > kOverlayLimit) {
         MKOverlayView *overlay = [[_mapView overlays] firstObject];
         [_mapView removeOverlay:(id)overlay];
@@ -583,9 +601,7 @@ static NSMutableArray *dzNear;
         
         historyView.managedObjectContext = self.managedObjectContext;
         historyView.fetchedResultsController = self.fetchedResultsController;
-        
     }
-    
 }
 
 - (void)isDZLoaded
@@ -673,50 +689,6 @@ static NSMutableArray *dzNear;
     
     [self performSelectorInBackground:@selector(importDZ) withObject:nil];
 
-    
-   /* NSError *err;
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"DangerZone" inManagedObjectContext:_managedObjectContext];
-    [fetchRequest setEntity:entity];
-    
-    NSArray *csvArray = [[NSBundle mainBundle] pathsForResourcesOfType:@"csv" inDirectory:nil];
-    for(NSString *filePath in csvArray)
-    {
-        NSError *error;
-        NSUInteger countRows = 0;
-        
-        NSString *csvData = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:&error];
-        NSArray *rawData = [csvData componentsSeparatedByString:@"\n"];
-        
-        for(NSString *line in rawData)
-        {
-            NSArray *arrayValues = [line componentsSeparatedByString:@","];
-            if (arrayValues.count > 2) {
-                
-                countRows++;
-                
-                DangerZone *newDZ = [[DangerZone alloc]initWithEntity:entity insertIntoManagedObjectContext:_managedObjectContext];
-                
-                newDZ.label           = arrayValues[2];
-                newDZ.longitude       = [NSNumber numberWithFloat:[arrayValues[0] floatValue]];
-                newDZ.latitude        = [NSNumber numberWithFloat:[arrayValues[1] floatValue]];
-                // Save the context.
-                NSError *error = nil;
-                if (![_managedObjectContext save:&error]) {
-                    NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-                    abort();
-                }
-            }
-        }
-        NSLog(@"Loaded %lu records for %@", (unsigned long)countRows, filePath);
-    }
-    
-    NSUInteger count = [_managedObjectContext countForFetchRequest:fetchRequest error:&err];
-    NSLog(@"Loaded %lu danger zones records", (unsigned long)count);
-    
-    _dangerZones = [_managedObjectContext executeFetchRequest:fetchRequest error:nil];*/
-    
 }
 
 - (void)willPresentAlertView:(UIAlertView *)alertView

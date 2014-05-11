@@ -26,6 +26,7 @@
 @property (nonatomic) Boolean saveTrip;
 @property (nonatomic) Boolean newDZFileAvailable;
 @property (nonatomic) double frequency;
+@property (nonatomic) double maxAnnotations;
 @property (nonatomic, strong) NSString *dzServerURL;
 
 @property (nonatomic, strong) UITabBarController *tabBarController;

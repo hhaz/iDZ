@@ -50,6 +50,11 @@
     [_alert show];
 }
 
+-(void)displayStatus:(NSNumber *)countRow {
+    UIAlertView *displayStatus = [[UIAlertView alloc]initWithTitle:@"DownloadDZ" message:[NSString stringWithFormat:@"%@ records imported",countRow] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [displayStatus show];
+}
+
 -(void)updateData:(NSMutableData *)data {
     
     NSError *nserr;
@@ -71,7 +76,7 @@
         
         for (DangerZone *objectToDelete in myObjectsToDelete) {
             countRow++;
-            [_managedObjectContext deleteObject:objectToDelete];
+            [localMOC deleteObject:objectToDelete];
         }
         
         NSLog(@"%d records deleted", countRow);
@@ -98,6 +103,7 @@
         }
          NSLog(@"%d records added", countRow);
         [_alert dismissWithClickedButtonIndex:0 animated:YES];
+        [self performSelectorOnMainThread:@selector(displayStatus:) withObject:[NSNumber numberWithDouble:countRow] waitUntilDone:YES];
     }
 }
 

@@ -41,6 +41,7 @@
     _saveTrip = NO;
     _dzServerURL = @"http://velhaz.hd.free.fr:3000";
     _frequency = 10;
+    _maxAnnotations = 100;
     _newDZFileAvailable = NO;
     
     _tabBarController = (UITabBarController*)self.window.rootViewController;
@@ -214,7 +215,7 @@
     
     UITabBarItem *itemSetting = _tabBarController.tabBar.items[1];
     
-    itemSetting.badgeValue = @"1";    NSLog(@"User info : %d", [userInfo count]);
+    itemSetting.badgeValue = @"1";    NSLog(@"User info : %lu", (unsigned long)[userInfo count]);
 }
 
 @end
