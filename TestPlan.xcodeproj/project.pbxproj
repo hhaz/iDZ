@@ -45,6 +45,7 @@
 		63402F1A18DAF30600FAF06F /* TestPlan.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 63402F1818DAF30600FAF06F /* TestPlan.xcdatamodeld */; };
 		63402F1D18DAFB9E00FAF06F /* Tracking.m in Sources */ = {isa = PBXBuildFile; fileRef = 63402F1C18DAFB9E00FAF06F /* Tracking.m */; };
 		634BBA4A191444DE007B38C0 /* TestPlandzInfos.m in Sources */ = {isa = PBXBuildFile; fileRef = 634BBA49191444DE007B38C0 /* TestPlandzInfos.m */; };
+		63572EDC191E957C0041B91F /* pin.png in Resources */ = {isa = PBXBuildFile; fileRef = 63572EDB191E957C0041B91F /* pin.png */; };
 		635CA63918DC3D920046C839 /* TestPlanUIStoryBoardSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 635CA63818DC3D920046C839 /* TestPlanUIStoryBoardSegue.m */; };
 		635CA63C18DC4A5D0046C839 /* TestPlanHistoryTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 635CA63B18DC4A5D0046C839 /* TestPlanHistoryTableView.m */; };
 		635CA63F18DC51300046C839 /* TestPlanHistoryItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 635CA63E18DC51300046C839 /* TestPlanHistoryItemCell.m */; };
@@ -206,6 +207,7 @@
 		63402F1C18DAFB9E00FAF06F /* Tracking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tracking.m; sourceTree = "<group>"; };
 		634BBA48191444DE007B38C0 /* TestPlandzInfos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestPlandzInfos.h; sourceTree = "<group>"; };
 		634BBA49191444DE007B38C0 /* TestPlandzInfos.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestPlandzInfos.m; sourceTree = "<group>"; };
+		63572EDB191E957C0041B91F /* pin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pin.png; sourceTree = "<group>"; };
 		635CA63718DC3D920046C839 /* TestPlanUIStoryBoardSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestPlanUIStoryBoardSegue.h; sourceTree = "<group>"; };
 		635CA63818DC3D920046C839 /* TestPlanUIStoryBoardSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestPlanUIStoryBoardSegue.m; sourceTree = "<group>"; };
 		635CA63A18DC4A5D0046C839 /* TestPlanHistoryTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestPlanHistoryTableView.h; sourceTree = "<group>"; };
@@ -489,6 +491,7 @@
 				63A63B2119151F95008AA00A /* preferences.png */,
 				63A63B26191523F8008AA00A /* url2.png */,
 				63CEA0D11915A16500559706 /* B14_90.png */,
+				63572EDB191E957C0041B91F /* pin.png */,
 				63A63B2A19152697008AA00A /* clock.png */,
 				63A63B2819152663008AA00A /* database.png */,
 				63A63B2319151FA1008AA00A /* world.png */,
@@ -546,6 +549,11 @@
 				TargetAttributes = {
 					63402ED818DA001900FAF06F = {
 						DevelopmentTeam = 83NE4H42TL;
+						SystemCapabilities = {
+							com.apple.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					63402EFC18DA001900FAF06F = {
 						TestTargetID = 63402ED818DA001900FAF06F;
@@ -583,6 +591,7 @@
 				632D8D0E190BBAC100F98060 /* FR Zone de danger FR 90.csv in Resources */,
 				63A63B2219151F95008AA00A /* preferences.png in Resources */,
 				63402EF318DA001900FAF06F /* Main_iPad.storyboard in Resources */,
+				63572EDC191E957C0041B91F /* pin.png in Resources */,
 				632D8D07190BBAC100F98060 /* FR Zone de danger FR 110.csv in Resources */,
 				63A63B2919152663008AA00A /* database.png in Resources */,
 				63402EF818DA001900FAF06F /* Images.xcassets in Resources */,
@@ -772,7 +781,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Herve AZOULAY (UBNJQ4PPD7)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TestPlan/TestPlan-Prefix.pch";
 				INFOPLIST_FILE = "TestPlan/TestPlan-Info.plist";
@@ -791,7 +800,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Herve AZOULAY (UBNJQ4PPD7)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TestPlan/TestPlan-Prefix.pch";
 				INFOPLIST_FILE = "TestPlan/TestPlan-Info.plist";
