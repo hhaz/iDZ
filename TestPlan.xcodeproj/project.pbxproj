@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6302662819275FEB00D8CBC8 /* TestPlanAlertDZView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6302662719275FEB00D8CBC8 /* TestPlanAlertDZView.m */; };
+		6302662B1927B85200D8CBC8 /* ManageDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 6302662A1927B85200D8CBC8 /* ManageDefaults.m */; };
+		6302662D1927C31200D8CBC8 /* speed.png in Resources */ = {isa = PBXBuildFile; fileRef = 6302662C1927C31200D8CBC8 /* speed.png */; };
+		6302662F1927C4AA00D8CBC8 /* dist.png in Resources */ = {isa = PBXBuildFile; fileRef = 6302662E1927C4AA00D8CBC8 /* dist.png */; };
+		630266311927C54100D8CBC8 /* Altimeter.png in Resources */ = {isa = PBXBuildFile; fileRef = 630266301927C54100D8CBC8 /* Altimeter.png */; };
 		631D74B818F1A23200F517D4 /* TestPlanAltitudeHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = 631D74B718F1A23200F517D4 /* TestPlanAltitudeHistory.m */; };
 		631D74BB18F1A8B000F517D4 /* GradientScatterPlot.m in Sources */ = {isa = PBXBuildFile; fileRef = 631D74BA18F1A8B000F517D4 /* GradientScatterPlot.m */; };
 		631E026718EDB79E0013689D /* libCorePlot-CocoaTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 631E026618EDB79E0013689D /* libCorePlot-CocoaTouch.a */; };
@@ -15,6 +20,7 @@
 		631E027D18EE9D980013689D /* PlotGallery.m in Sources */ = {isa = PBXBuildFile; fileRef = 631E027C18EE9D980013689D /* PlotGallery.m */; };
 		631E027F18EE9E1B0013689D /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 631E027E18EE9E1B0013689D /* Accelerate.framework */; };
 		631E028118EEAAA30013689D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 631E028018EEAAA30013689D /* QuartzCore.framework */; };
+		632A8D2F1920EFE500A5B5E0 /* radius.png in Resources */ = {isa = PBXBuildFile; fileRef = 632A8D2E1920EFE500A5B5E0 /* radius.png */; };
 		632D8D06190BBAC100F98060 /* FR Zone de danger Feu Rouge FR.csv in Resources */ = {isa = PBXBuildFile; fileRef = 632D8CF9190BBAC100F98060 /* FR Zone de danger Feu Rouge FR.csv */; };
 		632D8D07190BBAC100F98060 /* FR Zone de danger FR 110.csv in Resources */ = {isa = PBXBuildFile; fileRef = 632D8CFA190BBAC100F98060 /* FR Zone de danger FR 110.csv */; };
 		632D8D08190BBAC100F98060 /* FR Zone de danger FR 130.csv in Resources */ = {isa = PBXBuildFile; fileRef = 632D8CFB190BBAC100F98060 /* FR Zone de danger FR 130.csv */; };
@@ -52,6 +58,8 @@
 		635CA64218DC840B0046C839 /* TestPlanlocationDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 635CA64118DC840B0046C839 /* TestPlanlocationDetailsViewController.m */; };
 		635CA64518DC8CB70046C839 /* TestPlanAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 635CA64418DC8CB70046C839 /* TestPlanAnnotation.m */; };
 		635CA64818DCA1530046C839 /* TestPlanAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 635CA64718DCA1530046C839 /* TestPlanAnnotationView.m */; };
+		6375F68D19202BAA00B04944 /* distance.png in Resources */ = {isa = PBXBuildFile; fileRef = 6375F68C19202BAA00B04944 /* distance.png */; };
+		638034341926989E001DC62E /* DZ.png in Resources */ = {isa = PBXBuildFile; fileRef = 638034331926989E001DC62E /* DZ.png */; };
 		63899CBD18DF3D6A00C02B39 /* TestPlanTripMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 63899CBC18DF3D6A00C02B39 /* TestPlanTripMap.m */; };
 		63A63B2219151F95008AA00A /* preferences.png in Resources */ = {isa = PBXBuildFile; fileRef = 63A63B2119151F95008AA00A /* preferences.png */; };
 		63A63B2419151FA1008AA00A /* world.png in Resources */ = {isa = PBXBuildFile; fileRef = 63A63B2319151FA1008AA00A /* world.png */; };
@@ -65,6 +73,8 @@
 		63CEA0D21915A16500559706 /* B14_90.png in Resources */ = {isa = PBXBuildFile; fileRef = 63CEA0D11915A16500559706 /* B14_90.png */; };
 		63E5470618E9870A00D603D9 /* Trip.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E5470518E9870A00D603D9 /* Trip.m */; };
 		63EC074619158BFA001F2042 /* TestPlanTableViewControllerSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 63EC074519158BFA001F2042 /* TestPlanTableViewControllerSettings.m */; };
+		63F94AF519255A6A004576EF /* viewInPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = 63F94AF319255A6A004576EF /* viewInPopup.m */; };
+		63F94AF619255A6A004576EF /* viewInPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63F94AF419255A6A004576EF /* viewInPopup.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +88,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6302662619275FEB00D8CBC8 /* TestPlanAlertDZView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestPlanAlertDZView.h; sourceTree = "<group>"; };
+		6302662719275FEB00D8CBC8 /* TestPlanAlertDZView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestPlanAlertDZView.m; sourceTree = "<group>"; };
+		630266291927B85200D8CBC8 /* ManageDefaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ManageDefaults.h; sourceTree = "<group>"; };
+		6302662A1927B85200D8CBC8 /* ManageDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ManageDefaults.m; sourceTree = "<group>"; };
+		6302662C1927C31200D8CBC8 /* speed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = speed.png; sourceTree = "<group>"; };
+		6302662E1927C4AA00D8CBC8 /* dist.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dist.png; sourceTree = "<group>"; };
+		630266301927C54100D8CBC8 /* Altimeter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Altimeter.png; sourceTree = "<group>"; };
 		631D74B618F1A23200F517D4 /* TestPlanAltitudeHistory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestPlanAltitudeHistory.h; sourceTree = "<group>"; };
 		631D74B718F1A23200F517D4 /* TestPlanAltitudeHistory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestPlanAltitudeHistory.m; sourceTree = "<group>"; };
 		631D74B918F1A8B000F517D4 /* GradientScatterPlot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientScatterPlot.h; sourceTree = "<group>"; };
@@ -169,6 +186,7 @@
 		631E027C18EE9D980013689D /* PlotGallery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlotGallery.m; sourceTree = "<group>"; };
 		631E027E18EE9E1B0013689D /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		631E028018EEAAA30013689D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		632A8D2E1920EFE500A5B5E0 /* radius.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = radius.png; sourceTree = "<group>"; };
 		632D8CF9190BBAC100F98060 /* FR Zone de danger Feu Rouge FR.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "FR Zone de danger Feu Rouge FR.csv"; sourceTree = "<group>"; };
 		632D8CFA190BBAC100F98060 /* FR Zone de danger FR 110.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "FR Zone de danger FR 110.csv"; sourceTree = "<group>"; };
 		632D8CFB190BBAC100F98060 /* FR Zone de danger FR 130.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "FR Zone de danger FR 130.csv"; sourceTree = "<group>"; };
@@ -220,6 +238,8 @@
 		635CA64418DC8CB70046C839 /* TestPlanAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestPlanAnnotation.m; sourceTree = "<group>"; };
 		635CA64618DCA1530046C839 /* TestPlanAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestPlanAnnotationView.h; sourceTree = "<group>"; };
 		635CA64718DCA1530046C839 /* TestPlanAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestPlanAnnotationView.m; sourceTree = "<group>"; };
+		6375F68C19202BAA00B04944 /* distance.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = distance.png; sourceTree = "<group>"; };
+		638034331926989E001DC62E /* DZ.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DZ.png; sourceTree = "<group>"; };
 		63899CBB18DF3D6A00C02B39 /* TestPlanTripMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestPlanTripMap.h; sourceTree = "<group>"; };
 		63899CBC18DF3D6A00C02B39 /* TestPlanTripMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestPlanTripMap.m; sourceTree = "<group>"; };
 		63A63B2119151F95008AA00A /* preferences.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = preferences.png; sourceTree = "<group>"; };
@@ -238,6 +258,9 @@
 		63E5470518E9870A00D603D9 /* Trip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Trip.m; sourceTree = "<group>"; };
 		63EC074419158BFA001F2042 /* TestPlanTableViewControllerSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestPlanTableViewControllerSettings.h; sourceTree = "<group>"; };
 		63EC074519158BFA001F2042 /* TestPlanTableViewControllerSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestPlanTableViewControllerSettings.m; sourceTree = "<group>"; };
+		63F94AF219255A6A004576EF /* viewInPopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = viewInPopup.h; sourceTree = "<group>"; };
+		63F94AF319255A6A004576EF /* viewInPopup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = viewInPopup.m; sourceTree = "<group>"; };
+		63F94AF419255A6A004576EF /* viewInPopup.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = viewInPopup.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -429,8 +452,14 @@
 				63E5470518E9870A00D603D9 /* Trip.m */,
 				63402F1B18DAFB9E00FAF06F /* Tracking.h */,
 				63402F1C18DAFB9E00FAF06F /* Tracking.m */,
+				630266291927B85200D8CBC8 /* ManageDefaults.h */,
+				6302662A1927B85200D8CBC8 /* ManageDefaults.m */,
 				63402EF418DA001900FAF06F /* TestPlanViewController.h */,
 				63402EF518DA001900FAF06F /* TestPlanViewController.m */,
+				63F94AF219255A6A004576EF /* viewInPopup.h */,
+				63F94AF319255A6A004576EF /* viewInPopup.m */,
+				6302662619275FEB00D8CBC8 /* TestPlanAlertDZView.h */,
+				6302662719275FEB00D8CBC8 /* TestPlanAlertDZView.m */,
 				63CEA0CE19159A3400559706 /* downloadDZ.h */,
 				63CEA0CF19159A3400559706 /* downloadDZ.m */,
 				63EC074419158BFA001F2042 /* TestPlanTableViewControllerSettings.h */,
@@ -448,6 +477,7 @@
 		63402EE318DA001900FAF06F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				63F94AF419255A6A004576EF /* viewInPopup.xib */,
 				63AC1B751910128500B7E759 /* Ethereal Accents.caf */,
 				63AC1B731910122D00B7E759 /* Comedy Whistle.caf */,
 				632D8CF9190BBAC100F98060 /* FR Zone de danger Feu Rouge FR.csv */,
@@ -489,10 +519,16 @@
 			isa = PBXGroup;
 			children = (
 				63A63B2119151F95008AA00A /* preferences.png */,
+				630266301927C54100D8CBC8 /* Altimeter.png */,
+				632A8D2E1920EFE500A5B5E0 /* radius.png */,
 				63A63B26191523F8008AA00A /* url2.png */,
 				63CEA0D11915A16500559706 /* B14_90.png */,
 				63572EDB191E957C0041B91F /* pin.png */,
+				6302662E1927C4AA00D8CBC8 /* dist.png */,
+				638034331926989E001DC62E /* DZ.png */,
+				6375F68C19202BAA00B04944 /* distance.png */,
 				63A63B2A19152697008AA00A /* clock.png */,
+				6302662C1927C31200D8CBC8 /* speed.png */,
 				63A63B2819152663008AA00A /* database.png */,
 				63A63B2319151FA1008AA00A /* world.png */,
 			);
@@ -595,16 +631,23 @@
 				632D8D07190BBAC100F98060 /* FR Zone de danger FR 110.csv in Resources */,
 				63A63B2919152663008AA00A /* database.png in Resources */,
 				63402EF818DA001900FAF06F /* Images.xcassets in Resources */,
+				6302662F1927C4AA00D8CBC8 /* dist.png in Resources */,
 				63402EF018DA001900FAF06F /* Main_iPhone.storyboard in Resources */,
 				632D8D08190BBAC100F98060 /* FR Zone de danger FR 130.csv in Resources */,
+				638034341926989E001DC62E /* DZ.png in Resources */,
 				63CEA0D21915A16500559706 /* B14_90.png in Resources */,
 				632D8D09190BBAC100F98060 /* FR Zone de danger FR 30.csv in Resources */,
 				632D8D0D190BBAC100F98060 /* FR Zone de danger FR 80.csv in Resources */,
+				6375F68D19202BAA00B04944 /* distance.png in Resources */,
 				63A63B2419151FA1008AA00A /* world.png in Resources */,
+				6302662D1927C31200D8CBC8 /* speed.png in Resources */,
 				63402EE718DA001900FAF06F /* InfoPlist.strings in Resources */,
 				63A63B2B19152697008AA00A /* clock.png in Resources */,
+				630266311927C54100D8CBC8 /* Altimeter.png in Resources */,
 				632D8D0A190BBAC100F98060 /* FR Zone de danger FR 50.csv in Resources */,
+				632A8D2F1920EFE500A5B5E0 /* radius.png in Resources */,
 				632D8D0B190BBAC100F98060 /* FR Zone de danger FR 60.csv in Resources */,
+				63F94AF619255A6A004576EF /* viewInPopup.xib in Resources */,
 				632D8D0C190BBAC100F98060 /* FR Zone de danger FR 70.csv in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -633,6 +676,7 @@
 				635CA64218DC840B0046C839 /* TestPlanlocationDetailsViewController.m in Sources */,
 				63EC074619158BFA001F2042 /* TestPlanTableViewControllerSettings.m in Sources */,
 				631E027D18EE9D980013689D /* PlotGallery.m in Sources */,
+				6302662819275FEB00D8CBC8 /* TestPlanAlertDZView.m in Sources */,
 				63402EF618DA001900FAF06F /* TestPlanViewController.m in Sources */,
 				63402EED18DA001900FAF06F /* TestPlanAppDelegate.m in Sources */,
 				634BBA4A191444DE007B38C0 /* TestPlandzInfos.m in Sources */,
@@ -643,9 +687,11 @@
 				631E027718EDBB510013689D /* RealTimePlot.m in Sources */,
 				63402F1A18DAF30600FAF06F /* TestPlan.xcdatamodeld in Sources */,
 				632D8D15190BFB1900F98060 /* DangerZone.m in Sources */,
+				6302662B1927B85200D8CBC8 /* ManageDefaults.m in Sources */,
 				63A63B321915476F008AA00A /* TestPlanUpdateAnnotationsFromServer.m in Sources */,
 				631E027A18EDBB950013689D /* PlotItem.m in Sources */,
 				635CA64518DC8CB70046C839 /* TestPlanAnnotation.m in Sources */,
+				63F94AF519255A6A004576EF /* viewInPopup.m in Sources */,
 				63CEA0D019159A3400559706 /* downloadDZ.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

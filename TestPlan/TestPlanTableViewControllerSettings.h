@@ -16,11 +16,16 @@
 @property (weak, nonatomic) IBOutlet UITextField *dzServerURL;
 @property (weak, nonatomic) IBOutlet UITextField *frequency;
 @property (weak, nonatomic) IBOutlet UISwitch *tripSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *dzSwitch;
 @property (weak, nonatomic) IBOutlet UIButton *go;
 @property (weak, nonatomic) IBOutlet UITextField *maxAnnotations;
+@property (weak, nonatomic) IBOutlet UITextField *warningDistance;
+@property (weak, nonatomic) IBOutlet UITextField *radius;
 
 - (void)setSaveTrip;
 
 -(IBAction)removeKeyBoard:(id)sender;
+
+-(IBAction)saveSettings:(id)sender;
 
 @end

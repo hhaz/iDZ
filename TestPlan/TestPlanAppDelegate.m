@@ -8,7 +8,7 @@
 
 #import "TestPlanAppDelegate.h"
 #import "DangerZone.h"
-
+#import "ManageDefaults.h"
 
 @implementation TestPlanAppDelegate
 
@@ -38,12 +38,10 @@
     
     _theAudio.enableRate = YES;
     
-    _saveTrip = NO;
-    _dzServerURL = @"http://velhaz.hd.free.fr:3000";
-    _frequency = 10;
-    _maxAnnotations = 100;
-    _newDZFileAvailable = NO;
+    ManageDefaults *defaults = [[ManageDefaults alloc]init];
     
+    [defaults loadDefaults];
+
     _tabBarController = (UITabBarController*)self.window.rootViewController;
     
     NSDictionary *remoteNotif = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
@@ -51,6 +49,8 @@
     {
         [self handleRemoteNotification:application userInfo:remoteNotif];
     }
+    
+    [[UIApplication sharedApplication] setIdleTimerDisabled: YES];
     
     return YES;
 }

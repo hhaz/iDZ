@@ -13,6 +13,6 @@
 @property (nonatomic, retain) NSNumber *longitude;
 @property (nonatomic, retain) NSNumber *latitude;
 @property (nonatomic, retain) NSNumber *distance;
-@property (nonatomic, retain) NSString *description;
+@property (nonatomic, retain) NSString *descDZ;
 
 @end

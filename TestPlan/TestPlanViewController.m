@@ -14,12 +14,14 @@
 #import "TestPlanAnnotation.h"
 #import "TestPlandzInfos.h"
 
+
 static CLLocationCoordinate2D coordinateArray[2];
 static CLLocationDistance distance = 0;
 static double previousDist;
 static bool playSound = YES;
 static bool dzServerConnected = NO;
 static NSMutableArray *dzNear;
+static TestPlandzInfos *firstDZ = nil;
 
 @interface TestPlanViewController ()
 
@@ -69,7 +71,7 @@ static NSMutableArray *dzNear;
         
         dzCurrent.latitude = dz.latitude;
         dzCurrent.longitude = dz.longitude;
-        dzCurrent.description = dz.description ;
+        dzCurrent.descDZ = dz.label ;
         
         [_dangerZonesLocalInfos addObject:dzCurrent];
     }
@@ -86,8 +88,6 @@ static NSMutableArray *dzNear;
     twoFingerPinch.delegate = self;
     [_mapView addGestureRecognizer:twoFingerPinch];
     
-    _proximity.progress = 0;
-    
     dzNear = [[NSMutableArray alloc]init];
     
     _isConnected.text = @"Not connected";
@@ -96,6 +96,20 @@ static NSMutableArray *dzNear;
     
     _updateAnnot = [[TestPlanUpdateAnnotationsFromServer alloc]init];
     
+    _popup = [[UIAlertView alloc] initWithTitle:@"DZ Alert !"
+                                                   message:@"Message test"
+                                                  delegate:nil
+                                         cancelButtonTitle:@"OK"
+                                         otherButtonTitles:nil];
+    
+    _viewInPopup = [[UIViewController alloc]initWithNibName:@"viewInPopup" bundle:[NSBundle mainBundle]];
+    
+    _viewInPopup.view.frame = CGRectMake(0, 0, 210, 145);
+    
+    [_popup setValue:_viewInPopup.view forKey:@"accessoryView"];
+    
+    _alertView = (TestPlanAlertDZView *)_viewInPopup.view;
+
 }
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
@@ -160,6 +174,7 @@ static NSMutableArray *dzNear;
         }
     }
     [_locationManager startUpdatingLocation];
+    [_locationManager startUpdatingHeading];
     _mapView.showsUserLocation = YES;
     distance = 0;
     _buttonStop.enabled = YES;
@@ -167,15 +182,26 @@ static NSMutableArray *dzNear;
     
     _stepper.hidden = NO;
     
-    previousDist = 2000;
-    _proximity.progress = 0;
+    previousDist = _appDelegate.warningDistance;
     
-    _dzTimer = [NSTimer timerWithTimeInterval:kDZCheckFrequency
-                                       target:self
-                                     selector:@selector(checkDZ:)
-                                     userInfo:nil
-                                      repeats:YES];
-    [[NSRunLoop mainRunLoop] addTimer:_dzTimer forMode:NSRunLoopCommonModes];
+    if(_appDelegate.alertDZ) {
+        
+        _dzTimer = [NSTimer timerWithTimeInterval:kDZCheckFrequency
+                                           target:self
+                                         selector:@selector(checkDZ:)
+                                         userInfo:nil
+                                          repeats:YES];
+        [[NSRunLoop mainRunLoop] addTimer:_dzTimer forMode:NSRunLoopCommonModes];
+        
+        _dzRefreshTimer = [NSTimer timerWithTimeInterval:kDZRefreshFrequency
+                                                  target:self
+                                                selector:@selector(refreshLocalNearDZTimer:)
+                                                userInfo:nil
+                                                 repeats:YES];
+        [[NSRunLoop mainRunLoop] addTimer:_dzRefreshTimer forMode:NSRunLoopCommonModes];
+        
+        [self refreshLocalNearDZ];
+    }
     
 }
 
@@ -226,7 +252,6 @@ static NSMutableArray *dzNear;
     CFRelease(uuidRef);
     NSString *uuid = CFBridgingRelease(uuidStringRef);
     return uuid;
-    //return (__bridge NSString *)uuidStringRef;
 }
 
 - (void)insertNewObject:(CLLocation *)location
@@ -306,13 +331,51 @@ static NSMutableArray *dzNear;
     [self.apiReturnXMLData appendData:data];
 }
 
+// This function helps restricting the number of dz to be considered by checkDZ when disconnected from the server. This function determines the DZ available aroung 100km. This improves a lot the performance when disconnected from server (the server is much faster than any iOS device ...for now !)
+- (void)refreshLocalNearDZTimer:(NSTimer *)theTimer {
+    [self refreshLocalNearDZ];
+}
+
+- (void)refreshLocalNearDZ {
+    NSDate *startDate = [NSDate date];
+    [_dangerZonesLocalInfos removeAllObjects];
+    
+    // put in _dangerZonesLocalInfos only DZ near by kDZProximityRadius meters to restrict the number of DZ to check
+    
+    for (DangerZone *dz in _dangerZones) {
+        CLLocation *dzLoc = [[CLLocation alloc]initWithLatitude:[dz.latitude doubleValue] longitude:[dz.longitude doubleValue]];
+        double distance = [_mapView.userLocation.location distanceFromLocation:dzLoc];
+        
+        if(distance < _appDelegate.dzRadius * 1000)
+        {
+            TestPlandzInfos *dzCurrent = [[TestPlandzInfos alloc]init];
+            
+            dzCurrent.latitude = dz.latitude;
+            dzCurrent.longitude = dz.longitude;
+            dzCurrent.descDZ = dz.label ;
+            
+            [_dangerZonesLocalInfos addObject:dzCurrent];
+        }
+    }
+    NSLog(@"refreshing local DZ array : %f", [[NSDate date] timeIntervalSinceDate:startDate]);
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateHeading:(CLHeading *)newHeading
+{
+    _head = newHeading;
+}
+
+
 - (void)checkIfDzNear:(NSArray *)dzArray
 {
     NSDate *startDate = [NSDate date];
-    TestPlandzInfos *firstDZ = nil;
-    double minDistance = 2000;
+    double minDistance = _appDelegate.warningDistance;
+    double count = 0;
+    
+    NSLog(@"Heading %f", _head.trueHeading);
     
     for (TestPlandzInfos *dzCurrent in dzArray) {
+        count++;
         TestPlandzInfos *dzFound = nil;
         CLLocation *dzLoc = [[CLLocation alloc]initWithLatitude:[dzCurrent.latitude doubleValue] longitude:[dzCurrent.longitude doubleValue]];
         double distance = [_mapView.userLocation.location distanceFromLocation:dzLoc];
@@ -329,51 +392,20 @@ static NSMutableArray *dzNear;
             dzFound = [dzNear lastObject];
         }
         
-        if(distance < minDistance && distance <= [dzFound.distance doubleValue])
-        {
-            minDistance = distance;
-            firstDZ = dzCurrent;
-        }
-        if (distance > [dzFound.distance doubleValue] && [dzFound.distance doubleValue] != -1) {
-            [dzNear removeObject:dzFound];
-        }
-        dzFound.distance = [NSNumber numberWithDouble:distance];
-        
-        TestPlanAnnotation *annotationDZ = [[TestPlanAnnotation alloc]initWithTitle:dzCurrent.description AndCoordinate:dzLoc.coordinate];
-        [_mapView addAnnotation:annotationDZ];
-    }
-    if (firstDZ != nil) {
-        CLLocation *dzLoc = [[CLLocation alloc]initWithLatitude:[firstDZ.latitude doubleValue] longitude:[firstDZ.longitude doubleValue]];
-        double distance = [_mapView.userLocation.location distanceFromLocation:dzLoc];
-        
-        if(playSound) {
-            [_appDelegate.theAudio play];
-            playSound = NO;
-            _appDelegate.theAudio.rate = 1;
-        }
-        if (distance < previousDist) { //getting closer
-            previousDist = distance;
-            _proximity.progress = 1 - distance/2000;
-            _proximityValue.text = [NSString stringWithFormat:@"%1.0f m",distance];
-            if(distance < 500 ){
-                playSound = YES;
-                _appDelegate.theAudio.rate = 2;
+        if (dzFound != nil) {
+            if(distance < minDistance && distance <= [dzFound.distance doubleValue])
+            {
+                minDistance = distance;
+                firstDZ = dzCurrent;
             }
+            if (distance > [dzFound.distance doubleValue] && [dzFound.distance doubleValue] != -1) {
+                [dzNear removeObject:dzFound];
+            }
+            dzFound.distance = [NSNumber numberWithDouble:distance];
         }
-        else {
-            previousDist = 2000;
-            playSound = YES;
-            _proximity.progress = 0;
-            _proximityValue.text = @"";
-        }
+        
     }
-    else {
-        previousDist = 2000;
-        playSound = YES;
-        _proximity.progress = 0;
-        _proximityValue.text = @"";
-    }
-    NSLog(@"Computing near DZ Time : %f", [[NSDate date] timeIntervalSinceDate:startDate]);
+    NSLog(@"Computing near DZ Time : %1.3f for %f records", [[NSDate date] timeIntervalSinceDate:startDate],count);
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
@@ -395,7 +427,7 @@ static NSMutableArray *dzNear;
                 
                 dzCurrent.latitude = [NSNumber numberWithDouble:latitude];
                 dzCurrent.longitude = [NSNumber numberWithDouble:longitude];
-                dzCurrent.description = dzLabel;
+                dzCurrent.descDZ = dzLabel;
                 
                 [dzArray addObject:dzCurrent];
             }
@@ -409,7 +441,7 @@ static NSMutableArray *dzNear;
 {
     NSDate *startDate = [NSDate date];
     
-    NSString *restCallString = [NSString stringWithFormat:@"%@/api/findClosestDZ?latitude=%f&longitude=%f&distance=%d", _appDelegate.dzServerURL,_mapView.userLocation.location.coordinate.latitude, _mapView.userLocation.coordinate.longitude, 2000];
+    NSString *restCallString = [NSString stringWithFormat:@"%@/api/findClosestDZ?latitude=%f&longitude=%f&distance=%f", _appDelegate.dzServerURL,_mapView.userLocation.location.coordinate.latitude, _mapView.userLocation.coordinate.longitude, _appDelegate.warningDistance];
     
     NSURL *restURL = [NSURL URLWithString:restCallString];
     NSURLRequest *restRequest = [NSURLRequest requestWithURL:restURL cachePolicy:0 timeoutInterval:3];
@@ -525,20 +557,20 @@ static NSMutableArray *dzNear;
         
         if (distance > 1000) {
             unit = @"km";
-            distanceString = [NSString localizedStringWithFormat:@"%.3F", distance/1000];
+            distanceString = [NSString localizedStringWithFormat:@"%.1F", distance/1000];
         }
         else {
             unit = @"m";
-            distanceString = [NSString localizedStringWithFormat:@"%.3F", distance];
+            distanceString = [NSString localizedStringWithFormat:@"%.1F", distance];
         }
         
         if (location.speed > 1) {
             unitSpeed = @"km/h";
-            speedString = [NSString localizedStringWithFormat:@"%.3F", location.speed*3600/1000];
+            speedString = [NSString localizedStringWithFormat:@"%.1F", location.speed*3600/1000];
         }
         else {
             unitSpeed = @"m/s";
-            speedString = [NSString localizedStringWithFormat:@"%.3F", location.speed];
+            speedString = [NSString localizedStringWithFormat:@"%.1F", location.speed];
         }
         
         _labelDistance.text = [NSString stringWithFormat:@"%@ %@",distanceString,unit];
@@ -566,6 +598,43 @@ static NSMutableArray *dzNear;
     }
     
     coordinateArray[0] = zoomLocation;
+    
+    if (firstDZ != nil && location.speed > 0.5) {
+        CLLocation *dzLoc = [[CLLocation alloc]initWithLatitude:[firstDZ.latitude doubleValue] longitude:[firstDZ.longitude doubleValue]];
+        double distance = [_mapView.userLocation.location distanceFromLocation:dzLoc];
+        
+        if(playSound) {
+            if(_popup.hidden == NO) {
+                _popup.message = firstDZ.descDZ;
+                _popup.alpha = 0.0;
+                [_popup show];
+            }
+            [_appDelegate.theAudio play];
+            playSound = NO;
+            _appDelegate.theAudio.rate = 1;
+        }
+        _alertView.prox.progress = 1 - distance/_appDelegate.warningDistance;;
+        _alertView.labelProx.text = [NSString stringWithFormat:@"%1.0f m",distance];
+        _alertView.labelDZ.text = firstDZ.descDZ;
+        
+        if (distance <= previousDist) { //getting closer
+            previousDist = distance;
+            if(distance < _appDelegate.warningDistance/4 ){
+                _appDelegate.theAudio.rate = 2;
+                [_appDelegate.theAudio play];
+            }
+        }
+        else {
+            [_popup dismissWithClickedButtonIndex:0 animated:YES];
+            previousDist = _appDelegate.warningDistance;
+            playSound = YES;
+            firstDZ = nil;
+        }
+    }
+    else {
+        previousDist = _appDelegate.warningDistance;
+        playSound = YES;
+    }
     
 }
 
@@ -677,6 +746,18 @@ static NSMutableArray *dzNear;
     NSLog(@"Loaded %lu danger zones records", (unsigned long)count);
     
     _dangerZones = [localMOC executeFetchRequest:fetchRequest error:nil];
+    
+    [_dangerZonesLocalInfos removeAllObjects];
+    
+    for (DangerZone *dz in _dangerZones) {
+        TestPlandzInfos *dzCurrent = [[TestPlandzInfos alloc]init];
+        
+        dzCurrent.latitude = dz.latitude;
+        dzCurrent.longitude = dz.longitude;
+        dzCurrent.descDZ = dz.description ;
+        
+        [_dangerZonesLocalInfos addObject:dzCurrent];
+    }
     
      [_alert dismissWithClickedButtonIndex:0 animated:YES];
     
