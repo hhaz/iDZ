@@ -3,55 +3,55 @@
     {
       "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "TestPlan58x58.png",
+      "filename" : "iDZ58x58.png",
       "scale" : "2x"
     },
     {
       "size" : "40x40",
       "idiom" : "iphone",
-      "filename" : "TestPlan80x80.png",
+      "filename" : "iDZ80x80.png",
       "scale" : "2x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "TestPlan120x120.png",
+      "filename" : "iDZ120x120.png",
       "scale" : "2x"
     },
     {
       "size" : "29x29",
       "idiom" : "ipad",
-      "filename" : "TestPlan29x29.png",
+      "filename" : "iDZ29x29.png",
       "scale" : "1x"
     },
     {
       "size" : "29x29",
       "idiom" : "ipad",
-      "filename" : "TestPlan58x58-1.png",
+      "filename" : "iDZ58x58-1.png",
       "scale" : "2x"
     },
     {
       "size" : "40x40",
       "idiom" : "ipad",
-      "filename" : "TestPlan40x40-1.png",
+      "filename" : "iDZ40x40.png",
       "scale" : "1x"
     },
     {
       "size" : "40x40",
       "idiom" : "ipad",
-      "filename" : "TestPlan80x80-1.png",
+      "filename" : "iDZ80x80-1.png",
       "scale" : "2x"
     },
     {
       "size" : "76x76",
       "idiom" : "ipad",
-      "filename" : "TestPlan76x76.png",
+      "filename" : "iDZ76x76.png",
       "scale" : "1x"
     },
     {
       "size" : "76x76",
       "idiom" : "ipad",
-      "filename" : "TestPlan152x152.png",
+      "filename" : "iDZ152x152.png",
       "scale" : "2x"
     }
   ],
