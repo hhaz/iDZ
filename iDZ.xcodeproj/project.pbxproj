@@ -57,6 +57,7 @@
 		635CA64218DC840B0046C839 /* iDZlocationDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 635CA64118DC840B0046C839 /* iDZlocationDetailsViewController.m */; };
 		635CA64518DC8CB70046C839 /* iDZAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 635CA64418DC8CB70046C839 /* iDZAnnotation.m */; };
 		635CA64818DCA1530046C839 /* iDZAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 635CA64718DCA1530046C839 /* iDZAnnotationView.m */; };
+		6362BF60192B99A800593344 /* downloadDZ.m in Sources */ = {isa = PBXBuildFile; fileRef = 6362BF5F192B99A800593344 /* downloadDZ.m */; };
 		6375F68D19202BAA00B04944 /* distance.png in Resources */ = {isa = PBXBuildFile; fileRef = 6375F68C19202BAA00B04944 /* distance.png */; };
 		638034341926989E001DC62E /* DZ.png in Resources */ = {isa = PBXBuildFile; fileRef = 638034331926989E001DC62E /* DZ.png */; };
 		63899CBD18DF3D6A00C02B39 /* iDZTripMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 63899CBC18DF3D6A00C02B39 /* iDZTripMap.m */; };
@@ -68,7 +69,6 @@
 		63A63B321915476F008AA00A /* iDZUpdateAnnotationsFromServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A63B311915476F008AA00A /* iDZUpdateAnnotationsFromServer.m */; };
 		63AADA7619114B42005E5AC4 /* Ethereal Accents.caf in Resources */ = {isa = PBXBuildFile; fileRef = 63AC1B751910128500B7E759 /* Ethereal Accents.caf */; };
 		63AC1B7619104C8A00B7E759 /* Comedy Whistle.caf in Resources */ = {isa = PBXBuildFile; fileRef = 63AC1B731910122D00B7E759 /* Comedy Whistle.caf */; };
-		63CEA0D019159A3400559706 /* downloadDZ.m in Sources */ = {isa = PBXBuildFile; fileRef = 63CEA0CF19159A3400559706 /* downloadDZ.m */; };
 		63CEA0D21915A16500559706 /* B14_90.png in Resources */ = {isa = PBXBuildFile; fileRef = 63CEA0D11915A16500559706 /* B14_90.png */; };
 		63E5470618E9870A00D603D9 /* Trip.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E5470518E9870A00D603D9 /* Trip.m */; };
 		63EC074619158BFA001F2042 /* iDZTableViewControllerSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 63EC074519158BFA001F2042 /* iDZTableViewControllerSettings.m */; };
@@ -236,6 +236,8 @@
 		635CA64418DC8CB70046C839 /* iDZAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iDZAnnotation.m; sourceTree = "<group>"; };
 		635CA64618DCA1530046C839 /* iDZAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iDZAnnotationView.h; sourceTree = "<group>"; };
 		635CA64718DCA1530046C839 /* iDZAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iDZAnnotationView.m; sourceTree = "<group>"; };
+		6362BF5E192B99A800593344 /* downloadDZ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = downloadDZ.h; sourceTree = "<group>"; };
+		6362BF5F192B99A800593344 /* downloadDZ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = downloadDZ.m; sourceTree = "<group>"; };
 		6375F68C19202BAA00B04944 /* distance.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = distance.png; sourceTree = "<group>"; };
 		638034331926989E001DC62E /* DZ.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DZ.png; sourceTree = "<group>"; };
 		63899CBB18DF3D6A00C02B39 /* iDZTripMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iDZTripMap.h; sourceTree = "<group>"; };
@@ -249,8 +251,6 @@
 		63A63B311915476F008AA00A /* iDZUpdateAnnotationsFromServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iDZUpdateAnnotationsFromServer.m; sourceTree = "<group>"; };
 		63AC1B731910122D00B7E759 /* Comedy Whistle.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comedy Whistle.caf"; sourceTree = "<group>"; };
 		63AC1B751910128500B7E759 /* Ethereal Accents.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ethereal Accents.caf"; sourceTree = "<group>"; };
-		63CEA0CE19159A3400559706 /* downloadDZ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = downloadDZ.h; path = ../downloadDZ.h; sourceTree = "<group>"; };
-		63CEA0CF19159A3400559706 /* downloadDZ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = downloadDZ.m; path = ../downloadDZ.m; sourceTree = "<group>"; };
 		63CEA0D11915A16500559706 /* B14_90.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = B14_90.png; sourceTree = "<group>"; };
 		63E5470418E9870A00D603D9 /* Trip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Trip.h; sourceTree = "<group>"; };
 		63E5470518E9870A00D603D9 /* Trip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Trip.m; sourceTree = "<group>"; };
@@ -457,8 +457,8 @@
 				63F94AF319255A6A004576EF /* viewInPopup.m */,
 				6302662619275FEB00D8CBC8 /* iDZAlertDZView.h */,
 				6302662719275FEB00D8CBC8 /* iDZAlertDZView.m */,
-				63CEA0CE19159A3400559706 /* downloadDZ.h */,
-				63CEA0CF19159A3400559706 /* downloadDZ.m */,
+				6362BF5E192B99A800593344 /* downloadDZ.h */,
+				6362BF5F192B99A800593344 /* downloadDZ.m */,
 				63EC074419158BFA001F2042 /* iDZTableViewControllerSettings.h */,
 				63EC074519158BFA001F2042 /* iDZTableViewControllerSettings.m */,
 				63A63B301915476F008AA00A /* iDZUpdateAnnotationsFromServer.h */,
@@ -671,6 +671,7 @@
 				635CA63918DC3D920046C839 /* iDZUIStoryBoardSegue.m in Sources */,
 				635CA63C18DC4A5D0046C839 /* iDZHistoryTableView.m in Sources */,
 				63402EE918DA001900FAF06F /* main.m in Sources */,
+				6362BF60192B99A800593344 /* downloadDZ.m in Sources */,
 				635CA64218DC840B0046C839 /* iDZlocationDetailsViewController.m in Sources */,
 				63EC074619158BFA001F2042 /* iDZTableViewControllerSettings.m in Sources */,
 				631E027D18EE9D980013689D /* PlotGallery.m in Sources */,
@@ -690,7 +691,6 @@
 				631E027A18EDBB950013689D /* PlotItem.m in Sources */,
 				635CA64518DC8CB70046C839 /* iDZAnnotation.m in Sources */,
 				63F94AF519255A6A004576EF /* viewInPopup.m in Sources */,
-				63CEA0D019159A3400559706 /* downloadDZ.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
