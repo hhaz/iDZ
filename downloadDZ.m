@@ -12,7 +12,7 @@
 @implementation downloadDZ
 
 -(void)downloadDZ {
-    _appDelegate = (TestPlanAppDelegate *)[[UIApplication sharedApplication] delegate];
+    _appDelegate = (iDZAppDelegate *)[[UIApplication sharedApplication] delegate];
     
     NSString *restCallString = [NSString stringWithFormat:@"%@/api/findAllDZ",_appDelegate.dzServerURL];
     

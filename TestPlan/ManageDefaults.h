@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "TestPlanAppDelegate.h"
+#import "iDZAppDelegate.h"
 
 @interface ManageDefaults : UIView
 

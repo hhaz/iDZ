@@ -22,7 +22,7 @@
 
 - (void)loadDefaults
 {
-    TestPlanAppDelegate *appDelegate = (TestPlanAppDelegate *)[[UIApplication sharedApplication] delegate];
+    iDZAppDelegate *appDelegate = (iDZAppDelegate *)[[UIApplication sharedApplication] delegate];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
     appDelegate.saveTrip            = [defaults boolForKey:@"saveTrip"];
@@ -50,7 +50,7 @@
 
 - (void)saveDefaults
 {
-    TestPlanAppDelegate *appDelegate = (TestPlanAppDelegate *)[[UIApplication sharedApplication] delegate];
+    iDZAppDelegate *appDelegate = (iDZAppDelegate *)[[UIApplication sharedApplication] delegate];
     
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];

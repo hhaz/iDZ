@@ -1,5 +1,5 @@
 //
-//  downloadDZ.h
+//  TestPlanUpdateAnnotationsFromServer.h
 //  TestPlan
 //
 //  Created by Hervé AZOULAY on 03/05/2014.
@@ -7,21 +7,19 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <MapKit/MapKit.h>
 #import "iDZAppDelegate.h"
 
-@interface downloadDZ : NSObject <NSURLConnectionDelegate>
+@interface iDZUpdateAnnotationsFromServer : NSObject <NSURLConnectionDelegate>
 {
     NSURLConnection *currentConnection;
 }
 
 @property (retain, nonatomic) NSMutableData *apiReturnXMLData;
-
+@property (retain, nonatomic) MKMapView *mapView;
 @property (nonatomic, retain) iDZAppDelegate *appDelegate;
-@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
-@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
-@property (strong, nonatomic) UIAlertView *alert;
-
-- (void)downloadDZ;
+-(void)updateAnnotations:(double)distance mapView:(MKMapView *)mapView;
 
 @end
+
