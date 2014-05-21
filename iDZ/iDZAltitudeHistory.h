@@ -7,13 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GradientScatterPlot.h"
+#import "SimpleScatterPlot.h"
 
 @interface iDZAltitudeHistory : UIViewController
 
 @property (weak, nonatomic) IBOutlet CPTGraphHostingView *graphView;
 
 @property (strong, nonatomic) NSArray *tracks;
-@property (nonatomic, retain) GradientScatterPlot *graph;
+@property (nonatomic, retain) SimpleScatterPlot *graph;
 
 @end

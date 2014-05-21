@@ -27,7 +27,7 @@
 {
     [super viewDidLoad];
 
-    _graph = [[GradientScatterPlot alloc]init];
+    _graph = [[SimpleScatterPlot alloc]init];
     
     _graph.tracks = _tracks;
 

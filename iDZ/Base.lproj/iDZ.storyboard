@@ -73,11 +73,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z3i-fL-sJ1" customClass="CPTGraphHostingView">
-                                <rect key="frame" x="71" y="136" width="179" height="119"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                            </view>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pyY-Ub-h65">
                                 <rect key="frame" x="260" y="72" width="60" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -87,9 +82,6 @@
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <action selector="showGraph" destination="vXZ-lx-hvc" eventType="touchUpInside" id="d9d-fj-Ul8"/>
-                                </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SRv-XP-Wkn">
                                 <rect key="frame" x="91" y="405" width="129" height="21"/>
@@ -137,7 +129,6 @@
                         <outlet property="buttonAltitude" destination="pyY-Ub-h65" id="oVV-31-O8Z"/>
                         <outlet property="buttonStart" destination="TOZ-Nk-5OX" id="RCJ-d6-Ypo"/>
                         <outlet property="buttonStop" destination="vRL-eu-Y7a" id="c6v-F7-YB6"/>
-                        <outlet property="graphView" destination="z3i-fL-sJ1" id="TDK-ur-FDI"/>
                         <outlet property="isConnected" destination="SRv-XP-Wkn" id="C4n-pa-GEw"/>
                         <outlet property="labelDistance" destination="qU9-7D-exp" id="do8-ak-oLe"/>
                         <outlet property="labelSpeed" destination="uik-XX-CiT" id="dJw-Nr-Lon"/>
@@ -242,7 +233,7 @@
         <!--IDZ Table View Controller Settings - Settings-->
         <scene sceneID="a5b-Rw-PZH">
             <objects>
-                <tableViewController id="ZWX-no-etg" customClass="iDZTableViewControllerSettings" sceneMemberID="viewController">
+                <tableViewController title="Settings" modalTransitionStyle="flipHorizontal" id="ZWX-no-etg" customClass="iDZTableViewControllerSettings" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="interactive" dataMode="static" style="grouped" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="5" sectionFooterHeight="5" id="b3R-rg-Sa9">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="431"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -580,7 +571,7 @@
             </objects>
             <point key="canvasLocation" x="695" y="323"/>
         </scene>
-        <!--IDZ Altitude History-->
+        <!--IDZ Altitude History - Altitude History-->
         <scene sceneID="uxx-MW-W29">
             <objects>
                 <viewController id="Pcj-NX-ZD0" customClass="iDZAltitudeHistory" sceneMemberID="viewController">
@@ -593,14 +584,14 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="25E-yk-wR8" customClass="CPTGraphHostingView">
-                                <rect key="frame" x="0.0" y="65" width="320" height="415"/>
+                                <rect key="frame" x="0.0" y="65" width="320" height="365"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="5pl-Tt-kY9"/>
+                    <navigationItem key="navigationItem" title="Altitude History" id="5pl-Tt-kY9"/>
                     <connections>
                         <outlet property="graphView" destination="25E-yk-wR8" id="IBc-Pa-RrM"/>
                     </connections>

@@ -75,12 +75,6 @@ static iDZdzInfos *firstDZ = nil;
         
         [_dangerZonesLocalInfos addObject:dzCurrent];
     }
-
-    
-    _graph = [[RealTimePlot alloc]init];
-    _graph.altitude = _mapView.userLocation.location.altitude;
-    
-    [_graph renderInLayer:_graphView withTheme:[CPTTheme themeNamed:kCPTSlateTheme] animated:YES];
     
     UIPinchGestureRecognizer *twoFingerPinch =
     [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(handlePinchGesture:)];
@@ -91,8 +85,6 @@ static iDZdzInfos *firstDZ = nil;
     dzNear = [[NSMutableArray alloc]init];
     
     _isConnected.text = @"Not connected";
-    
-    _graphView.hidden = YES;
     
     _updateAnnot = [[iDZUpdateAnnotationsFromServer alloc]init];
     
@@ -109,6 +101,8 @@ static iDZdzInfos *firstDZ = nil;
     [_popup setValue:_viewInPopup.view forKey:@"accessoryView"];
     
     _alertView = (iDZAlertDZView *)_viewInPopup.view;
+    
+    _stepper.value = _appDelegate.warningDistance *1.2;
 
 }
 
@@ -345,7 +339,7 @@ static iDZdzInfos *firstDZ = nil;
     for (DangerZone *dz in _dangerZones) {
         CLLocation *dzLoc = [[CLLocation alloc]initWithLatitude:[dz.latitude doubleValue] longitude:[dz.longitude doubleValue]];
         double distance = [_mapView.userLocation.location distanceFromLocation:dzLoc];
-        
+
         if(distance < _appDelegate.dzRadius * 1000)
         {
             iDZdzInfos *dzCurrent = [[iDZdzInfos alloc]init];
@@ -357,7 +351,7 @@ static iDZdzInfos *firstDZ = nil;
             [_dangerZonesLocalInfos addObject:dzCurrent];
         }
     }
-    NSLog(@"refreshing local DZ array : %f", [[NSDate date] timeIntervalSinceDate:startDate]);
+    NSLog(@"refreshing local DZ array : %f for %lu records", [[NSDate date] timeIntervalSinceDate:startDate], (unsigned long)_dangerZonesLocalInfos.count);
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateHeading:(CLHeading *)newHeading
@@ -586,11 +580,8 @@ static iDZdzInfos *firstDZ = nil;
     if(location.verticalAccuracy > 0)
     {
         [_buttonAltitude setTitle:[NSString stringWithFormat:@"%1.0f",location.altitude] forState:UIControlStateNormal];
-        _graph.altitude = location.altitude;
     }
-    else
-        _graph.altitude = 0.0;
-    
+  
     // Limit number of overlays when drawing the trip
     if (_mapView.overlays.count > kOverlayLimit) {
         MKOverlayView *overlay = [[_mapView overlays] firstObject];
@@ -745,19 +736,7 @@ static iDZdzInfos *firstDZ = nil;
     NSUInteger count = [localMOC countForFetchRequest:fetchRequest error:&err];
     NSLog(@"Loaded %lu danger zones records", (unsigned long)count);
     
-    _dangerZones = [localMOC executeFetchRequest:fetchRequest error:nil];
-    
-    [_dangerZonesLocalInfos removeAllObjects];
-    
-    for (DangerZone *dz in _dangerZones) {
-        iDZdzInfos *dzCurrent = [[iDZdzInfos alloc]init];
-        
-        dzCurrent.latitude = dz.latitude;
-        dzCurrent.longitude = dz.longitude;
-        dzCurrent.descDZ = dz.description ;
-        
-        [_dangerZonesLocalInfos addObject:dzCurrent];
-    }
+    _dangerZones = [_appDelegate.managedObjectContext executeFetchRequest:fetchRequest error:nil];
     
     [self refreshLocalNearDZ];
     
@@ -792,11 +771,6 @@ static iDZdzInfos *firstDZ = nil;
     }
 }
 
-
--(void) showGraph
-{
-    _graphView.hidden = ! _graphView.hidden;
-}
 
 - (void)viewWillAppear:(BOOL)animated {
     

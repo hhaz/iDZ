@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 #import <CoreData/CoreData.h>
-#import "RealTimePlot.h"
 #import "DangerZone.h"
 #import "iDZUpdateAnnotationsFromServer.h"
 #import "iDZAlertDZView.h"
@@ -31,13 +30,11 @@
 @property (weak, nonatomic) IBOutlet UIButton *buttonAltitude;
 @property (weak, nonatomic) IBOutlet UIButton *buttonStart;
 @property (weak, nonatomic) IBOutlet UIButton *buttonStop;
-@property (weak, nonatomic) IBOutlet CPTGraphHostingView *graphView;
 @property (weak, nonatomic) IBOutlet UIStepper *stepper;
 @property (weak, nonatomic) IBOutlet UILabel *isConnected;
 
 @property (nonatomic , strong) CLLocationManager *locationManager;
 @property (nonatomic , strong) CLHeading *head;
-@property (nonatomic, retain) RealTimePlot *graph;
 @property (nonatomic, retain) UIAlertView *activityAlert;
 @property (nonatomic, retain) iDZUpdateAnnotationsFromServer *updateAnnot;
 
@@ -65,7 +62,5 @@
 @property (nonatomic) NSDate *lastUpdateTimeInterval;
 - (IBAction) startUpdatingLocation;
 - (IBAction) stopUpdatingLocation;
-
-- (IBAction) showGraph;
 
 @end

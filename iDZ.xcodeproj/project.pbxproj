@@ -13,9 +13,7 @@
 		6302662F1927C4AA00D8CBC8 /* dist.png in Resources */ = {isa = PBXBuildFile; fileRef = 6302662E1927C4AA00D8CBC8 /* dist.png */; };
 		630266311927C54100D8CBC8 /* Altimeter.png in Resources */ = {isa = PBXBuildFile; fileRef = 630266301927C54100D8CBC8 /* Altimeter.png */; };
 		631D74B818F1A23200F517D4 /* iDZAltitudeHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = 631D74B718F1A23200F517D4 /* iDZAltitudeHistory.m */; };
-		631D74BB18F1A8B000F517D4 /* GradientScatterPlot.m in Sources */ = {isa = PBXBuildFile; fileRef = 631D74BA18F1A8B000F517D4 /* GradientScatterPlot.m */; };
 		631E026718EDB79E0013689D /* libCorePlot-CocoaTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 631E026618EDB79E0013689D /* libCorePlot-CocoaTouch.a */; };
-		631E027718EDBB510013689D /* RealTimePlot.m in Sources */ = {isa = PBXBuildFile; fileRef = 631E027618EDBB510013689D /* RealTimePlot.m */; };
 		631E027A18EDBB950013689D /* PlotItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 631E027918EDBB950013689D /* PlotItem.m */; };
 		631E027D18EE9D980013689D /* PlotGallery.m in Sources */ = {isa = PBXBuildFile; fileRef = 631E027C18EE9D980013689D /* PlotGallery.m */; };
 		631E027F18EE9E1B0013689D /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 631E027E18EE9E1B0013689D /* Accelerate.framework */; };
@@ -51,13 +49,13 @@
 		63402F1D18DAFB9E00FAF06F /* Tracking.m in Sources */ = {isa = PBXBuildFile; fileRef = 63402F1C18DAFB9E00FAF06F /* Tracking.m */; };
 		634BBA4A191444DE007B38C0 /* iDZdzInfos.m in Sources */ = {isa = PBXBuildFile; fileRef = 634BBA49191444DE007B38C0 /* iDZdzInfos.m */; };
 		63572EDC191E957C0041B91F /* pin.png in Resources */ = {isa = PBXBuildFile; fileRef = 63572EDB191E957C0041B91F /* pin.png */; };
-		635CA63918DC3D920046C839 /* iDZUIStoryBoardSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 635CA63818DC3D920046C839 /* iDZUIStoryBoardSegue.m */; };
 		635CA63C18DC4A5D0046C839 /* iDZHistoryTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 635CA63B18DC4A5D0046C839 /* iDZHistoryTableView.m */; };
 		635CA63F18DC51300046C839 /* iDZHistoryItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 635CA63E18DC51300046C839 /* iDZHistoryItemCell.m */; };
 		635CA64218DC840B0046C839 /* iDZlocationDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 635CA64118DC840B0046C839 /* iDZlocationDetailsViewController.m */; };
 		635CA64518DC8CB70046C839 /* iDZAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 635CA64418DC8CB70046C839 /* iDZAnnotation.m */; };
 		635CA64818DCA1530046C839 /* iDZAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 635CA64718DCA1530046C839 /* iDZAnnotationView.m */; };
 		6362BF60192B99A800593344 /* downloadDZ.m in Sources */ = {isa = PBXBuildFile; fileRef = 6362BF5F192B99A800593344 /* downloadDZ.m */; };
+		636D693C192BBD1F00A7612E /* SimpleScatterPlot.m in Sources */ = {isa = PBXBuildFile; fileRef = 636D693B192BBD1F00A7612E /* SimpleScatterPlot.m */; };
 		6375F68D19202BAA00B04944 /* distance.png in Resources */ = {isa = PBXBuildFile; fileRef = 6375F68C19202BAA00B04944 /* distance.png */; };
 		638034341926989E001DC62E /* DZ.png in Resources */ = {isa = PBXBuildFile; fileRef = 638034331926989E001DC62E /* DZ.png */; };
 		63899CBD18DF3D6A00C02B39 /* iDZTripMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 63899CBC18DF3D6A00C02B39 /* iDZTripMap.m */; };
@@ -96,8 +94,6 @@
 		630266301927C54100D8CBC8 /* Altimeter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Altimeter.png; sourceTree = "<group>"; };
 		631D74B618F1A23200F517D4 /* iDZAltitudeHistory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iDZAltitudeHistory.h; sourceTree = "<group>"; };
 		631D74B718F1A23200F517D4 /* iDZAltitudeHistory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iDZAltitudeHistory.m; sourceTree = "<group>"; };
-		631D74B918F1A8B000F517D4 /* GradientScatterPlot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientScatterPlot.h; sourceTree = "<group>"; };
-		631D74BA18F1A8B000F517D4 /* GradientScatterPlot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradientScatterPlot.m; sourceTree = "<group>"; };
 		631E021818EDB6E20013689D /* CorePlot-CocoaTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CorePlot-CocoaTouch.h"; sourceTree = "<group>"; };
 		631E021918EDB6E20013689D /* CPTAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTAnimation.h; sourceTree = "<group>"; };
 		631E021A18EDB6E20013689D /* CPTAnimationOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTAnimationOperation.h; sourceTree = "<group>"; };
@@ -177,8 +173,6 @@
 		631E026418EDB6E20013689D /* NSDecimalNumberExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDecimalNumberExtensions.h; sourceTree = "<group>"; };
 		631E026518EDB6E20013689D /* NSNumberExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSNumberExtensions.h; sourceTree = "<group>"; };
 		631E026618EDB79E0013689D /* libCorePlot-CocoaTouch.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libCorePlot-CocoaTouch.a"; path = "iDZ/libCorePlot-CocoaTouch.a"; sourceTree = "<group>"; };
-		631E027518EDBB510013689D /* RealTimePlot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RealTimePlot.h; sourceTree = "<group>"; };
-		631E027618EDBB510013689D /* RealTimePlot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RealTimePlot.m; sourceTree = "<group>"; };
 		631E027818EDBB950013689D /* PlotItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlotItem.h; sourceTree = "<group>"; };
 		631E027918EDBB950013689D /* PlotItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlotItem.m; sourceTree = "<group>"; };
 		631E027B18EE9D980013689D /* PlotGallery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlotGallery.h; sourceTree = "<group>"; };
@@ -223,8 +217,6 @@
 		634BBA48191444DE007B38C0 /* iDZdzInfos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iDZdzInfos.h; sourceTree = "<group>"; };
 		634BBA49191444DE007B38C0 /* iDZdzInfos.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iDZdzInfos.m; sourceTree = "<group>"; };
 		63572EDB191E957C0041B91F /* pin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pin.png; sourceTree = "<group>"; };
-		635CA63718DC3D920046C839 /* iDZUIStoryBoardSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iDZUIStoryBoardSegue.h; sourceTree = "<group>"; };
-		635CA63818DC3D920046C839 /* iDZUIStoryBoardSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iDZUIStoryBoardSegue.m; sourceTree = "<group>"; };
 		635CA63A18DC4A5D0046C839 /* iDZHistoryTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iDZHistoryTableView.h; sourceTree = "<group>"; };
 		635CA63B18DC4A5D0046C839 /* iDZHistoryTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iDZHistoryTableView.m; sourceTree = "<group>"; };
 		635CA63D18DC51300046C839 /* iDZHistoryItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iDZHistoryItemCell.h; sourceTree = "<group>"; };
@@ -237,6 +229,8 @@
 		635CA64718DCA1530046C839 /* iDZAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iDZAnnotationView.m; sourceTree = "<group>"; };
 		6362BF5E192B99A800593344 /* downloadDZ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = downloadDZ.h; sourceTree = "<group>"; };
 		6362BF5F192B99A800593344 /* downloadDZ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = downloadDZ.m; sourceTree = "<group>"; };
+		636D693A192BBD1F00A7612E /* SimpleScatterPlot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleScatterPlot.h; sourceTree = "<group>"; };
+		636D693B192BBD1F00A7612E /* SimpleScatterPlot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleScatterPlot.m; sourceTree = "<group>"; };
 		6375F68C19202BAA00B04944 /* distance.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = distance.png; sourceTree = "<group>"; };
 		638034331926989E001DC62E /* DZ.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DZ.png; sourceTree = "<group>"; };
 		63899CBB18DF3D6A00C02B39 /* iDZTripMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iDZTripMap.h; sourceTree = "<group>"; };
@@ -412,19 +406,12 @@
 		63402EE218DA001900FAF06F /* iDZ */ = {
 			isa = PBXGroup;
 			children = (
-				63A63B2519151FA6008AA00A /* png */,
+				636D692C192B9D9700A7612E /* Graphs */,
+				63A63B2519151FA6008AA00A /* PNG */,
 				631E021718EDB6E20013689D /* CorePlotHeaders */,
 				63402EEC18DA001900FAF06F /* iDZAppDelegate.m */,
 				635CA64318DC8CB70046C839 /* iDZAnnotation.h */,
 				635CA64418DC8CB70046C839 /* iDZAnnotation.m */,
-				631E027B18EE9D980013689D /* PlotGallery.h */,
-				631E027C18EE9D980013689D /* PlotGallery.m */,
-				631E027818EDBB950013689D /* PlotItem.h */,
-				631E027918EDBB950013689D /* PlotItem.m */,
-				631D74B918F1A8B000F517D4 /* GradientScatterPlot.h */,
-				631D74BA18F1A8B000F517D4 /* GradientScatterPlot.m */,
-				631E027518EDBB510013689D /* RealTimePlot.h */,
-				631E027618EDBB510013689D /* RealTimePlot.m */,
 				635CA64618DCA1530046C839 /* iDZAnnotationView.h */,
 				635CA64718DCA1530046C839 /* iDZAnnotationView.m */,
 				63402EEE18DA001900FAF06F /* iDZ.storyboard */,
@@ -434,12 +421,10 @@
 				63899CBC18DF3D6A00C02B39 /* iDZTripMap.m */,
 				635CA64018DC840B0046C839 /* iDZlocationDetailsViewController.h */,
 				635CA64118DC840B0046C839 /* iDZlocationDetailsViewController.m */,
-				635CA63718DC3D920046C839 /* iDZUIStoryBoardSegue.h */,
 				635CA63A18DC4A5D0046C839 /* iDZHistoryTableView.h */,
 				635CA63B18DC4A5D0046C839 /* iDZHistoryTableView.m */,
 				635CA63D18DC51300046C839 /* iDZHistoryItemCell.h */,
 				635CA63E18DC51300046C839 /* iDZHistoryItemCell.m */,
-				635CA63818DC3D920046C839 /* iDZUIStoryBoardSegue.m */,
 				63402F1818DAF30600FAF06F /* iDZ.xcdatamodeld */,
 				632D8D13190BFB1900F98060 /* DangerZone.h */,
 				632D8D14190BFB1900F98060 /* DangerZone.m */,
@@ -510,7 +495,20 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		63A63B2519151FA6008AA00A /* png */ = {
+		636D692C192B9D9700A7612E /* Graphs */ = {
+			isa = PBXGroup;
+			children = (
+				631E027B18EE9D980013689D /* PlotGallery.h */,
+				631E027C18EE9D980013689D /* PlotGallery.m */,
+				631E027818EDBB950013689D /* PlotItem.h */,
+				631E027918EDBB950013689D /* PlotItem.m */,
+				636D693A192BBD1F00A7612E /* SimpleScatterPlot.h */,
+				636D693B192BBD1F00A7612E /* SimpleScatterPlot.m */,
+			);
+			name = Graphs;
+			sourceTree = "<group>";
+		};
+		63A63B2519151FA6008AA00A /* PNG */ = {
 			isa = PBXGroup;
 			children = (
 				63A63B2119151F95008AA00A /* preferences.png */,
@@ -527,7 +525,7 @@
 				63A63B2819152663008AA00A /* database.png */,
 				63A63B2319151FA1008AA00A /* world.png */,
 			);
-			name = png;
+			name = PNG;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -664,9 +662,9 @@
 				63E5470618E9870A00D603D9 /* Trip.m in Sources */,
 				635CA63F18DC51300046C839 /* iDZHistoryItemCell.m in Sources */,
 				63402F1D18DAFB9E00FAF06F /* Tracking.m in Sources */,
-				635CA63918DC3D920046C839 /* iDZUIStoryBoardSegue.m in Sources */,
 				635CA63C18DC4A5D0046C839 /* iDZHistoryTableView.m in Sources */,
 				63402EE918DA001900FAF06F /* main.m in Sources */,
+				636D693C192BBD1F00A7612E /* SimpleScatterPlot.m in Sources */,
 				6362BF60192B99A800593344 /* downloadDZ.m in Sources */,
 				635CA64218DC840B0046C839 /* iDZlocationDetailsViewController.m in Sources */,
 				63EC074619158BFA001F2042 /* iDZTableViewControllerSettings.m in Sources */,
@@ -676,10 +674,8 @@
 				63402EED18DA001900FAF06F /* iDZAppDelegate.m in Sources */,
 				634BBA4A191444DE007B38C0 /* iDZdzInfos.m in Sources */,
 				63899CBD18DF3D6A00C02B39 /* iDZTripMap.m in Sources */,
-				631D74BB18F1A8B000F517D4 /* GradientScatterPlot.m in Sources */,
 				635CA64818DCA1530046C839 /* iDZAnnotationView.m in Sources */,
 				631D74B818F1A23200F517D4 /* iDZAltitudeHistory.m in Sources */,
-				631E027718EDBB510013689D /* RealTimePlot.m in Sources */,
 				63402F1A18DAF30600FAF06F /* iDZ.xcdatamodeld in Sources */,
 				632D8D15190BFB1900F98060 /* DangerZone.m in Sources */,
 				6302662B1927B85200D8CBC8 /* ManageDefaults.m in Sources */,
