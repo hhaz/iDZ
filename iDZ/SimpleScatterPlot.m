@@ -47,13 +47,13 @@
         NSMutableArray *contentArray = [NSMutableArray array];
         if(_tracks.count > 0)
         {
-            for (int i = _tracks.count - 1; i >= 0;i--) {
+            for (long i = _tracks.count - 1; i >= 0;i--) {
                 Tracking *currentTrack = _tracks[i];
                 NSNumber *y = currentTrack.altitude;
                 if ([y intValue] > maxAltitude) {
                     maxAltitude = [y intValue];
                 }
-                NSNumber *x = [NSNumber numberWithInt:_tracks.count - i];
+                NSNumber *x = [NSNumber numberWithLong:_tracks.count - i];
                 [contentArray addObject:@{ @"x": x, @"y": y }];
             }
             
