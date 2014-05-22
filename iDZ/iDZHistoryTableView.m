@@ -89,7 +89,7 @@
     if(_refresh == nil)
     {
         _refresh = [[UIRefreshControl alloc]initWithFrame:CGRectMake(0, 0 , 220, 22)];
-        NSAttributedString *title = [[NSAttributedString alloc]initWithString:@"Refreshing History"];
+        NSAttributedString *title = [[NSAttributedString alloc]initWithString:NSLocalizedString(@"Refreshing History",nil)];
         _refresh.attributedTitle = title;
         [_refresh addTarget:self action:@selector(refreshHistory) forControlEvents:UIControlEventValueChanged];
     }
