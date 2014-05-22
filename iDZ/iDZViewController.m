@@ -84,12 +84,12 @@ static iDZdzInfos *firstDZ = nil;
     
     dzNear = [[NSMutableArray alloc]init];
     
-    _isConnected.text = @"Not connected";
+    _isConnected.text = NSLocalizedString(@"Not connected",nil);
     
     _updateAnnot = [[iDZUpdateAnnotationsFromServer alloc]init];
     
-    _popup = [[UIAlertView alloc] initWithTitle:@"DZ Alert !"
-                                                   message:@"Message test"
+    _popup = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"DZ Alert !",nil)
+                                                   message:@""
                                                   delegate:nil
                                          cancelButtonTitle:@"OK"
                                          otherButtonTitles:nil];
@@ -312,13 +312,13 @@ static iDZdzInfos *firstDZ = nil;
     NSLog(@"URL Connection Failed!");
     currentConnection = nil;
     dzServerConnected = NO;
-    _isConnected.text = @"Not connected";
+    _isConnected.text = NSLocalizedString(@"Not connected",nil);
 }
 
 - (void)connection:(NSURLConnection*)connection didReceiveResponse:(NSURLResponse *)response {
     [self.apiReturnXMLData setLength:0];
     dzServerConnected = YES;
-    _isConnected.text = @"Connected";
+    _isConnected.text = NSLocalizedString(@"Connected",nil);
 }
 
 - (void)connection:(NSURLConnection*)connection didReceiveData:(NSData*)data {
@@ -638,7 +638,7 @@ static iDZdzInfos *firstDZ = nil;
         _buttonStop.enabled = NO;
         _buttonStart.enabled = YES;
         
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Access to location service must be enabled" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error",nil) message:NSLocalizedString(@"Access to location service must be enabled",nil) delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
     }
 }
@@ -676,16 +676,16 @@ static iDZdzInfos *firstDZ = nil;
     if (count == 0) {
         
         _activityAlert = [[UIAlertView alloc]
-                          initWithTitle:@" No Danger Zone Information"
-                          message:@"Download from settings or click Import to load local data"
-                          delegate:self cancelButtonTitle:@"Close"
-                          otherButtonTitles:@"Import",nil];
+                          initWithTitle:NSLocalizedString(@"No Danger Zone Information",nil)
+                          message:NSLocalizedString(@"Download from settings",nil)
+                          delegate:self cancelButtonTitle:NSLocalizedString(@"Close",nil)
+                          otherButtonTitles:NSLocalizedString(@"Import",nil),nil];
         [_activityAlert show];
     }
 }
 
 -(void)waitPanel {
-    _alert = [[UIAlertView alloc]initWithTitle:@"ImportDZ" message:[NSString stringWithFormat:@"Importing data. Please Wait ..."] delegate:nil cancelButtonTitle:nil otherButtonTitles:nil];
+    _alert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"ImportDZ",nil) message:NSLocalizedString(@"Importing data",nil) delegate:nil cancelButtonTitle:nil otherButtonTitles:nil];
     [_alert show];
 }
 

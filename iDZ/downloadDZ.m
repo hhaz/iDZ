@@ -32,7 +32,7 @@
 }
 
 - (void)connection:(NSURLConnection*)connection didFailWithError:(NSError*)error {
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"DownloadDZ" message:[NSString stringWithFormat:@"Connection Failed"] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"DownloadDZ",nil) message:NSLocalizedString(@"Connection Failed", nil) delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [alert show];
     currentConnection = nil;
 }
@@ -46,12 +46,12 @@
 }
 
 -(void)waitPanel {
-    _alert = [[UIAlertView alloc]initWithTitle:@"DownloadDZ" message:[NSString stringWithFormat:@"Downloading data. Please Wait ..."] delegate:nil cancelButtonTitle:nil otherButtonTitles:nil];
+    _alert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"DownloadDZ",nil) message:NSLocalizedString(@"Downloading data",nil) delegate:nil cancelButtonTitle:nil otherButtonTitles:nil];
     [_alert show];
 }
 
 -(void)displayStatus:(NSNumber *)countRow {
-    UIAlertView *displayStatus = [[UIAlertView alloc]initWithTitle:@"DownloadDZ" message:[NSString stringWithFormat:@"%@ records imported",countRow] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    UIAlertView *displayStatus = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"DownloadDZ",nil) message:[NSString stringWithFormat:NSLocalizedString(@"%@ records imported",nil),countRow] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [displayStatus show];
 }
 

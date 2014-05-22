@@ -186,7 +186,7 @@
     [aView addSubview:toggleView];
     
     UIButton *map = [[UIButton alloc]initWithFrame:CGRectMake( self.view.frame.size.width - 50 , 0, 50 , kHeaderHeight)];
-    [map setTitle:@"Map" forState:UIControlStateNormal];
+    [map setTitle:NSLocalizedString(@"Map",nil) forState:UIControlStateNormal];
     map.titleLabel.font = [UIFont fontWithName:@"Arial" size:12];
     map.tag = section;
     [aView addSubview:map];

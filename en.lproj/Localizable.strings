@@ -1,0 +1,24 @@
+/* 
+  Localizable.strings
+  iDZ
+
+  Created by Hervé AZOULAY on 22/05/2014.
+  Copyright (c) 2014 Hervé AZOULAY. All rights reserved.
+*/
+"Connection Failed" = "Connection Failed";
+"Downloading data" = "Downloading data. Please wait ...";
+"%@ records imported" = "%@ records imported";
+"Unresolved error %@, %@" = "Unresolved error %@, %@";
+"DownloadDZ" = "DZ Download";
+"Not connected" = "Not connected";
+"Connected" = "Connected";
+"Access to location service must be enabled" = "Access to location service must be enabled" ;
+"Importing data" = "Importing data. Please Wait ...";
+"ImportDZ" = "DZ Import";
+"No Danger Zone Information" = "No Danger Zone Information";
+"Download from settings" = "Download from settings or click Import to load local data";
+"Import" = "Import";
+"Close" = "Close";
+"Error" = "Error";
+"DZ Alert !" = "DZ Alert !";
+"Map" = "Map";

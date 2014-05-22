@@ -1,0 +1,96 @@
+
+/* Class = "IBUILabel"; text = "DZ Server URL"; ObjectID = "3PF-Rp-wUs"; */
+"3PF-Rp-wUs.text" = "URL Server DZ";
+
+/* Class = "IBUIButton"; normalTitle = "Go"; ObjectID = "4Tj-uS-xwj"; */
+"4Tj-uS-xwj.normalTitle" = "Go";
+
+/* Class = "IBUINavigationItem"; title = "Altitude History"; ObjectID = "5pl-Tt-kY9"; */
+"5pl-Tt-kY9.title" = "Historique Altitude";
+
+/* Class = "IBUINavigationItem"; title = "Location History"; ObjectID = "5tO-R6-icp"; */
+"5tO-R6-icp.title" = "Historique des Lieux";
+
+/* Class = "IBUILabel"; text = "Latitude : "; ObjectID = "7N4-mi-htX"; */
+"7N4-mi-htX.text" = "Latitude : ";
+
+/* Class = "IBUIButton"; normalTitle = "Save"; ObjectID = "7yb-nh-3hV"; */
+"7yb-nh-3hV.normalTitle" = "Sauvegarder";
+
+/* Class = "IBUILabel"; text = "Log trip"; ObjectID = "Mfq-Eg-1VV"; */
+"Mfq-Eg-1VV.text" = "Enregistrer Trajet";
+
+/* Class = "IBUIBarButtonItem"; title = "History"; ObjectID = "MpY-bx-HSY"; */
+"MpY-bx-HSY.title" = "Historique";
+
+/* Class = "IBUITextField"; placeholder = "http://server:port/link"; ObjectID = "N0q-CE-ncz"; */
+"N0q-CE-ncz.placeholder" = "http://server:port/link";
+
+/* Class = "IBUILabel"; text = "Distance Warning (m)"; ObjectID = "Pu4-cI-eGQ"; */
+"Pu4-cI-eGQ.text" = "Distance Alerte (m)";
+
+/* Class = "IBUITableViewSection"; headerTitle = "Technical Settings"; ObjectID = "Qv0-MW-l9e"; */
+"Qv0-MW-l9e.headerTitle" = "Configuration Technique";
+
+/* Class = "IBUILabel"; text = "Download DZ"; ObjectID = "QvF-2m-5p8"; */
+"QvF-2m-5p8.text" = "Télécharger DZ";
+
+/* Class = "IBUILabel"; text = "Longitude : "; ObjectID = "RAz-PS-GYC"; */
+"RAz-PS-GYC.text" = "Longitude : ";
+
+/* Class = "IBUILabel"; text = "Max Annotations"; ObjectID = "RPe-V7-Ndl"; */
+"RPe-V7-Ndl.text" = "Annotations Max.";
+
+/* Class = "IBUIButton"; normalTitle = "Start"; ObjectID = "TOZ-Nk-5OX"; */
+"TOZ-Nk-5OX.normalTitle" = "Départ";
+
+/* Class = "IBUILabel"; text = "Altitude : "; ObjectID = "TtS-KJ-l6j"; */
+"TtS-KJ-l6j.text" = "Altitude : ";
+
+/* Class = "IBUINavigationItem"; title = "iDZ"; ObjectID = "X1b-QF-HZs"; */
+"X1b-QF-HZs.title" = "iDZ";
+
+/* Class = "IBUILabel"; text = "DZ Alert"; ObjectID = "Ybn-yZ-jQr"; */
+"Ybn-yZ-jQr.text" = "DZ Alerte";
+
+/* Class = "IBUITableViewSection"; headerTitle = "Trip Settings"; ObjectID = "YeP-zj-phe"; */
+"YeP-zj-phe.headerTitle" = "Configuration Trajet";
+
+/* Class = "IBUILabel"; text = "Logging Frequency (s)"; ObjectID = "Yfo-4e-pXQ"; */
+"Yfo-4e-pXQ.text" = "Fréquence (s)";
+
+/* Class = "IBUITableViewController"; title = "Settings"; ObjectID = "ZWX-no-etg"; */
+"ZWX-no-etg.title" = "Configuration";
+
+/* Class = "IBUITabBarItem"; title = "Item"; ObjectID = "dVi-0b-4gz"; */
+"dVi-0b-4gz.title" = "Item";
+
+/* Class = "IBUITabBarItem"; title = "Settings"; ObjectID = "elI-9y-r2o"; */
+"elI-9y-r2o.title" = "Configuration";
+
+/* Class = "IBUITabBarItem"; title = "MapView"; ObjectID = "hgc-dG-1Ac"; */
+"hgc-dG-1Ac.title" = "iDZ";
+
+/* Class = "IBUITableViewSection"; headerTitle = "Save"; ObjectID = "iFG-w0-CWJ"; */
+"iFG-w0-CWJ.headerTitle" = "Enregistrer";
+
+/* Class = "IBUINavigationItem"; title = "Location Details"; ObjectID = "jN2-29-18G"; */
+"jN2-29-18G.title" = "Details Lieu";
+
+/* Class = "IBUITableViewSection"; headerTitle = "Danger Zone Settings"; ObjectID = "orm-dN-TTS"; */
+"orm-dN-TTS.headerTitle" = "Configuration Zone de Danger";
+
+/* Class = "IBUILabel"; text = "Date : "; ObjectID = "q8H-En-Qpd"; */
+"q8H-En-Qpd.text" = "Date : ";
+
+/* Class = "IBUILabel"; text = "DZ Refresh Radius (km)"; ObjectID = "rS7-Zj-2up"; */
+"rS7-Zj-2up.text" = "Rayon Limite DZ (km)";
+
+/* Class = "IBUINavigationItem"; title = "Trip Map"; ObjectID = "vJo-eh-v6d"; */
+"vJo-eh-v6d.title" = "Carte du Trajet";
+
+/* Class = "IBUIButton"; normalTitle = "Stop"; ObjectID = "vRL-eu-Y7a"; */
+"vRL-eu-Y7a.normalTitle" = "Stop";
+
+/* Class = "IBUIBarButtonItem"; title = "Altitude"; ObjectID = "zw8-3X-JRm"; */
+"zw8-3X-JRm.title" = "Altitude";
