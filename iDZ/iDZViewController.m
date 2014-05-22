@@ -29,6 +29,8 @@ static iDZdzInfos *firstDZ = nil;
 
 @implementation iDZViewController
 
+#pragma mark - Initialization
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -106,6 +108,8 @@ static iDZdzInfos *firstDZ = nil;
 
 }
 
+#pragma mark - Gesture Management
+
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
     return YES;
 }
@@ -119,6 +123,7 @@ static iDZdzInfos *firstDZ = nil;
     }
 }
 
+#pragma mark - Route drawing
 
 - (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id < MKOverlay >)overlay
 {
@@ -133,6 +138,8 @@ static iDZdzInfos *firstDZ = nil;
     return routeLineView;
     
 }
+
+#pragma mark - Location update
 
 -(void)startUpdatingLocation
 {
@@ -239,278 +246,14 @@ static iDZdzInfos *firstDZ = nil;
     _dzTimer = nil;
 }
 
-- (NSString *)newUUID
-{
-    CFUUIDRef uuidRef = CFUUIDCreate(NULL);
-    CFStringRef uuidStringRef = CFUUIDCreateString(NULL, uuidRef);
-    CFRelease(uuidRef);
-    NSString *uuid = CFBridgingRelease(uuidStringRef);
-    return uuid;
-}
-
-- (void)insertNewObject:(CLLocation *)location
-{
-    NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
-    NSEntityDescription *entity = [[self.fetchedResultsController fetchRequest] entity];
-    
-    Tracking *newTracking = [[Tracking alloc]initWithEntity:entity insertIntoManagedObjectContext:context];
-    
-    newTracking.dateandtime     = [NSDate date];
-    newTracking.longitude       = [NSNumber numberWithFloat:location.coordinate.longitude];
-    newTracking.latitude        = [NSNumber numberWithFloat:location.coordinate.latitude];
-    newTracking.tripid          = _tripId;
-    newTracking.altitude        = [NSNumber numberWithFloat:location.altitude];
-    
-    // Save the context.
-    NSError *error = nil;
-    if (![context save:&error]) {
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        abort();
-    }
-}
-
-- (NSFetchedResultsController *)fetchedResultsController
-{
-    if (_fetchedResultsController != nil) {
-        return _fetchedResultsController;
-    }
-    
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    // Edit the entity name as appropriate.
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Tracking" inManagedObjectContext:self.managedObjectContext];
-    [fetchRequest setEntity:entity];
-    
-    // Set the batch size to a suitable number.
-    [fetchRequest setFetchBatchSize:20];
-    
-    // Edit the sort key as appropriate.
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"dateandtime" ascending:NO];
-    NSArray *sortDescriptors = @[sortDescriptor];
-    
-    [fetchRequest setSortDescriptors:sortDescriptors];
-    
-    // nil for section name key path means "no sections".
-    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
-    aFetchedResultsController.delegate = self;
-    self.fetchedResultsController = aFetchedResultsController;
-    
-	NSError *error = nil;
-	if (![self.fetchedResultsController performFetch:&error]) {
-	    NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-	    abort();
-	}
-    
-    return _fetchedResultsController;
-}
-
 - (void)locationManager:(CLLocationManager *)manager didFinishDeferredUpdatesWithError:(NSError *)error
 {
     NSLog(@"Error : %@", error.localizedDescription);
 }
 
-- (void)connection:(NSURLConnection*)connection didFailWithError:(NSError*)error {
-    NSLog(@"URL Connection Failed!");
-    currentConnection = nil;
-    dzServerConnected = NO;
-    _isConnected.text = NSLocalizedString(@"Not connected",nil);
-}
-
-- (void)connection:(NSURLConnection*)connection didReceiveResponse:(NSURLResponse *)response {
-    [self.apiReturnXMLData setLength:0];
-    dzServerConnected = YES;
-    _isConnected.text = NSLocalizedString(@"Connected",nil);
-}
-
-- (void)connection:(NSURLConnection*)connection didReceiveData:(NSData*)data {
-    [self.apiReturnXMLData appendData:data];
-}
-
-// This function helps restricting the number of dz to be considered by checkDZ when disconnected from the server. This function determines the DZ available aroung 100km. This improves a lot the performance when disconnected from server (the server is much faster than any iOS device ...for now !)
-- (void)refreshLocalNearDZTimer:(NSTimer *)theTimer {
-    [self refreshLocalNearDZ];
-}
-
-- (void)refreshLocalNearDZ {
-    NSDate *startDate = [NSDate date];
-    [_dangerZonesLocalInfos removeAllObjects];
-    
-    // put in _dangerZonesLocalInfos only DZ near by kDZProximityRadius meters to restrict the number of DZ to check
-    
-    for (DangerZone *dz in _dangerZones) {
-        CLLocation *dzLoc = [[CLLocation alloc]initWithLatitude:[dz.latitude doubleValue] longitude:[dz.longitude doubleValue]];
-        double distance = [_mapView.userLocation.location distanceFromLocation:dzLoc];
-
-        if(distance < _appDelegate.dzRadius * 1000)
-        {
-            iDZdzInfos *dzCurrent = [[iDZdzInfos alloc]init];
-            
-            dzCurrent.latitude = dz.latitude;
-            dzCurrent.longitude = dz.longitude;
-            dzCurrent.descDZ = dz.label ;
-            
-            [_dangerZonesLocalInfos addObject:dzCurrent];
-        }
-    }
-    NSLog(@"refreshing local DZ array : %f for %lu records", [[NSDate date] timeIntervalSinceDate:startDate], (unsigned long)_dangerZonesLocalInfos.count);
-}
-
 - (void)locationManager:(CLLocationManager *)manager didUpdateHeading:(CLHeading *)newHeading
 {
     _head = newHeading;
-}
-
-
-- (void)checkIfDzNear:(NSArray *)dzArray
-{
-    NSDate *startDate = [NSDate date];
-    double minDistance = _appDelegate.warningDistance;
-    double count = 0;
-    
-    NSLog(@"Heading %f", _head.trueHeading);
-    
-    for (iDZdzInfos *dzCurrent in dzArray) {
-        count++;
-        iDZdzInfos *dzFound = nil;
-        CLLocation *dzLoc = [[CLLocation alloc]initWithLatitude:[dzCurrent.latitude doubleValue] longitude:[dzCurrent.longitude doubleValue]];
-        double distance = [_mapView.userLocation.location distanceFromLocation:dzLoc];
-        
-        for (iDZdzInfos *dzn in dzNear) {
-            if ([dzn.latitude doubleValue] == [dzCurrent.latitude doubleValue] && [dzCurrent.longitude doubleValue] == [dzCurrent.longitude doubleValue] ) {
-                dzFound = dzn;
-            }
-        }
-        
-        if (distance < minDistance && dzFound == nil) {
-            dzCurrent.distance = [NSNumber numberWithDouble:-1]; // adding dz for the first time
-            [dzNear addObject:dzCurrent];
-            dzFound = [dzNear lastObject];
-        }
-        
-        if (dzFound != nil) {
-            if(distance < minDistance && distance <= [dzFound.distance doubleValue])
-            {
-                minDistance = distance;
-                firstDZ = dzCurrent;
-            }
-            if (distance > [dzFound.distance doubleValue] && [dzFound.distance doubleValue] != -1) {
-                [dzNear removeObject:dzFound];
-            }
-            dzFound.distance = [NSNumber numberWithDouble:distance];
-        }
-        
-    }
-    NSLog(@"Computing near DZ Time : %1.3f for %f records", [[NSDate date] timeIntervalSinceDate:startDate],count);
-}
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-    currentConnection = nil;
-    NSError *nserr;
-    NSMutableArray *dzArray = [[NSMutableArray alloc]init];
-    
-    NSArray *jsonArray=[NSJSONSerialization JSONObjectWithData:_apiReturnXMLData options:NSJSONReadingMutableContainers error:&nserr];
-    
-    if(jsonArray !=nil && jsonArray.count > 0 && nserr == nil && !([[jsonArray objectAtIndex:0] isEqual:[NSNull null]]))
-    {
-        for (int i=0; i<jsonArray.count; i++) {
-            if (![[jsonArray objectAtIndex:i] isEqual:[NSNull null]]) {
-                double latitude = [(NSNumber *)[[jsonArray objectAtIndex:i] objectForKey:@"latitude"] doubleValue];
-                double longitude = [(NSNumber *)[[jsonArray objectAtIndex:i] objectForKey:@"longitude"] doubleValue];
-                NSString *dzLabel = (NSString *)[[jsonArray objectAtIndex:i] objectForKey:@"description"];
-                
-                iDZdzInfos *dzCurrent = [[iDZdzInfos alloc]init];
-                
-                dzCurrent.latitude = [NSNumber numberWithDouble:latitude];
-                dzCurrent.longitude = [NSNumber numberWithDouble:longitude];
-                dzCurrent.descDZ = dzLabel;
-                
-                [dzArray addObject:dzCurrent];
-            }
-        }
-    }
-    [self checkIfDzNear:dzArray];
-}
-
-
--(void)checkDZ:(NSTimer *)theTimer
-{
-    NSDate *startDate = [NSDate date];
-    
-    NSString *restCallString = [NSString stringWithFormat:@"%@/api/findClosestDZ?latitude=%f&longitude=%f&distance=%f", _appDelegate.dzServerURL,_mapView.userLocation.location.coordinate.latitude, _mapView.userLocation.coordinate.longitude, _appDelegate.warningDistance];
-    
-    NSURL *restURL = [NSURL URLWithString:restCallString];
-    NSURLRequest *restRequest = [NSURLRequest requestWithURL:restURL cachePolicy:0 timeoutInterval:3];
-    
-    if( currentConnection)
-    {
-        [currentConnection cancel];
-        currentConnection = nil;
-        self.apiReturnXMLData = nil;
-    }
-    
-    currentConnection = [[NSURLConnection alloc] initWithRequest:restRequest delegate:self];
-    
-    _apiReturnXMLData = [NSMutableData data];
-    
-    if(!dzServerConnected) {
-        
-        [self checkIfDzNear:_dangerZonesLocalInfos];
-    }
-    
-    [self updateAnnotations];
-    
-    NSLog(@"Check DZ Time : %f", [[NSDate date] timeIntervalSinceDate:startDate]);
-}
-
--(void)updateAnnotations {
-    
-    NSDate *startDate = [NSDate date];
-    double annotCount = 0;
-    
-    [_mapView removeAnnotations:_mapView.annotations];
-    
-    if(dzServerConnected)
-    {
-        MKMapRect mRect = _mapView.visibleMapRect;
-        
-        // get points of the visibleMapRect
-        MKMapPoint eastMapPoint = MKMapPointMake(MKMapRectGetMinX(mRect), MKMapRectGetMidY(mRect));
-        MKMapPoint westMapPoint = MKMapPointMake(MKMapRectGetMaxX(mRect), MKMapRectGetMidY(mRect));
-        
-        MKMapPoint northMapPoint = MKMapPointMake(MKMapRectGetMidX(mRect), MKMapRectGetMinY(mRect));
-        MKMapPoint southMapPoint = MKMapPointMake(MKMapRectGetMidX(mRect), MKMapRectGetMaxY(mRect));
-        
-        CLLocationDistance widthDist = MKMetersBetweenMapPoints(eastMapPoint, westMapPoint);
-        CLLocationDistance heightDist = MKMetersBetweenMapPoints(northMapPoint, southMapPoint);
-        
-        double maxDistance = 0;
-        
-        if (widthDist >= heightDist) {
-            maxDistance = widthDist;
-        } else {
-            maxDistance = heightDist;
-        }
-        [_updateAnnot updateAnnotations:maxDistance mapView:_mapView];
-    }
-    else {
-        for (DangerZone *dz in _dangerZones) {
-            CLLocationCoordinate2D locationDZ;
-            
-            locationDZ.longitude    = [dz.longitude doubleValue];
-            locationDZ.latitude     = [dz.latitude doubleValue];
-            
-            if (annotCount < _appDelegate.maxAnnotations) {
-                if (MKMapRectContainsPoint(_mapView.visibleMapRect, MKMapPointForCoordinate(locationDZ))){
-                    iDZAnnotation *annotationDZ = [[iDZAnnotation alloc]initWithTitle:dz.label AndCoordinate:locationDZ];
-                    [_mapView addAnnotation:annotationDZ];
-                    annotCount++;
-                }
-            }
-            else {
-                break;
-            }
-        }
-    }
-    NSLog(@"Updating Annot Time : %f", [[NSDate date] timeIntervalSinceDate:startDate]);
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
@@ -581,7 +324,7 @@ static iDZdzInfos *firstDZ = nil;
     {
         [_buttonAltitude setTitle:[NSString stringWithFormat:@"%1.0f",location.altitude] forState:UIControlStateNormal];
     }
-  
+    
     // Limit number of overlays when drawing the trip
     if (_mapView.overlays.count > kOverlayLimit) {
         MKOverlayView *overlay = [[_mapView overlays] firstObject];
@@ -643,6 +386,278 @@ static iDZdzInfos *firstDZ = nil;
     }
 }
 
+#pragma mark - core data management
+
+- (NSString *)newUUID
+{
+    CFUUIDRef uuidRef = CFUUIDCreate(NULL);
+    CFStringRef uuidStringRef = CFUUIDCreateString(NULL, uuidRef);
+    CFRelease(uuidRef);
+    NSString *uuid = CFBridgingRelease(uuidStringRef);
+    return uuid;
+}
+
+- (void)insertNewObject:(CLLocation *)location
+{
+    NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
+    NSEntityDescription *entity = [[self.fetchedResultsController fetchRequest] entity];
+    
+    Tracking *newTracking = [[Tracking alloc]initWithEntity:entity insertIntoManagedObjectContext:context];
+    
+    newTracking.dateandtime     = [NSDate date];
+    newTracking.longitude       = [NSNumber numberWithFloat:location.coordinate.longitude];
+    newTracking.latitude        = [NSNumber numberWithFloat:location.coordinate.latitude];
+    newTracking.tripid          = _tripId;
+    newTracking.altitude        = [NSNumber numberWithFloat:location.altitude];
+    
+    // Save the context.
+    NSError *error = nil;
+    if (![context save:&error]) {
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        abort();
+    }
+}
+
+- (NSFetchedResultsController *)fetchedResultsController
+{
+    if (_fetchedResultsController != nil) {
+        return _fetchedResultsController;
+    }
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    // Edit the entity name as appropriate.
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Tracking" inManagedObjectContext:self.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    
+    // Set the batch size to a suitable number.
+    [fetchRequest setFetchBatchSize:20];
+    
+    // Edit the sort key as appropriate.
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"dateandtime" ascending:NO];
+    NSArray *sortDescriptors = @[sortDescriptor];
+    
+    [fetchRequest setSortDescriptors:sortDescriptors];
+    
+    // nil for section name key path means "no sections".
+    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
+    aFetchedResultsController.delegate = self;
+    self.fetchedResultsController = aFetchedResultsController;
+    
+	NSError *error = nil;
+	if (![self.fetchedResultsController performFetch:&error]) {
+	    NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+	    abort();
+	}
+    
+    return _fetchedResultsController;
+}
+
+#pragma mark - DZ Server connection & data retrieval
+
+- (void)connection:(NSURLConnection*)connection didFailWithError:(NSError*)error {
+    NSLog(@"URL Connection Failed!");
+    currentConnection = nil;
+    dzServerConnected = NO;
+    _isConnected.text = NSLocalizedString(@"Not connected",nil);
+}
+
+- (void)connection:(NSURLConnection*)connection didReceiveResponse:(NSURLResponse *)response {
+    [self.apiReturnXMLData setLength:0];
+    dzServerConnected = YES;
+    _isConnected.text = NSLocalizedString(@"Connected",nil);
+}
+
+- (void)connection:(NSURLConnection*)connection didReceiveData:(NSData*)data {
+    [self.apiReturnXMLData appendData:data];
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+    currentConnection = nil;
+    NSError *nserr;
+    NSMutableArray *dzArray = [[NSMutableArray alloc]init];
+    
+    NSArray *jsonArray=[NSJSONSerialization JSONObjectWithData:_apiReturnXMLData options:NSJSONReadingMutableContainers error:&nserr];
+    
+    if(jsonArray !=nil && jsonArray.count > 0 && nserr == nil && !([[jsonArray objectAtIndex:0] isEqual:[NSNull null]]))
+    {
+        for (int i=0; i<jsonArray.count; i++) {
+            if (![[jsonArray objectAtIndex:i] isEqual:[NSNull null]]) {
+                double latitude = [(NSNumber *)[[jsonArray objectAtIndex:i] objectForKey:@"latitude"] doubleValue];
+                double longitude = [(NSNumber *)[[jsonArray objectAtIndex:i] objectForKey:@"longitude"] doubleValue];
+                NSString *dzLabel = (NSString *)[[jsonArray objectAtIndex:i] objectForKey:@"description"];
+                
+                iDZdzInfos *dzCurrent = [[iDZdzInfos alloc]init];
+                
+                dzCurrent.latitude = [NSNumber numberWithDouble:latitude];
+                dzCurrent.longitude = [NSNumber numberWithDouble:longitude];
+                dzCurrent.descDZ = dzLabel;
+                
+                [dzArray addObject:dzCurrent];
+            }
+        }
+    }
+    [self checkIfDzNear:dzArray];
+}
+
+#pragma mark - DZ Detection
+
+// This function helps restricting the number of dz to be considered by checkDZ when disconnected from the server. This function determines the DZ available aroung 100km. This improves a lot the performance when disconnected from server (the server is much faster than any iOS device ...for now !)
+- (void)refreshLocalNearDZTimer:(NSTimer *)theTimer {
+    [self refreshLocalNearDZ];
+}
+
+- (void)refreshLocalNearDZ {
+    NSDate *startDate = [NSDate date];
+    [_dangerZonesLocalInfos removeAllObjects];
+    
+    // put in _dangerZonesLocalInfos only DZ near by kDZProximityRadius meters to restrict the number of DZ to check
+    
+    for (DangerZone *dz in _dangerZones) {
+        CLLocation *dzLoc = [[CLLocation alloc]initWithLatitude:[dz.latitude doubleValue] longitude:[dz.longitude doubleValue]];
+        double distance = [_mapView.userLocation.location distanceFromLocation:dzLoc];
+
+        if(distance < _appDelegate.dzRadius * 1000)
+        {
+            iDZdzInfos *dzCurrent = [[iDZdzInfos alloc]init];
+            
+            dzCurrent.latitude = dz.latitude;
+            dzCurrent.longitude = dz.longitude;
+            dzCurrent.descDZ = dz.label ;
+            
+            [_dangerZonesLocalInfos addObject:dzCurrent];
+        }
+    }
+    NSLog(@"refreshing local DZ array : %f for %lu records", [[NSDate date] timeIntervalSinceDate:startDate], (unsigned long)_dangerZonesLocalInfos.count);
+}
+
+- (void)checkIfDzNear:(NSArray *)dzArray
+{
+    NSDate *startDate = [NSDate date];
+    double minDistance = _appDelegate.warningDistance;
+    double count = 0;
+    
+    NSLog(@"Heading %f", _head.trueHeading);
+    
+    for (iDZdzInfos *dzCurrent in dzArray) {
+        count++;
+        iDZdzInfos *dzFound = nil;
+        CLLocation *dzLoc = [[CLLocation alloc]initWithLatitude:[dzCurrent.latitude doubleValue] longitude:[dzCurrent.longitude doubleValue]];
+        double distance = [_mapView.userLocation.location distanceFromLocation:dzLoc];
+        
+        for (iDZdzInfos *dzn in dzNear) {
+            if ([dzn.latitude doubleValue] == [dzCurrent.latitude doubleValue] && [dzCurrent.longitude doubleValue] == [dzCurrent.longitude doubleValue] ) {
+                dzFound = dzn;
+            }
+        }
+        
+        if (distance < minDistance && dzFound == nil) {
+            dzCurrent.distance = [NSNumber numberWithDouble:-1]; // adding dz for the first time
+            [dzNear addObject:dzCurrent];
+            dzFound = [dzNear lastObject];
+        }
+        
+        if (dzFound != nil) {
+            if(distance < minDistance && distance <= [dzFound.distance doubleValue])
+            {
+                minDistance = distance;
+                firstDZ = dzCurrent;
+            }
+            if (distance > [dzFound.distance doubleValue] && [dzFound.distance doubleValue] != -1) {
+                [dzNear removeObject:dzFound];
+            }
+            dzFound.distance = [NSNumber numberWithDouble:distance];
+        }
+        
+    }
+    NSLog(@"Computing near DZ Time : %1.3f for %f records", [[NSDate date] timeIntervalSinceDate:startDate],count);
+}
+
+-(void)checkDZ:(NSTimer *)theTimer
+{
+    NSDate *startDate = [NSDate date];
+    
+    NSString *restCallString = [NSString stringWithFormat:@"%@/api/findClosestDZ?latitude=%f&longitude=%f&distance=%f", _appDelegate.dzServerURL,_mapView.userLocation.location.coordinate.latitude, _mapView.userLocation.coordinate.longitude, _appDelegate.warningDistance];
+    
+    NSURL *restURL = [NSURL URLWithString:restCallString];
+    NSURLRequest *restRequest = [NSURLRequest requestWithURL:restURL cachePolicy:0 timeoutInterval:3];
+    
+    if( currentConnection)
+    {
+        [currentConnection cancel];
+        currentConnection = nil;
+        self.apiReturnXMLData = nil;
+    }
+    
+    currentConnection = [[NSURLConnection alloc] initWithRequest:restRequest delegate:self];
+    
+    _apiReturnXMLData = [NSMutableData data];
+    
+    if(!dzServerConnected) {
+        
+        [self checkIfDzNear:_dangerZonesLocalInfos];
+    }
+    
+    [self updateAnnotations];
+    
+    NSLog(@"Check DZ Time : %f", [[NSDate date] timeIntervalSinceDate:startDate]);
+}
+
+#pragma mark - Annotations management
+
+-(void)updateAnnotations {
+    
+    NSDate *startDate = [NSDate date];
+    double annotCount = 0;
+    
+    [_mapView removeAnnotations:_mapView.annotations];
+    
+    if(dzServerConnected)
+    {
+        MKMapRect mRect = _mapView.visibleMapRect;
+        
+        // get points of the visibleMapRect
+        MKMapPoint eastMapPoint = MKMapPointMake(MKMapRectGetMinX(mRect), MKMapRectGetMidY(mRect));
+        MKMapPoint westMapPoint = MKMapPointMake(MKMapRectGetMaxX(mRect), MKMapRectGetMidY(mRect));
+        
+        MKMapPoint northMapPoint = MKMapPointMake(MKMapRectGetMidX(mRect), MKMapRectGetMinY(mRect));
+        MKMapPoint southMapPoint = MKMapPointMake(MKMapRectGetMidX(mRect), MKMapRectGetMaxY(mRect));
+        
+        CLLocationDistance widthDist = MKMetersBetweenMapPoints(eastMapPoint, westMapPoint);
+        CLLocationDistance heightDist = MKMetersBetweenMapPoints(northMapPoint, southMapPoint);
+        
+        double maxDistance = 0;
+        
+        if (widthDist >= heightDist) {
+            maxDistance = widthDist;
+        } else {
+            maxDistance = heightDist;
+        }
+        [_updateAnnot updateAnnotations:maxDistance mapView:_mapView];
+    }
+    else {
+        for (DangerZone *dz in _dangerZones) {
+            CLLocationCoordinate2D locationDZ;
+            
+            locationDZ.longitude    = [dz.longitude doubleValue];
+            locationDZ.latitude     = [dz.latitude doubleValue];
+            
+            if (annotCount < _appDelegate.maxAnnotations) {
+                if (MKMapRectContainsPoint(_mapView.visibleMapRect, MKMapPointForCoordinate(locationDZ))){
+                    iDZAnnotation *annotationDZ = [[iDZAnnotation alloc]initWithTitle:dz.label AndCoordinate:locationDZ];
+                    [_mapView addAnnotation:annotationDZ];
+                    annotCount++;
+                }
+            }
+            else {
+                break;
+            }
+        }
+    }
+    NSLog(@"Updating Annot Time : %f", [[NSDate date] timeIntervalSinceDate:startDate]);
+}
+
+#pragma mark - Segue
+
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 
 {
@@ -663,6 +678,8 @@ static iDZdzInfos *firstDZ = nil;
         historyView.fetchedResultsController = self.fetchedResultsController;
     }
 }
+
+#pragma mark - Local DZ management
 
 - (void)isDZLoaded
 {
@@ -771,6 +788,7 @@ static iDZdzInfos *firstDZ = nil;
     }
 }
 
+#pragma mark - Misc.
 
 - (void)viewWillAppear:(BOOL)animated {
     
@@ -779,7 +797,7 @@ static iDZdzInfos *firstDZ = nil;
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+
 }
 
 

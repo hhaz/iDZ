@@ -238,6 +238,7 @@
 		637F34B7192E4BE000AA7E44 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		637F34B9192E4E0E00AA7E44 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		637F34BB192E4E1400AA7E44 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		637F34BE192E6DB400AA7E44 /* iDZAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iDZAppDelegate.h; sourceTree = "<group>"; };
 		638034331926989E001DC62E /* DZ.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DZ.png; sourceTree = "<group>"; };
 		63899CBB18DF3D6A00C02B39 /* iDZTripMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iDZTripMap.h; sourceTree = "<group>"; };
 		63899CBC18DF3D6A00C02B39 /* iDZTripMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iDZTripMap.m; sourceTree = "<group>"; };
@@ -377,9 +378,9 @@
 		63402ED018DA001800FAF06F = {
 			isa = PBXGroup;
 			children = (
+				63402EDB18DA001900FAF06F /* Frameworks */,
 				63402EE218DA001900FAF06F /* iDZ */,
 				63402F0418DA001900FAF06F /* iDZTests */,
-				63402EDB18DA001900FAF06F /* Frameworks */,
 				63402EDA18DA001900FAF06F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -416,6 +417,7 @@
 				63A63B2519151FA6008AA00A /* PNG */,
 				631E021718EDB6E20013689D /* CorePlotHeaders */,
 				63402EEC18DA001900FAF06F /* iDZAppDelegate.m */,
+				637F34BE192E6DB400AA7E44 /* iDZAppDelegate.h */,
 				635CA64318DC8CB70046C839 /* iDZAnnotation.h */,
 				635CA64418DC8CB70046C839 /* iDZAnnotation.m */,
 				635CA64618DCA1530046C839 /* iDZAnnotationView.h */,
