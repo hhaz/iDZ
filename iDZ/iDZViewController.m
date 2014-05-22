@@ -9,7 +9,6 @@
 #import "iDZAppDelegate.h"
 #import "iDZViewController.h"
 #import "Tracking.h"
-#import "iDZHistoryTableView.h"
 #import "Trip.h"
 #import "iDZAnnotation.h"
 #import "iDZdzInfos.h"
@@ -654,29 +653,6 @@ static iDZdzInfos *firstDZ = nil;
         }
     }
     NSLog(@"Updating Annot Time : %f", [[NSDate date] timeIntervalSinceDate:startDate]);
-}
-
-#pragma mark - Segue
-
--(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-
-{
-    if ([[segue identifier] isEqualToString:@"historySegue"])
-    {
-        
-        [self fetchedResultsController];
-        
-        NSError *error = nil;
-        if (![self.fetchedResultsController performFetch:&error]) {
-            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-            abort();
-        }
-        
-        iDZHistoryTableView *historyView = [segue destinationViewController];
-        
-        historyView.managedObjectContext = self.managedObjectContext;
-        historyView.fetchedResultsController = self.fetchedResultsController;
-    }
 }
 
 #pragma mark - Local DZ management

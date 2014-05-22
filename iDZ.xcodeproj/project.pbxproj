@@ -233,12 +233,12 @@
 		636D693A192BBD1F00A7612E /* SimpleScatterPlot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleScatterPlot.h; sourceTree = "<group>"; };
 		636D693B192BBD1F00A7612E /* SimpleScatterPlot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleScatterPlot.m; sourceTree = "<group>"; };
 		6375F68C19202BAA00B04944 /* distance.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = distance.png; sourceTree = "<group>"; };
-		637F34B5192E4BE000AA7E44 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/iDZ.strings; sourceTree = "<group>"; };
 		637F34B6192E4BE000AA7E44 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		637F34B7192E4BE000AA7E44 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		637F34B9192E4E0E00AA7E44 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		637F34BB192E4E1400AA7E44 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		637F34BE192E6DB400AA7E44 /* iDZAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iDZAppDelegate.h; sourceTree = "<group>"; };
+		637F34C2192E87F700AA7E44 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/iDZ.strings; sourceTree = "<group>"; };
 		638034331926989E001DC62E /* DZ.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DZ.png; sourceTree = "<group>"; };
 		63899CBB18DF3D6A00C02B39 /* iDZTripMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iDZTripMap.h; sourceTree = "<group>"; };
 		63899CBC18DF3D6A00C02B39 /* iDZTripMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iDZTripMap.m; sourceTree = "<group>"; };
@@ -729,7 +729,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				63402EEF18DA001900FAF06F /* Base */,
-				637F34B5192E4BE000AA7E44 /* fr */,
+				637F34C2192E87F700AA7E44 /* fr */,
 			);
 			name = iDZ.storyboard;
 			sourceTree = "<group>";

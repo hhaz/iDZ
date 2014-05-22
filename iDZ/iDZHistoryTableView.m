@@ -12,6 +12,7 @@
 #import "iDZlocationDetailsViewController.h"
 #import "iDZTripMap.h"
 #import "Trip.h"
+#import "iDZAppDelegate.h"
 
 #define kHeaderHeight 25
 
@@ -101,7 +102,26 @@
     
     _currentButton.tag = -1;
     
-    [self updateContent];
+     iDZAppDelegate *appDelegate = (iDZAppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    _managedObjectContext = appDelegate.managedObjectContext;
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Tracking" inManagedObjectContext:self.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    
+    [fetchRequest setFetchBatchSize:20];
+    
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"dateandtime" ascending:NO];
+    NSArray *sortDescriptors = @[sortDescriptor];
+    
+    [fetchRequest setSortDescriptors:sortDescriptors];
+    
+    _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
+    
+    _fetchedResultsController.delegate = self;
+    
+    [self refreshHistory];
 }
 
 - (void)didReceiveMemoryWarning
