@@ -93,6 +93,7 @@
 		6302662C1927C31200D8CBC8 /* speed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = speed.png; sourceTree = "<group>"; };
 		6302662E1927C4AA00D8CBC8 /* dist.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dist.png; sourceTree = "<group>"; };
 		630266301927C54100D8CBC8 /* Altimeter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Altimeter.png; sourceTree = "<group>"; };
+		630B9029192F3851002F637E /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/iDZ.strings; sourceTree = "<group>"; };
 		631D74B618F1A23200F517D4 /* iDZAltitudeHistory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iDZAltitudeHistory.h; sourceTree = "<group>"; };
 		631D74B718F1A23200F517D4 /* iDZAltitudeHistory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iDZAltitudeHistory.m; sourceTree = "<group>"; };
 		631E021818EDB6E20013689D /* CorePlot-CocoaTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CorePlot-CocoaTouch.h"; sourceTree = "<group>"; };
@@ -238,7 +239,6 @@
 		637F34B9192E4E0E00AA7E44 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		637F34BB192E4E1400AA7E44 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		637F34BE192E6DB400AA7E44 /* iDZAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iDZAppDelegate.h; sourceTree = "<group>"; };
-		637F34C2192E87F700AA7E44 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/iDZ.strings; sourceTree = "<group>"; };
 		638034331926989E001DC62E /* DZ.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DZ.png; sourceTree = "<group>"; };
 		63899CBB18DF3D6A00C02B39 /* iDZTripMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iDZTripMap.h; sourceTree = "<group>"; };
 		63899CBC18DF3D6A00C02B39 /* iDZTripMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iDZTripMap.m; sourceTree = "<group>"; };
@@ -729,7 +729,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				63402EEF18DA001900FAF06F /* Base */,
-				637F34C2192E87F700AA7E44 /* fr */,
+				630B9029192F3851002F637E /* fr */,
 			);
 			name = iDZ.storyboard;
 			sourceTree = "<group>";
