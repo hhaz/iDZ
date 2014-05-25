@@ -10,7 +10,7 @@
 "%@ records imported" = "%@ enregistrement(s) importé(s)";
 "Unresolved error %@, %@" = "Erreur inconnue %@, %@";
 "DownloadDZ" = "Téléchargement de DZ";
-"Not connected" = "Pas de connexion";
+"Not connected" = "Mode local";
 "Connected" = "Connecté";
 "Access to location service must be enabled"  = "L'accès au service de localisation doit être autorisé";
 "Importing data" = "Importation de données en cours, merci de patienter ...";

@@ -30,7 +30,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *buttonAltitude;
 @property (weak, nonatomic) IBOutlet UIButton *buttonStart;
 @property (weak, nonatomic) IBOutlet UIButton *buttonStop;
-@property (weak, nonatomic) IBOutlet UIStepper *stepper;
+@property (nonatomic) double regionSize;
 @property (weak, nonatomic) IBOutlet UILabel *isConnected;
 
 @property (nonatomic , strong) CLLocationManager *locationManager;

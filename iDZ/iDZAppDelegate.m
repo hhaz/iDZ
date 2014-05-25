@@ -22,6 +22,9 @@
     [[UIApplication sharedApplication] registerForRemoteNotificationTypes:
      (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
     
+    _serverVersion = nil;
+    _dateCreated = nil;
+    
     NSArray *cafArray = [[NSBundle mainBundle] pathsForResourcesOfType:@"caf" inDirectory:nil];
     
     _soundDataArray = [[NSMutableArray alloc]initWithCapacity:cafArray.count];

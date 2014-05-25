@@ -31,6 +31,8 @@
 @property (nonatomic) double maxAnnotations;
 @property (nonatomic) double dzRadius;
 @property (nonatomic, strong) NSString *dzServerURL;
+@property (nonatomic, strong) NSString *serverVersion;
+@property (nonatomic, strong) NSString *dateCreated;
 @property (nonatomic) Boolean defaultSaved;
 
 @property (nonatomic, strong) UITabBarController *tabBarController;

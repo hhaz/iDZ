@@ -12,15 +12,16 @@
 #import "Trip.h"
 #import "iDZAnnotation.h"
 #import "iDZdzInfos.h"
+#import "checkVersion.h"
 
 
 static CLLocationCoordinate2D coordinateArray[2];
 static CLLocationDistance distance = 0;
 static double previousDist;
-static bool playSound = YES;
 static bool dzServerConnected = NO;
 static NSMutableArray *dzNear;
 static iDZdzInfos *firstDZ = nil;
+static iDZdzInfos *previousDZ = nil;
 
 @interface iDZViewController ()
 
@@ -33,14 +34,16 @@ static iDZdzInfos *firstDZ = nil;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    checkVersion *check = [[checkVersion alloc]init];
+    
+    [check checkVersion:_isConnected];
     
     _appDelegate = (iDZAppDelegate *)[[UIApplication sharedApplication] delegate];
     
     _lastUpdateTimeInterval = [NSDate date];
     
     _managedObjectContext = _appDelegate.managedObjectContext;
-    
-    _stepper.hidden = YES;
     
     [self isDZLoaded];
     
@@ -85,8 +88,6 @@ static iDZdzInfos *firstDZ = nil;
     
     dzNear = [[NSMutableArray alloc]init];
     
-    _isConnected.text = NSLocalizedString(@"Not connected",nil);
-    
     _updateAnnot = [[iDZUpdateAnnotationsFromServer alloc]init];
     
     _popup = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"DZ Alert !",nil)
@@ -103,7 +104,7 @@ static iDZdzInfos *firstDZ = nil;
     
     _alertView = (iDZAlertDZView *)_viewInPopup.view;
     
-    _stepper.value = _appDelegate.warningDistance *1.2;
+   _regionSize= _appDelegate.warningDistance *1.2;
 
 }
 
@@ -115,7 +116,7 @@ static iDZdzInfos *firstDZ = nil;
 
 - (void)handlePinchGesture:(UIPinchGestureRecognizer *)pinchRecognizer {
     
-    _stepper.value += 100 * - pinchRecognizer.velocity;
+    _regionSize += 100 * - pinchRecognizer.velocity;
     
     if (pinchRecognizer.state == UIGestureRecognizerStateEnded) {
         [self updateAnnotations];
@@ -180,8 +181,6 @@ static iDZdzInfos *firstDZ = nil;
     _buttonStop.enabled = YES;
     _buttonStart.enabled = NO;
     
-    _stepper.hidden = NO;
-    
     previousDist = _appDelegate.warningDistance;
     
     if(_appDelegate.alertDZ) {
@@ -208,7 +207,6 @@ static iDZdzInfos *firstDZ = nil;
 -(void)stopUpdatingLocation
 {
     _mapView.showsUserLocation = NO;
-    _stepper.hidden = YES;
     [_locationManager stopUpdatingLocation];
     
     if(_appDelegate.saveTrip) {
@@ -264,7 +262,7 @@ static iDZdzInfos *firstDZ = nil;
     
     coordinateArray[1] = zoomLocation;
     
-    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(zoomLocation, _stepper.value, _stepper.value);
+    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(zoomLocation, _regionSize, _regionSize);
     [_mapView setRegion:viewRegion animated:YES];
     
     _mapView.userLocation.subtitle = [NSString stringWithFormat:@"Long : %f - Lat : %f", _mapView.userLocation.location.coordinate.longitude,_mapView.userLocation.coordinate.latitude];
@@ -333,17 +331,17 @@ static iDZdzInfos *firstDZ = nil;
     coordinateArray[0] = zoomLocation;
     
     if (firstDZ != nil && location.speed > 0.5) {
+        
         CLLocation *dzLoc = [[CLLocation alloc]initWithLatitude:[firstDZ.latitude doubleValue] longitude:[firstDZ.longitude doubleValue]];
         double distance = [_mapView.userLocation.location distanceFromLocation:dzLoc];
         
-        if(playSound) {
+        if([previousDZ.latitude doubleValue] != [firstDZ.latitude doubleValue] || [previousDZ.longitude doubleValue] != [firstDZ.longitude doubleValue]) {
             if(_popup.hidden == NO) {
                 _popup.message = firstDZ.descDZ;
                 _popup.alpha = 0.0;
                 [_popup show];
             }
             [_appDelegate.theAudio play];
-            playSound = NO;
             _appDelegate.theAudio.rate = 1;
         }
         _alertView.prox.progress = 1 - distance/_appDelegate.warningDistance;;
@@ -353,20 +351,19 @@ static iDZdzInfos *firstDZ = nil;
         if (distance <= previousDist) { //getting closer
             previousDist = distance;
             if(distance < _appDelegate.warningDistance/4 ){
-                _appDelegate.theAudio.rate = 2;
-                [_appDelegate.theAudio play];
+                //_appDelegate.theAudio.rate = 2;
+                //[_appDelegate.theAudio play];
             }
         }
         else {
             [_popup dismissWithClickedButtonIndex:0 animated:YES];
             previousDist = _appDelegate.warningDistance;
-            playSound = YES;
             firstDZ = nil;
         }
+        previousDZ = firstDZ;
     }
     else {
         previousDist = _appDelegate.warningDistance;
-        playSound = YES;
     }
     
 }

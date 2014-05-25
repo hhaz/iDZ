@@ -29,6 +29,7 @@
 		632D8D0D190BBAC100F98060 /* FR Zone de danger FR 80.csv in Resources */ = {isa = PBXBuildFile; fileRef = 632D8D00190BBAC100F98060 /* FR Zone de danger FR 80.csv */; };
 		632D8D0E190BBAC100F98060 /* FR Zone de danger FR 90.csv in Resources */ = {isa = PBXBuildFile; fileRef = 632D8D01190BBAC100F98060 /* FR Zone de danger FR 90.csv */; };
 		632D8D15190BFB1900F98060 /* DangerZone.m in Sources */ = {isa = PBXBuildFile; fileRef = 632D8D14190BFB1900F98060 /* DangerZone.m */; };
+		6339ECF619323861001A3295 /* checkVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = 6339ECF519323861001A3295 /* checkVersion.m */; };
 		63402EDD18DA001900FAF06F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63402EDC18DA001900FAF06F /* Foundation.framework */; };
 		63402EDF18DA001900FAF06F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63402EDE18DA001900FAF06F /* CoreGraphics.framework */; };
 		63402EE118DA001900FAF06F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63402EE018DA001900FAF06F /* UIKit.framework */; };
@@ -193,6 +194,8 @@
 		632D8D01190BBAC100F98060 /* FR Zone de danger FR 90.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "FR Zone de danger FR 90.csv"; sourceTree = "<group>"; };
 		632D8D13190BFB1900F98060 /* DangerZone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DangerZone.h; sourceTree = "<group>"; };
 		632D8D14190BFB1900F98060 /* DangerZone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DangerZone.m; sourceTree = "<group>"; };
+		6339ECF419323861001A3295 /* checkVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = checkVersion.h; sourceTree = "<group>"; };
+		6339ECF519323861001A3295 /* checkVersion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = checkVersion.m; sourceTree = "<group>"; };
 		63402ED918DA001900FAF06F /* iDZ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iDZ.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63402EDC18DA001900FAF06F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		63402EDE18DA001900FAF06F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -416,6 +419,8 @@
 				636D692C192B9D9700A7612E /* Graphs */,
 				63A63B2519151FA6008AA00A /* PNG */,
 				631E021718EDB6E20013689D /* CorePlotHeaders */,
+				6339ECF419323861001A3295 /* checkVersion.h */,
+				6339ECF519323861001A3295 /* checkVersion.m */,
 				63402EEC18DA001900FAF06F /* iDZAppDelegate.m */,
 				637F34BE192E6DB400AA7E44 /* iDZAppDelegate.h */,
 				635CA64318DC8CB70046C839 /* iDZAnnotation.h */,
@@ -688,6 +693,7 @@
 				635CA64818DCA1530046C839 /* iDZAnnotationView.m in Sources */,
 				631D74B818F1A23200F517D4 /* iDZAltitudeHistory.m in Sources */,
 				63402F1A18DAF30600FAF06F /* iDZ.xcdatamodeld in Sources */,
+				6339ECF619323861001A3295 /* checkVersion.m in Sources */,
 				632D8D15190BFB1900F98060 /* DangerZone.m in Sources */,
 				6302662B1927B85200D8CBC8 /* ManageDefaults.m in Sources */,
 				63A63B321915476F008AA00A /* iDZUpdateAnnotationsFromServer.m in Sources */,
