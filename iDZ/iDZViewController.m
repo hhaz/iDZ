@@ -335,18 +335,17 @@ static iDZdzInfos *previousDZ = nil;
         CLLocation *dzLoc = [[CLLocation alloc]initWithLatitude:[firstDZ.latitude doubleValue] longitude:[firstDZ.longitude doubleValue]];
         double distance = [_mapView.userLocation.location distanceFromLocation:dzLoc];
         
-        if([previousDZ.latitude doubleValue] != [firstDZ.latitude doubleValue] || [previousDZ.longitude doubleValue] != [firstDZ.longitude doubleValue]) {
-            if(_popup.hidden == NO) {
-                _popup.message = firstDZ.descDZ;
-                _popup.alpha = 0.0;
-                [_popup show];
-            }
-            [_appDelegate.theAudio play];
-            _appDelegate.theAudio.rate = 1;
-        }
         _alertView.prox.progress = 1 - distance/_appDelegate.warningDistance;;
         _alertView.labelProx.text = [NSString stringWithFormat:@"%1.0f m",distance];
         _alertView.labelDZ.text = firstDZ.descDZ;
+        _popup.message = firstDZ.descDZ;
+        _popup.alpha = 0.0;
+        
+        if([previousDZ.latitude doubleValue] != [firstDZ.latitude doubleValue] || [previousDZ.longitude doubleValue] != [firstDZ.longitude doubleValue]) {
+            [_appDelegate.theAudio play];
+            [_popup dismissWithClickedButtonIndex:0 animated:YES]; //dismiss the popup in case it's already displayed
+            [_popup show];
+        }
         
         if (distance <= previousDist) { //getting closer
             previousDist = distance;
@@ -382,7 +381,7 @@ static iDZdzInfos *previousDZ = nil;
     }
 }
 
-#pragma mark - core data management
+#pragma mark - Core data management
 
 - (NSString *)newUUID
 {

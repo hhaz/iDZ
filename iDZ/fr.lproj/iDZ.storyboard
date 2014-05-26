@@ -34,7 +34,7 @@
                                 <constraints>
                                     <constraint firstAttribute="width" constant="75" id="t3r-dG-Yya"/>
                                 </constraints>
-                                <state key="normal" title="Start">
+                                <state key="normal" title="Départ">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -193,7 +193,7 @@
             </objects>
             <point key="canvasLocation" x="-1393" y="323"/>
         </scene>
-        <!--IDZ History Table View - Location History-->
+        <!--IDZ History Table View - Historique Lieux-->
         <scene sceneID="zg4-g1-Hi8">
             <objects>
                 <tableViewController id="Gw6-7g-DPB" customClass="iDZHistoryTableView" sceneMemberID="viewController">
@@ -253,7 +253,7 @@
                             <outlet property="delegate" destination="Gw6-7g-DPB" id="8f6-8I-M1v"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Location History" id="5tO-R6-icp"/>
+                    <navigationItem key="navigationItem" title="Historique Lieux" id="5tO-R6-icp"/>
                     <connections>
                         <outlet property="historyTableView" destination="zYX-57-SVq" id="YT9-yu-w6U"/>
                         <segue destination="J8A-Ku-hJv" kind="push" identifier="segueMap" id="MVt-CF-8FW"/>
@@ -263,16 +263,16 @@
             </objects>
             <point key="canvasLocation" x="-113" y="267"/>
         </scene>
-        <!--IDZ Table View Controller Settings - Settings-->
+        <!--IDZ Table View Controller Settings - Configuration-->
         <scene sceneID="a5b-Rw-PZH">
             <objects>
-                <tableViewController title="Settings" modalTransitionStyle="flipHorizontal" id="ZWX-no-etg" customClass="iDZTableViewControllerSettings" sceneMemberID="viewController">
+                <tableViewController title="Configuration" modalTransitionStyle="flipHorizontal" id="ZWX-no-etg" customClass="iDZTableViewControllerSettings" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="interactive" dataMode="static" style="grouped" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="2" sectionFooterHeight="2" id="b3R-rg-Sa9">
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
-                            <tableViewSection headerTitle="Danger Zone Settings" id="orm-dN-TTS">
+                            <tableViewSection headerTitle="Config Zone de Danger" id="orm-dN-TTS">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="q8C-Og-kY5">
                                         <rect key="frame" x="0.0" y="55" width="320" height="44"/>
@@ -285,7 +285,7 @@
                                                     <rect key="frame" x="20" y="9" width="25" height="25"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 </imageView>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="DZ Server URL" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3PF-Rp-wUs">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="DZ Server" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3PF-Rp-wUs">
                                                     <rect key="frame" x="53" y="11" width="120" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -315,7 +315,7 @@
                                                     <rect key="frame" x="20" y="9" width="25" height="25"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 </imageView>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Download DZ" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QvF-2m-5p8">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Téléchargement DZ" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QvF-2m-5p8">
                                                     <rect key="frame" x="53" y="11" width="182" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -349,7 +349,7 @@
                                                     <rect key="frame" x="20" y="9" width="25" height="25"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 </imageView>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Distance Warning (m)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pu4-cI-eGQ">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Distance Alerte (m)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pu4-cI-eGQ">
                                                     <rect key="frame" x="53" y="11" width="176" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -370,7 +370,7 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Trip Settings" id="YeP-zj-phe">
+                            <tableViewSection headerTitle="Trajet" id="YeP-zj-phe">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="eAn-Ap-LiE">
                                         <rect key="frame" x="0.0" y="227" width="320" height="44"/>
@@ -383,7 +383,7 @@
                                                     <rect key="frame" x="20" y="9" width="25" height="25"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 </imageView>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Log trip" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mfq-Eg-1VV">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Enregistrer Trajet" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mfq-Eg-1VV">
                                                     <rect key="frame" x="53" y="11" width="190" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -411,7 +411,7 @@
                                                     <rect key="frame" x="20" y="9" width="25" height="25"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 </imageView>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Logging Frequency (s)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yfo-4e-pXQ">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Fréquence (s)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yfo-4e-pXQ">
                                                     <rect key="frame" x="53" y="11" width="180" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -441,7 +441,7 @@
                                                     <rect key="frame" x="20" y="9" width="25" height="25"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 </imageView>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Max Annotations" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RPe-V7-Ndl">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Annotations Max" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RPe-V7-Ndl">
                                                     <rect key="frame" x="53" y="11" width="180" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -471,7 +471,7 @@
                                                     <rect key="frame" x="20" y="9" width="25" height="25"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 </imageView>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="DZ Alert" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ybn-yZ-jQr">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Alerte DZ" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ybn-yZ-jQr">
                                                     <rect key="frame" x="53" y="11" width="180" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -490,7 +490,7 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Technical Settings" id="Qv0-MW-l9e">
+                            <tableViewSection headerTitle="Paramètres Techniques" id="Qv0-MW-l9e">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="7YE-6T-CtR">
                                         <rect key="frame" x="0.0" y="443" width="320" height="44"/>
@@ -503,7 +503,7 @@
                                                     <rect key="frame" x="20" y="9" width="25" height="25"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 </imageView>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="DZ Refresh Radius (km)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rS7-Zj-2up">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Rayon Détection (km)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rS7-Zj-2up">
                                                     <rect key="frame" x="53" y="11" width="190" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -531,12 +531,12 @@
                         </connections>
                     </tableView>
                     <extendedEdge key="edgesForExtendedLayout"/>
-                    <navigationItem key="navigationItem" title="Settings" id="zKC-Qh-ixw">
-                        <barButtonItem key="rightBarButtonItem" title="Settings" id="mmY-om-RAG">
+                    <navigationItem key="navigationItem" title="Configuration" id="zKC-Qh-ixw">
+                        <barButtonItem key="rightBarButtonItem" title="Configuration" id="mmY-om-RAG">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="7yb-nh-3hV">
                                 <rect key="frame" x="204" y="7" width="100" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Save">
+                                <state key="normal" title="Sauvegarder">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -560,7 +560,7 @@
             </objects>
             <point key="canvasLocation" x="-198" y="919"/>
         </scene>
-        <!--Dz Details Table View Controller - DZ Details-->
+        <!--Dz Details Table View Controller - Infos Zones de Danger-->
         <scene sceneID="Uw8-vx-JeT">
             <objects>
                 <tableViewController id="hg4-S7-Ng1" customClass="dzDetailsTableViewController" sceneMemberID="viewController">
@@ -578,15 +578,15 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="DZ Version " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lZY-KN-SDc">
-                                                    <rect key="frame" x="46" y="11" width="148" height="21"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Version des informations" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lZY-KN-SDc">
+                                                    <rect key="frame" x="46" y="11" width="193" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Rl-0u-dvA">
-                                                    <rect key="frame" x="230" y="11" width="76" height="21"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1.0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Rl-0u-dvA">
+                                                    <rect key="frame" x="256" y="11" width="44" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -606,15 +606,15 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Creation Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4gf-6Z-HIV">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Date de création" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4gf-6Z-HIV">
                                                     <rect key="frame" x="45" y="11" width="148" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="01/01/2000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Leb-cq-ZPm">
-                                                    <rect key="frame" x="182" y="11" width="123" height="21"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="01/01/2000" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Leb-cq-ZPm">
+                                                    <rect key="frame" x="201" y="11" width="104" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -634,15 +634,15 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Record Number" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wd6-Vl-npH">
-                                                    <rect key="frame" x="45" y="11" width="148" height="21"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Nombre de Zones de Danger" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wd6-Vl-npH">
+                                                    <rect key="frame" x="45" y="11" width="205" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="3500" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b3O-6z-Prg">
-                                                    <rect key="frame" x="190" y="11" width="123" height="21"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="3500" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b3O-6z-Prg">
+                                                    <rect key="frame" x="245" y="11" width="55" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -663,7 +663,7 @@
                             <outlet property="delegate" destination="hg4-S7-Ng1" id="NZg-XR-iJL"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="DZ Details" id="yIM-Fd-ac1"/>
+                    <navigationItem key="navigationItem" title="Infos Zones de Danger" id="yIM-Fd-ac1"/>
                     <connections>
                         <outlet property="dateCreated" destination="Leb-cq-ZPm" id="o2i-Yi-ldY"/>
                         <outlet property="dzVersion" destination="6Rl-0u-dvA" id="mQ1-Ee-DXY"/>
@@ -674,7 +674,7 @@
             </objects>
             <point key="canvasLocation" x="324" y="734"/>
         </scene>
-        <!--IDZ Trip Map - Trip Map-->
+        <!--IDZ Trip Map - Carte du Trajet-->
         <scene sceneID="xWp-Cp-V4I">
             <objects>
                 <viewController id="J8A-Ku-hJv" customClass="iDZTripMap" sceneMemberID="viewController">
@@ -699,7 +699,7 @@
                             <constraint firstItem="bFc-f1-FGD" firstAttribute="top" secondItem="ehn-Ej-zAb" secondAttribute="bottom" id="hLA-qV-BhK"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Trip Map" id="vJo-eh-v6d">
+                    <navigationItem key="navigationItem" title="Carte du Trajet" id="vJo-eh-v6d">
                         <barButtonItem key="rightBarButtonItem" title="Altitude" id="zw8-3X-JRm">
                             <connections>
                                 <segue destination="Pcj-NX-ZD0" kind="push" identifier="segueAltitudeHisotry" id="chR-it-9eE"/>
@@ -714,7 +714,7 @@
             </objects>
             <point key="canvasLocation" x="693" y="339"/>
         </scene>
-        <!--IDZ Altitude History - Altitude History-->
+        <!--IDZ Altitude History - Historique Altitude-->
         <scene sceneID="uxx-MW-W29">
             <objects>
                 <viewController id="Pcj-NX-ZD0" customClass="iDZAltitudeHistory" sceneMemberID="viewController">
@@ -740,7 +740,7 @@
                             <constraint firstItem="25E-yk-wR8" firstAttribute="leading" secondItem="A6h-rv-Ywb" secondAttribute="leading" id="pJs-Ul-Eme"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Altitude History" id="5pl-Tt-kY9"/>
+                    <navigationItem key="navigationItem" title="Historique Altitude" id="5pl-Tt-kY9"/>
                     <connections>
                         <outlet property="graphView" destination="25E-yk-wR8" id="IBc-Pa-RrM"/>
                     </connections>
@@ -749,7 +749,7 @@
             </objects>
             <point key="canvasLocation" x="1217" y="339"/>
         </scene>
-        <!--ID Zlocation Details View Controller - Location Details-->
+        <!--ID Zlocation Details View Controller - Details Lieu-->
         <scene sceneID="EBt-i6-43U">
             <objects>
                 <viewController id="0cK-vj-SDj" customClass="iDZlocationDetailsViewController" sceneMemberID="viewController">
@@ -774,7 +774,7 @@
                             <constraint firstAttribute="bottom" secondItem="7cC-Ig-NQw" secondAttribute="bottom" constant="48" id="yub-jt-g6g"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Location Details" id="jN2-29-18G"/>
+                    <navigationItem key="navigationItem" title="Details Lieu" id="jN2-29-18G"/>
                     <connections>
                         <outlet property="mapView" destination="7cC-Ig-NQw" id="BD3-TF-8k9"/>
                     </connections>
@@ -783,11 +783,11 @@
             </objects>
             <point key="canvasLocation" x="685" y="-425"/>
         </scene>
-        <!--Navigation Controller - History-->
+        <!--Navigation Controller - Historique-->
         <scene sceneID="EIb-69-xhv">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="EBd-4c-bUH" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="History" image="clock.png" id="pnM-FL-Pew">
+                    <tabBarItem key="tabBarItem" title="Historique" image="clock.png" id="pnM-FL-Pew">
                         <inset key="imageInsets" minX="10" minY="10" maxX="10" maxY="10"/>
                     </tabBarItem>
                     <toolbarItems/>
@@ -804,11 +804,11 @@
             </objects>
             <point key="canvasLocation" x="-724" y="279"/>
         </scene>
-        <!--Navigation Controller - Settings-->
+        <!--Navigation Controller - Configuration-->
         <scene sceneID="Szr-UZ-DHT">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="bSg-be-NWe" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Settings" image="preferences.png" id="elI-9y-r2o">
+                    <tabBarItem key="tabBarItem" title="Configuration" image="preferences.png" id="elI-9y-r2o">
                         <inset key="imageInsets" minX="10" minY="10" maxX="10" maxY="10"/>
                     </tabBarItem>
                     <toolbarItems/>

@@ -7,6 +7,7 @@
 //
 
 #import "checkVersion.h"
+#import "Version.h"
 
 @implementation checkVersion
 
@@ -64,8 +65,9 @@
         _appDelegate.serverVersion = version;
         _appDelegate.dateCreated = dateCreated;
         
-        _connectionInfo.text = NSLocalizedString(@"Connected",nil);
-
+        if (_connectionInfo != nil) {
+            _connectionInfo.text = NSLocalizedString(@"Connected",nil);
+        }
     }
 }
 

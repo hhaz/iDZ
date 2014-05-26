@@ -17,9 +17,13 @@
 "ImportDZ" = "DZ Import";
 "No Danger Zone Information" = "Pas d'information sur les DZ";
 "Download from settings" = "Télécharger les informations à partir de l'onglet Configuration ou choisissez Importer pour charger les données locales";
-"Import" = "importer";
+"Import" = "Importer";
 "Close" = "Fermer";
 "Error" = "Erreur";
 "DZ Alert !" = "Alerte Proximité DZ";
 "Map" = "Carte";
 "Refreshing History" = "Rechargement de l'historique";
+"datamodel" = "Modèle de Données";
+"Incorrect Data Model" = "Modèle de données incorrect. Supprimer puis réinstaller l'application";
+"unknown" = "Inconnu";
+"NEW_DATA" = "Nouvelles données de zone de danger disponibles";

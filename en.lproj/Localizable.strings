@@ -23,3 +23,7 @@
 "DZ Alert !" = "DZ Alert !";
 "Map" = "Map";
 "Refreshing History" = "Refreshing History";
+"datamodel" = "Data Model";
+"Incorrect Data Model" = "Incorrect Data Model. Please remove and reinstall the application";
+"unknown" = "Unknown";
+"NEW_DATA" = "New DZ Data Available !";

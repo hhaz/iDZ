@@ -8,6 +8,7 @@
 
 #import "downloadDZ.h"
 #import "DangerZone.h"
+#import "Version.h"
 
 @implementation downloadDZ
 
@@ -57,6 +58,8 @@
 
 -(void)updateData:(NSMutableData *)data {
     
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    
     NSError *nserr;
     int countRow = 0;
     NSArray *jsonArray=[NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&nserr];
@@ -102,7 +105,41 @@
             }
         }
          NSLog(@"%d records added", countRow);
+        
+         int countRowVersion = 0;
+         NSEntityDescription *entityVersion = [NSEntityDescription entityForName:@"Version" inManagedObjectContext:localMOC];
+         [fetchRequest setEntity:entityVersion];
+         
+         //Empty table
+         NSArray *versionInfo = [localMOC executeFetchRequest:fetchRequest error:nil];
+         
+         for (Version *objectToDelete in versionInfo) {
+             countRow++;
+             [localMOC deleteObject:objectToDelete];
+         }
+         
+         NSLog(@"Version : %d records deleted", countRowVersion);
+         
+         countRowVersion = 0;
+         
+         Version *newVersion = [[Version alloc]initWithEntity:entityVersion insertIntoManagedObjectContext:localMOC];
+         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+         [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+         
+         newVersion.version = _appDelegate.serverVersion;
+         newVersion.created = [dateFormatter dateFromString:_appDelegate.dateCreated];
+        
+         NSError *error = nil;
+         if (![localMOC save:&error]) {
+             NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+             abort();
+         }
+         else countRowVersion++;
+         
+         NSLog(@"Version : %d records inserted", countRowVersion);
+        
         [_alert dismissWithClickedButtonIndex:0 animated:YES];
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
         [self performSelectorOnMainThread:@selector(displayStatus:) withObject:[NSNumber numberWithDouble:countRow] waitUntilDone:YES];
     }
 }

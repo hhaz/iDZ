@@ -60,6 +60,11 @@
 		637F34BC192E5C3B00AA7E44 /* iDZ.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63402EEE18DA001900FAF06F /* iDZ.storyboard */; };
 		637F34BD192E5C8500AA7E44 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 637F34BA192E4E0E00AA7E44 /* Localizable.strings */; };
 		638034341926989E001DC62E /* DZ.png in Resources */ = {isa = PBXBuildFile; fileRef = 638034331926989E001DC62E /* DZ.png */; };
+		638770F01933497E00FD54EF /* Version.m in Sources */ = {isa = PBXBuildFile; fileRef = 638770EF1933497E00FD54EF /* Version.m */; };
+		638770F419335CF300FD54EF /* date.png in Resources */ = {isa = PBXBuildFile; fileRef = 638770F319335CF300FD54EF /* date.png */; };
+		638770F619335DE500FD54EF /* 9.png in Resources */ = {isa = PBXBuildFile; fileRef = 638770F519335DE500FD54EF /* 9.png */; };
+		638770F819335E3400FD54EF /* version.png in Resources */ = {isa = PBXBuildFile; fileRef = 638770F719335E3400FD54EF /* version.png */; };
+		638770FB19335F3E00FD54EF /* dzDetailsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 638770FA19335F3E00FD54EF /* dzDetailsTableViewController.m */; };
 		63899CBD18DF3D6A00C02B39 /* iDZTripMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 63899CBC18DF3D6A00C02B39 /* iDZTripMap.m */; };
 		63A63B2219151F95008AA00A /* preferences.png in Resources */ = {isa = PBXBuildFile; fileRef = 63A63B2119151F95008AA00A /* preferences.png */; };
 		63A63B2419151FA1008AA00A /* world.png in Resources */ = {isa = PBXBuildFile; fileRef = 63A63B2319151FA1008AA00A /* world.png */; };
@@ -94,7 +99,6 @@
 		6302662C1927C31200D8CBC8 /* speed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = speed.png; sourceTree = "<group>"; };
 		6302662E1927C4AA00D8CBC8 /* dist.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dist.png; sourceTree = "<group>"; };
 		630266301927C54100D8CBC8 /* Altimeter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Altimeter.png; sourceTree = "<group>"; };
-		630B9029192F3851002F637E /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/iDZ.strings; sourceTree = "<group>"; };
 		631D74B618F1A23200F517D4 /* iDZAltitudeHistory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iDZAltitudeHistory.h; sourceTree = "<group>"; };
 		631D74B718F1A23200F517D4 /* iDZAltitudeHistory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iDZAltitudeHistory.m; sourceTree = "<group>"; };
 		631E021818EDB6E20013689D /* CorePlot-CocoaTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CorePlot-CocoaTouch.h"; sourceTree = "<group>"; };
@@ -237,12 +241,20 @@
 		636D693A192BBD1F00A7612E /* SimpleScatterPlot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleScatterPlot.h; sourceTree = "<group>"; };
 		636D693B192BBD1F00A7612E /* SimpleScatterPlot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleScatterPlot.m; sourceTree = "<group>"; };
 		6375F68C19202BAA00B04944 /* distance.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = distance.png; sourceTree = "<group>"; };
+		637824BF19338EAB00B0F676 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = fr; path = fr.lproj/iDZ.storyboard; sourceTree = "<group>"; };
 		637F34B6192E4BE000AA7E44 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		637F34B7192E4BE000AA7E44 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		637F34B9192E4E0E00AA7E44 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		637F34BB192E4E1400AA7E44 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		637F34BE192E6DB400AA7E44 /* iDZAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iDZAppDelegate.h; sourceTree = "<group>"; };
 		638034331926989E001DC62E /* DZ.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DZ.png; sourceTree = "<group>"; };
+		638770EE1933497E00FD54EF /* Version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Version.h; sourceTree = "<group>"; };
+		638770EF1933497E00FD54EF /* Version.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Version.m; sourceTree = "<group>"; };
+		638770F319335CF300FD54EF /* date.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = date.png; sourceTree = "<group>"; };
+		638770F519335DE500FD54EF /* 9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 9.png; sourceTree = "<group>"; };
+		638770F719335E3400FD54EF /* version.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = version.png; sourceTree = "<group>"; };
+		638770F919335F3E00FD54EF /* dzDetailsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dzDetailsTableViewController.h; sourceTree = "<group>"; };
+		638770FA19335F3E00FD54EF /* dzDetailsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = dzDetailsTableViewController.m; sourceTree = "<group>"; };
 		63899CBB18DF3D6A00C02B39 /* iDZTripMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iDZTripMap.h; sourceTree = "<group>"; };
 		63899CBC18DF3D6A00C02B39 /* iDZTripMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iDZTripMap.m; sourceTree = "<group>"; };
 		63A63B2119151F95008AA00A /* preferences.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = preferences.png; sourceTree = "<group>"; };
@@ -421,13 +433,15 @@
 				631E021718EDB6E20013689D /* CorePlotHeaders */,
 				6339ECF419323861001A3295 /* checkVersion.h */,
 				6339ECF519323861001A3295 /* checkVersion.m */,
-				63402EEC18DA001900FAF06F /* iDZAppDelegate.m */,
 				637F34BE192E6DB400AA7E44 /* iDZAppDelegate.h */,
+				63402EEC18DA001900FAF06F /* iDZAppDelegate.m */,
 				635CA64318DC8CB70046C839 /* iDZAnnotation.h */,
 				635CA64418DC8CB70046C839 /* iDZAnnotation.m */,
 				635CA64618DCA1530046C839 /* iDZAnnotationView.h */,
 				635CA64718DCA1530046C839 /* iDZAnnotationView.m */,
 				63402EEE18DA001900FAF06F /* iDZ.storyboard */,
+				638770F919335F3E00FD54EF /* dzDetailsTableViewController.h */,
+				638770FA19335F3E00FD54EF /* dzDetailsTableViewController.m */,
 				631D74B618F1A23200F517D4 /* iDZAltitudeHistory.h */,
 				631D74B718F1A23200F517D4 /* iDZAltitudeHistory.m */,
 				63899CBB18DF3D6A00C02B39 /* iDZTripMap.h */,
@@ -439,6 +453,8 @@
 				635CA63D18DC51300046C839 /* iDZHistoryItemCell.h */,
 				635CA63E18DC51300046C839 /* iDZHistoryItemCell.m */,
 				63402F1818DAF30600FAF06F /* iDZ.xcdatamodeld */,
+				638770EE1933497E00FD54EF /* Version.h */,
+				638770EF1933497E00FD54EF /* Version.m */,
 				632D8D13190BFB1900F98060 /* DangerZone.h */,
 				632D8D14190BFB1900F98060 /* DangerZone.m */,
 				63E5470418E9870A00D603D9 /* Trip.h */,
@@ -532,8 +548,11 @@
 				63CEA0D11915A16500559706 /* B14_90.png */,
 				63572EDB191E957C0041B91F /* pin.png */,
 				6302662E1927C4AA00D8CBC8 /* dist.png */,
+				638770F519335DE500FD54EF /* 9.png */,
+				638770F319335CF300FD54EF /* date.png */,
 				638034331926989E001DC62E /* DZ.png */,
 				6375F68C19202BAA00B04944 /* distance.png */,
+				638770F719335E3400FD54EF /* version.png */,
 				63A63B2A19152697008AA00A /* clock.png */,
 				6302662C1927C31200D8CBC8 /* speed.png */,
 				63A63B2819152663008AA00A /* database.png */,
@@ -632,6 +651,7 @@
 				637F34BC192E5C3B00AA7E44 /* iDZ.storyboard in Resources */,
 				63AADA7619114B42005E5AC4 /* Ethereal Accents.caf in Resources */,
 				63AC1B7619104C8A00B7E759 /* Comedy Whistle.caf in Resources */,
+				638770F819335E3400FD54EF /* version.png in Resources */,
 				63A63B27191523F8008AA00A /* url2.png in Resources */,
 				632D8D06190BBAC100F98060 /* FR Zone de danger Feu Rouge FR.csv in Resources */,
 				632D8D0E190BBAC100F98060 /* FR Zone de danger FR 90.csv in Resources */,
@@ -645,8 +665,10 @@
 				638034341926989E001DC62E /* DZ.png in Resources */,
 				63CEA0D21915A16500559706 /* B14_90.png in Resources */,
 				632D8D09190BBAC100F98060 /* FR Zone de danger FR 30.csv in Resources */,
+				638770F419335CF300FD54EF /* date.png in Resources */,
 				632D8D0D190BBAC100F98060 /* FR Zone de danger FR 80.csv in Resources */,
 				6375F68D19202BAA00B04944 /* distance.png in Resources */,
+				638770F619335DE500FD54EF /* 9.png in Resources */,
 				63A63B2419151FA1008AA00A /* world.png in Resources */,
 				6302662D1927C31200D8CBC8 /* speed.png in Resources */,
 				63402EE718DA001900FAF06F /* InfoPlist.strings in Resources */,
@@ -697,9 +719,11 @@
 				632D8D15190BFB1900F98060 /* DangerZone.m in Sources */,
 				6302662B1927B85200D8CBC8 /* ManageDefaults.m in Sources */,
 				63A63B321915476F008AA00A /* iDZUpdateAnnotationsFromServer.m in Sources */,
+				638770F01933497E00FD54EF /* Version.m in Sources */,
 				631E027A18EDBB950013689D /* PlotItem.m in Sources */,
 				635CA64518DC8CB70046C839 /* iDZAnnotation.m in Sources */,
 				63F94AF519255A6A004576EF /* viewInPopup.m in Sources */,
+				638770FB19335F3E00FD54EF /* dzDetailsTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -735,7 +759,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				63402EEF18DA001900FAF06F /* Base */,
-				630B9029192F3851002F637E /* fr */,
+				637824BF19338EAB00B0F676 /* fr */,
 			);
 			name = iDZ.storyboard;
 			sourceTree = "<group>";
@@ -778,7 +802,7 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development IOS Push Services: HAZ.iDZ";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -817,7 +841,7 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development IOS Push Services: HAZ.iDZ";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;

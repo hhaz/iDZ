@@ -9,6 +9,7 @@
 #import "iDZTableViewControllerSettings.h"
 #import "downloadDZ.h"
 #import "ManageDefaults.h"
+#import "checkVersion.h"
 
 @interface iDZTableViewControllerSettings ()
 
@@ -85,11 +86,13 @@
 }
 
 -(IBAction)download {
+    checkVersion *version = [[checkVersion alloc]init];
+    [version checkVersion:nil];
     downloadDZ *download = [[downloadDZ alloc]init];
     
     [download downloadDZ];
     
-    UITabBarItem *itemSettings = _appDelegate.tabBarController.tabBar.items[1];
+    UITabBarItem *itemSettings = _appDelegate.tabBarController.tabBar.items[2];
     
     itemSettings.badgeValue = nil;
     

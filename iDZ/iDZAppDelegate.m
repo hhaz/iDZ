@@ -143,7 +143,8 @@
          
          */
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        abort();
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"datamodel", nil) message:NSLocalizedString(@"Incorrect Data Model", nil) delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
     }
     
     return _persistentStoreCoordinator;
@@ -204,7 +205,7 @@
 {
     application.applicationIconBadgeNumber = 0;
     
-    //_args = [[NSArray alloc] initWithArray:[[[userInfo objectForKey:@"aps"] objectForKey:@"alert"] objectForKey:@"loc-args"]];
+    //_args = [[NSArray alloc] initWithArray:[[[userInfo objectForKey:@"aps"] objectForKey:@"alert"] objectForKey:@"loc-key"]];
     
     UITabBarItem *itemSetting = _tabBarController.tabBar.items[1];
     
@@ -216,7 +217,7 @@
     
     application.applicationIconBadgeNumber = 0;
     
-    UITabBarItem *itemSetting = _tabBarController.tabBar.items[1];
+    UITabBarItem *itemSetting = _tabBarController.tabBar.items[2];
     
     itemSetting.badgeValue = @"1";    NSLog(@"User info : %lu", (unsigned long)[userInfo count]);
 }
