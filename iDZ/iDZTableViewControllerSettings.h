@@ -21,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *maxAnnotations;
 @property (weak, nonatomic) IBOutlet UITextField *warningDistance;
 @property (weak, nonatomic) IBOutlet UITextField *radius;
+@property (weak, nonatomic) IBOutlet UILabel *dzLabel;
 
 - (void)setSaveTrip;
 

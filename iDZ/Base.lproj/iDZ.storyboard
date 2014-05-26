@@ -319,7 +319,6 @@
                                                     <rect key="frame" x="53" y="11" width="182" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Tj-uS-xwj">
@@ -546,6 +545,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="dzLabel" destination="QvF-2m-5p8" id="vEh-19-Gea"/>
                         <outlet property="dzServerURL" destination="N0q-CE-ncz" id="FdM-5k-6ju"/>
                         <outlet property="dzSwitch" destination="Ngy-9l-Way" id="gdn-a5-Tb5"/>
                         <outlet property="frequency" destination="y8O-aj-G3h" id="NVX-9d-Ogo"/>

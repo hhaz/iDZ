@@ -207,7 +207,7 @@
     
     //_args = [[NSArray alloc] initWithArray:[[[userInfo objectForKey:@"aps"] objectForKey:@"alert"] objectForKey:@"loc-key"]];
     
-    UITabBarItem *itemSetting = _tabBarController.tabBar.items[1];
+    UITabBarItem *itemSetting = _tabBarController.tabBar.items[2];
     
     itemSetting.badgeValue = @"1";
     
@@ -219,7 +219,9 @@
     
     UITabBarItem *itemSetting = _tabBarController.tabBar.items[2];
     
-    itemSetting.badgeValue = @"1";    NSLog(@"User info : %lu", (unsigned long)[userInfo count]);
+    itemSetting.badgeValue = @"1";
+    
+    NSLog(@"User info : %lu", (unsigned long)[userInfo count]);
 }
 
 @end

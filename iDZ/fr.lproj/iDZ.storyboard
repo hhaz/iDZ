@@ -546,6 +546,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="dzLabel" destination="QvF-2m-5p8" id="ebC-RY-s3Y"/>
                         <outlet property="dzServerURL" destination="N0q-CE-ncz" id="FdM-5k-6ju"/>
                         <outlet property="dzSwitch" destination="Ngy-9l-Way" id="gdn-a5-Tb5"/>
                         <outlet property="frequency" destination="y8O-aj-G3h" id="NVX-9d-Ogo"/>

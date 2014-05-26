@@ -26,6 +26,16 @@
     return self;
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    UITabBarItem *itemSettings = _appDelegate.tabBarController.tabBar.items[2];
+    
+    if(itemSettings.badgeValue != nil) {
+        _dzLabel.textColor = [UIColor redColor];
+    }
+    else _dzLabel.textColor = [UIColor blackColor];
+}
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
