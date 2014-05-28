@@ -339,14 +339,13 @@ static iDZdzInfos *previousDZ = nil;
         _alertView.labelProx.text = [NSString stringWithFormat:@"%1.0f m",distance];
         _alertView.labelDZ.text = firstDZ.descDZ;
         _popup.message = firstDZ.descDZ;
-        _popup.alpha = 0.0;
         
         if([previousDZ.latitude doubleValue] != [firstDZ.latitude doubleValue] || [previousDZ.longitude doubleValue] != [firstDZ.longitude doubleValue]) {
             [_appDelegate.theAudio play];
-            [_popup dismissWithClickedButtonIndex:0 animated:YES]; //dismiss the popup in case it's already displayed
+            [_popup dismissWithClickedButtonIndex:0 animated:NO]; //dismiss the popup in case it's already displayed
             [_popup show];
         }
-        
+        previousDZ = firstDZ;
         if (distance <= previousDist) { //getting closer
             previousDist = distance;
             if(distance < _appDelegate.warningDistance/4 ){
@@ -359,12 +358,10 @@ static iDZdzInfos *previousDZ = nil;
             previousDist = _appDelegate.warningDistance;
             firstDZ = nil;
         }
-        previousDZ = firstDZ;
     }
     else {
         previousDist = _appDelegate.warningDistance;
     }
-    
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
