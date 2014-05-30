@@ -17,6 +17,7 @@
 #define kOverlayLimit 1000
 #define kDZCheckFrequency 5
 #define kDZRefreshFrequency 300
+#define kWidth 300 // width of rect vision
 
 @interface iDZViewController : UIViewController <CLLocationManagerDelegate,NSFetchedResultsControllerDelegate,MKMapViewDelegate,UIGestureRecognizerDelegate,UIAlertViewDelegate,NSURLConnectionDelegate>
 {

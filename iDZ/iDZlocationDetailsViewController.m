@@ -10,6 +10,7 @@
 #import "iDZAppDelegate.h"
 #import "iDZAnnotation.h"
 #import "iDZAnnotationView.h"
+#import <AddressBookUI/AddressBookUI.h>
 
 @interface iDZlocationDetailsViewController ()
 
@@ -47,6 +48,8 @@
     
     [_mapView addAnnotation:annotation];
     
+    _geoCoder = [[CLGeocoder alloc]init];
+    
 }
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation
@@ -70,14 +73,37 @@
             annotationView = [[iDZAnnotationView alloc] initWithAnnotation:annotation
                                                           reuseIdentifier:identifier];
         }
-    
+        UIButton* rightButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+        [rightButton addTarget:self action:@selector(writeSomething) forControlEvents:UIControlEventTouchUpInside];
+        [rightButton setTitle:@"GeoCoding" forState:UIControlStateNormal];
+        annotationView.rightCalloutAccessoryView = rightButton;
         annotationView.canShowCallout = YES;
-        //annotationView.image = [UIImage imageNamed:@"ko.png"];
         
         return annotationView;
     }
     return nil;
 }
+
+- (void)writeSomething{
+    CLLocation *dzLoc = [[CLLocation alloc]initWithLatitude:[_latitude doubleValue] longitude:[_longitude doubleValue]];
+    
+    [_geoCoder reverseGeocodeLocation:dzLoc completionHandler:
+     ^(NSArray* placemarks, NSError* error){
+         if ([placemarks count] > 0)
+         {
+             CLPlacemark *mark = placemarks[0];
+             NSString *messageString = ABCreateStringWithAddressDictionary(mark.addressDictionary, YES);
+             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"GeoCoding" message:messageString delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+             [alert show];
+         }
+         if(error !=nil) {
+             
+             NSString *errorMessage = [error.userInfo valueForKeyPath:@"NSLocalizedDescription"];
+             NSLog(@"%@",errorMessage);
+         }
+     }];
+  }
+
 
 - (void)didReceiveMemoryWarning
 {

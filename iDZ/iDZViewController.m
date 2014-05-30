@@ -57,7 +57,7 @@ static iDZdzInfos *previousDZ = nil;
     [_mapView setUserTrackingMode:MKUserTrackingModeFollowWithHeading];
     _mapView.zoomEnabled = YES;
     _mapView.scrollEnabled = YES;
-    _mapView.userLocation.title = @"Me";
+    _mapView.userLocation.title = [UIDevice currentDevice].name;
     
     _mapView.delegate = self;
     CLLocationCoordinate2D coordinateArrayLocal[2];
@@ -105,8 +105,10 @@ static iDZdzInfos *previousDZ = nil;
     _alertView = (iDZAlertDZView *)_viewInPopup.view;
     
    _regionSize= _appDelegate.warningDistance *1.2;
-
+    
 }
+
+
 
 #pragma mark - Gesture Management
 
@@ -543,16 +545,57 @@ static iDZdzInfos *previousDZ = nil;
         }
         
         if (distance < minDistance && dzFound == nil) {
-            dzCurrent.distance = [NSNumber numberWithDouble:-1]; // adding dz for the first time
             [dzNear addObject:dzCurrent];
             dzFound = [dzNear lastObject];
+            dzCurrent.distance = [NSNumber numberWithDouble:-1]; // adding dz for the first time
         }
         
         if (dzFound != nil) {
+            CLLocation *dzLocFound = [[CLLocation alloc]initWithLatitude:[dzFound.latitude doubleValue] longitude:[dzFound.longitude doubleValue]];
+            MKMapPoint dzFoundPoint = MKMapPointForCoordinate(dzLocFound.coordinate);
+            MKMapPoint dzPointUser = MKMapPointForCoordinate(_mapView.userLocation.coordinate);
+            double course = _mapView.userLocation.location.course;
+            
+            double width = MKMapPointsPerMeterAtLatitude([dzFound.latitude doubleValue])*kWidth;
+            double length = MKMapPointsPerMeterAtLatitude([dzFound.latitude doubleValue])*_appDelegate.warningDistance;
+            
+            MKMapPoint pointA = MKMapPointMake(dzPointUser.x - width*cos(course*M_PI/180), dzPointUser.y - width*sin(course*M_PI/180));
+            MKMapPoint pointB = MKMapPointMake(pointA.x + sin(course*M_PI/180)*length, pointA.y - cos(course*M_PI/180)*length);
+            MKMapPoint pointD = MKMapPointMake(dzPointUser.x + cos(course*M_PI/180)*width,dzPointUser.y + width*sin(course*M_PI/180));
+             MKMapPoint pointC = MKMapPointMake(pointD.x + sin(course*M_PI/180)*length, pointD.y - cos(course*M_PI/180)*length);
+           
+            // debug use
+            /*[_mapView removeAnnotations:_mapView.annotations];
+            iDZAnnotation *annotationUser = [[iDZAnnotation alloc]initWithTitle:@"User" AndCoordinate:_mapView.userLocation.location.coordinate];
+            [_mapView addAnnotation:annotationUser];
+            CLLocationCoordinate2D coordA = MKCoordinateForMapPoint(pointA);
+            iDZAnnotation *annotationA = [[iDZAnnotation alloc]initWithTitle:@"A" AndCoordinate:coordA];
+            [_mapView addAnnotation:annotationA];
+            CLLocationCoordinate2D coordB = MKCoordinateForMapPoint(pointB);
+            iDZAnnotation *annotationB = [[iDZAnnotation alloc]initWithTitle:@"B" AndCoordinate:coordB];
+            [_mapView addAnnotation:annotationB];
+            CLLocationCoordinate2D coordC = MKCoordinateForMapPoint(pointC);
+            iDZAnnotation *annotationC = [[iDZAnnotation alloc]initWithTitle:@"C" AndCoordinate:coordC];
+            [_mapView addAnnotation:annotationC];
+            CLLocationCoordinate2D coordD = MKCoordinateForMapPoint(pointD);
+            iDZAnnotation *annotationD = [[iDZAnnotation alloc]initWithTitle:@"D" AndCoordinate:coordD];
+            [_mapView addAnnotation:annotationD];*/
+        
+            double maxX,minX,maxY,minY;
+            
+            maxX = MAX(pointA.x, MAX(pointB.x, MAX(pointC.x, pointD.x)));
+            maxY = MAX(pointA.y, MAX(pointB.y, MAX(pointC.y, pointD.y)));
+            
+            minX = MIN(pointA.x, MIN(pointB.x, MIN(pointC.x, pointD.x)));
+            minY = MIN(pointA.y, MIN(pointB.y, MIN(pointC.y, pointD.y)));
+            
             if(distance < minDistance && distance <= [dzFound.distance doubleValue])
             {
-                minDistance = distance;
-                firstDZ = dzCurrent;
+                // Adding minimum rect vision testing. To be improved with finer detection using course angle
+                if (dzFoundPoint.x >= minX && dzFoundPoint.x <= maxX && dzFoundPoint.y >= minY && dzFoundPoint.y <= maxY) {
+                    minDistance = distance;
+                    firstDZ = dzCurrent;
+                }
             }
             if (distance > [dzFound.distance doubleValue] && [dzFound.distance doubleValue] != -1) {
                 [dzNear removeObject:dzFound];

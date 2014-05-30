@@ -16,5 +16,7 @@
 @property (weak, nonatomic) NSNumber *latitude;
 @property (weak, nonatomic) NSNumber *altitude;
 
+@property (nonatomic , strong) CLGeocoder *geoCoder;
+
 
 @end
