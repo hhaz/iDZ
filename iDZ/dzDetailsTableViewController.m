@@ -40,7 +40,7 @@
     NSArray *dzArray = [_managedObjectContext executeFetchRequest:fetchRequest error:&error];
     if(error == nil)
     {
-        _nbrRecord.text = [NSString stringWithFormat:@"%d",dzArray.count];
+        _nbrRecord.text = [NSString stringWithFormat:@"%lu",(unsigned long)dzArray.count];
     }
     else {
         _nbrRecord.text = @"unknown";

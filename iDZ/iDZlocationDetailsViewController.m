@@ -92,6 +92,7 @@
          if ([placemarks count] > 0)
          {
              CLPlacemark *mark = placemarks[0];
+             NSLog(@"Road : %@", mark.thoroughfare);
              NSString *messageString = ABCreateStringWithAddressDictionary(mark.addressDictionary, YES);
              UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"GeoCoding" message:messageString delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
              [alert show];

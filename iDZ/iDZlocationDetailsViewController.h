@@ -11,10 +11,10 @@
 
 @interface iDZlocationDetailsViewController : UIViewController <MKMapViewDelegate>
 
-@property (weak, nonatomic) IBOutlet MKMapView *mapView;
-@property (weak, nonatomic) NSNumber *longitude;
-@property (weak, nonatomic) NSNumber *latitude;
-@property (weak, nonatomic) NSNumber *altitude;
+@property (nonatomic, retain) IBOutlet MKMapView *mapView;
+@property (nonatomic, retain) NSNumber *longitude;
+@property (nonatomic, retain) NSNumber *latitude;
+@property (nonatomic, retain)NSNumber *altitude;
 
 @property (nonatomic , strong) CLGeocoder *geoCoder;
 

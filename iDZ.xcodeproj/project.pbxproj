@@ -66,6 +66,7 @@
 		638770F819335E3400FD54EF /* version.png in Resources */ = {isa = PBXBuildFile; fileRef = 638770F719335E3400FD54EF /* version.png */; };
 		638770FB19335F3E00FD54EF /* dzDetailsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 638770FA19335F3E00FD54EF /* dzDetailsTableViewController.m */; };
 		63899CBD18DF3D6A00C02B39 /* iDZTripMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 63899CBC18DF3D6A00C02B39 /* iDZTripMap.m */; };
+		638E013719928C6A0089C92A /* gameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 638E013619928C6A0089C92A /* gameScene.m */; };
 		63A63B2219151F95008AA00A /* preferences.png in Resources */ = {isa = PBXBuildFile; fileRef = 63A63B2119151F95008AA00A /* preferences.png */; };
 		63A63B2419151FA1008AA00A /* world.png in Resources */ = {isa = PBXBuildFile; fileRef = 63A63B2319151FA1008AA00A /* world.png */; };
 		63A63B27191523F8008AA00A /* url2.png in Resources */ = {isa = PBXBuildFile; fileRef = 63A63B26191523F8008AA00A /* url2.png */; };
@@ -257,6 +258,8 @@
 		638770FA19335F3E00FD54EF /* dzDetailsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = dzDetailsTableViewController.m; sourceTree = "<group>"; };
 		63899CBB18DF3D6A00C02B39 /* iDZTripMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iDZTripMap.h; sourceTree = "<group>"; };
 		63899CBC18DF3D6A00C02B39 /* iDZTripMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iDZTripMap.m; sourceTree = "<group>"; };
+		638E013519928C6A0089C92A /* gameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gameScene.h; sourceTree = "<group>"; };
+		638E013619928C6A0089C92A /* gameScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = gameScene.m; sourceTree = "<group>"; };
 		63A63B2119151F95008AA00A /* preferences.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = preferences.png; sourceTree = "<group>"; };
 		63A63B2319151FA1008AA00A /* world.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = world.png; sourceTree = "<group>"; };
 		63A63B26191523F8008AA00A /* url2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = url2.png; sourceTree = "<group>"; };
@@ -439,7 +442,6 @@
 				635CA64418DC8CB70046C839 /* iDZAnnotation.m */,
 				635CA64618DCA1530046C839 /* iDZAnnotationView.h */,
 				635CA64718DCA1530046C839 /* iDZAnnotationView.m */,
-				63402EEE18DA001900FAF06F /* iDZ.storyboard */,
 				638770F919335F3E00FD54EF /* dzDetailsTableViewController.h */,
 				638770FA19335F3E00FD54EF /* dzDetailsTableViewController.m */,
 				631D74B618F1A23200F517D4 /* iDZAltitudeHistory.h */,
@@ -460,11 +462,14 @@
 				63E5470418E9870A00D603D9 /* Trip.h */,
 				63E5470518E9870A00D603D9 /* Trip.m */,
 				63402F1B18DAFB9E00FAF06F /* Tracking.h */,
+				63402EEE18DA001900FAF06F /* iDZ.storyboard */,
 				63402F1C18DAFB9E00FAF06F /* Tracking.m */,
 				630266291927B85200D8CBC8 /* ManageDefaults.h */,
 				6302662A1927B85200D8CBC8 /* ManageDefaults.m */,
 				63402EF418DA001900FAF06F /* iDZViewController.h */,
 				63402EF518DA001900FAF06F /* iDZViewController.m */,
+				638E013519928C6A0089C92A /* gameScene.h */,
+				638E013619928C6A0089C92A /* gameScene.m */,
 				63F94AF219255A6A004576EF /* viewInPopup.h */,
 				63F94AF319255A6A004576EF /* viewInPopup.m */,
 				6302662619275FEB00D8CBC8 /* iDZAlertDZView.h */,
@@ -703,6 +708,7 @@
 				635CA63C18DC4A5D0046C839 /* iDZHistoryTableView.m in Sources */,
 				63402EE918DA001900FAF06F /* main.m in Sources */,
 				636D693C192BBD1F00A7612E /* SimpleScatterPlot.m in Sources */,
+				638E013719928C6A0089C92A /* gameScene.m in Sources */,
 				6362BF60192B99A800593344 /* downloadDZ.m in Sources */,
 				635CA64218DC840B0046C839 /* iDZlocationDetailsViewController.m in Sources */,
 				63EC074619158BFA001F2042 /* iDZTableViewControllerSettings.m in Sources */,
@@ -864,16 +870,19 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Herve AZOULAY (UBNJQ4PPD7)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iDZ/iDZ-Prefix.pch";
 				INFOPLIST_FILE = "iDZ/iDZ-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/iDZ",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = iDZ;
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -884,10 +893,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Herve AZOULAY (UBNJQ4PPD7)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iDZ/iDZ-Prefix.pch";
 				INFOPLIST_FILE = "iDZ/iDZ-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/iDZ",
@@ -895,6 +906,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = iDZ;
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};

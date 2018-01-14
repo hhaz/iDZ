@@ -14,7 +14,6 @@
 #import "iDZdzInfos.h"
 #import "checkVersion.h"
 
-
 static CLLocationCoordinate2D coordinateArray[2];
 static CLLocationDistance distance = 0;
 static double previousDist;
@@ -34,7 +33,21 @@ static iDZdzInfos *previousDZ = nil;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
+    /*_mainScene = [[gameScene alloc]init];
+    SKView *skView = (SKView *)self.view;
+    skView.showsFPS = YES;
+    skView.showsNodeCount = YES;
+    
+    CGSize viewSize = self.view.bounds.size;
+    
+    // Create and configure the scene.
+    _mainScene = [gameScene sceneWithSize:viewSize];
+    _mainScene.scaleMode = SKSceneScaleModeAspectFill;
+    
+    // Present the scene.
+    [skView presentScene:_mainScene];*/
+    
     checkVersion *check = [[checkVersion alloc]init];
     
     [check checkVersion:_isConnected];

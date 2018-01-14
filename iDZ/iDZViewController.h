@@ -12,7 +12,7 @@
 #import "DangerZone.h"
 #import "iDZUpdateAnnotationsFromServer.h"
 #import "iDZAlertDZView.h"
-
+#import "gameScene.h"
 
 #define kOverlayLimit 1000
 #define kDZCheckFrequency 5
@@ -38,6 +38,8 @@
 @property (nonatomic , strong) CLHeading *head;
 @property (nonatomic, retain) UIAlertView *activityAlert;
 @property (nonatomic, retain) iDZUpdateAnnotationsFromServer *updateAnnot;
+
+@property (nonatomic , strong) gameScene *mainScene;
 
 @property (nonatomic , strong) iDZAlertDZView *alertView;
 
